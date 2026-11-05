@@ -1,0 +1,68 @@
+---
+import { SITE } from '../../config/site';
+import { getFooterColumns } from '../../config/navigation';
+import { localePath, t } from '../../i18n';
+import LocaleSwitcher from './LocaleSwitcher.astro';
+
+interface Props { lang: string }
+const { lang } = Astro.props;
+const columns = getFooterColumns(lang);
+---
+
+<footer class="site-footer" id="footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a class="brand" href={localePath(lang)}>
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">{SITE.name}</span>
+      </a>
+      <p>{SITE.description}</p>
+      <p class="small muted" style="margin-top:1.5rem">{t(lang, 'cookie.note')}</p>
+    </div>
+    <div class="footer-cols">
+      {columns.map((col) => (
+        <div class="footer-col">
+          <p class="footer-title">{col.title}</p>
+          <ul class="footer-links">
+            {col.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="container locale-bar">
+    <strong>{t(lang, 'footer.location')}</strong>
+    <LocaleSwitcher lang={lang} />
+  </div>
+
+  <div class="container" style="padding-block:2rem; border-top:1px solid var(--line);">
+    <div class="cta-inner" style="padding:0">
+      <div>
+        <p class="eyebrow">{t(lang, 'footer.stayCurrent')}</p>
+        <h2 class="h3" style="margin-top:1rem">{t(lang, 'home.ctaTitle')}</h2>
+        <p class="muted small" style="margin:.7rem 0 0">{t(lang, 'home.ctaBody')}</p>
+      </div>
+      <div>
+        <form class="newsletter" data-newsletter aria-label="Newsletter">
+          <label class="visually-hidden" for="footer-email">Email</label>
+          <input class="newsletter-input" id="footer-email" type="email" name="email" required placeholder={t(lang, 'home.ctaPlaceholder')} />
+          <button class="btn btn--primary" type="submit">{t(lang, 'home.ctaButton')}</button>
+        </form>
+        <p class="form-note">{t(lang, 'home.ctaNote')} {t(lang, 'legal.disclaimer')}</p>
+        <p class="form-note" data-newsletter-status hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} {SITE.organization}. {t(lang, 'footer.rights')}</span>
+    <div class="footer-legal">
+      <a href={localePath(lang, 'privacy')}>Privacy Policy</a>
+      <a href={localePath(lang, 'terms')}>Terms of Use</a>
+      <a href={localePath(lang, 'accessibility')}>Accessibility</a>
+      <a href="/llms.txt">llms.txt</a>
+      <a href={`mailto:${SITE.email}`}>Contact</a>
+    </div>
+  </div>
+</footer>

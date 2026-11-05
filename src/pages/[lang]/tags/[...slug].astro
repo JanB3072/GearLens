@@ -1,0 +1,41 @@
+---
+import ListingLayout from '../../../layouts/ListingLayout.astro';
+import { PAGINATION } from '../../../config/site';
+import { localePath, t, tagPath } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { listByGroup } from '../../../lib/repository';
+import { groupHref, parseGroupPage } from '../../../lib/routes';
+import { groupStaticPaths } from '../../../lib/static-paths';
+import { tagBySlug } from '../../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return groupStaticPaths('by-tag');
+}
+
+const L = Astro.params.lang ?? 'en';
+const parsed = parseGroupPage(Astro.params.slug)!;
+const tag = tagBySlug.get(parsed.key)!;
+const result = listByGroup('by-tag', parsed.key, parsed.page, PAGINATION.articlesPerPage);
+const href = groupHref(tagPath(L, parsed.key));
+const pageSegments = parsed.page > 1 ? ['page', String(parsed.page)] : [];
+---
+
+<ListingLayout
+  lang={L}
+  path={href(parsed.page)}
+  title={parsed.page > 1 ? `${tag.name} — ${t(L, 'listing.page')} ${parsed.page}` : tag.name}
+  description={`Every guide tagged ${tag.name}, with dated short answers, measurements and cited sources.`}
+  eyebrow={t(L, 'listing.tag')}
+  cards={result.cards}
+  page={parsed.page}
+  totalPages={result.totalPages}
+  total={result.total}
+  href={href}
+  alternates={pageAlternates(L, 'tags', parsed.key, ...pageSegments)}
+  robots={parsed.page > 1 ? 'noindex, follow' : undefined}
+  crumbs={[
+    { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+    { label: t(L, 'listing.latest'), href: localePath(L, 'blog') },
+    { label: tag.name },
+  ]}
+/>

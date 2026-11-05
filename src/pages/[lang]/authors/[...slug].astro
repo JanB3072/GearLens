@@ -1,0 +1,42 @@
+---
+import ListingLayout from '../../../layouts/ListingLayout.astro';
+import { PAGINATION } from '../../../config/site';
+import { authorPath, localePath, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { listByGroup } from '../../../lib/repository';
+import { groupHref, parseGroupPage } from '../../../lib/routes';
+import { graph, organizationSchema, personSchema, websiteSchema } from '../../../lib/schema';
+import { groupStaticPaths } from '../../../lib/static-paths';
+import { authorBySlug } from '../../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return groupStaticPaths('by-author');
+}
+
+const L = Astro.params.lang ?? 'en';
+const parsed = parseGroupPage(Astro.params.slug)!;
+const author = authorBySlug.get(parsed.key)!;
+const result = listByGroup('by-author', parsed.key, parsed.page, PAGINATION.articlesPerPage);
+const href = groupHref(authorPath(L, parsed.key));
+const pageSegments = parsed.page > 1 ? ['page', String(parsed.page)] : [];
+const jsonLd = graph([organizationSchema(), websiteSchema(L), personSchema(author, L)]);
+---
+
+<ListingLayout
+  lang={L}
+  path={href(parsed.page)}
+  title={author.name}
+  description={`${author.role}. ${author.bio}`}
+  eyebrow={t(L, 'listing.author')}
+  cards={result.cards}
+  page={parsed.page}
+  totalPages={result.totalPages}
+  total={result.total}
+  href={href}
+  alternates={pageAlternates(L, 'authors', parsed.key, ...pageSegments)}
+  jsonLd={jsonLd}
+  crumbs={[
+    { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+    { label: author.name },
+  ]}
+/>

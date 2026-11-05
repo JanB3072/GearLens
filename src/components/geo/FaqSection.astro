@@ -1,0 +1,17 @@
+---
+import { t } from '../../i18n';
+import type { FaqItem } from '../../lib/types';
+interface Props { items: FaqItem[]; lang: string }
+const { items, lang } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="c-block c-faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">{t(lang, 'article.faqLabel')}</h2>
+    {items.map((item, i) => (
+      <details open={i === 0}>
+        <summary>{item.q}</summary>
+        <p>{item.a}</p>
+      </details>
+    ))}
+  </section>
+)}

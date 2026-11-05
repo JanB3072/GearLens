@@ -1,0 +1,40 @@
+---
+import { LOCALES } from '../../i18n';
+import { t } from '../../i18n';
+import { localePath } from '../../i18n';
+import { getLocaleConfig } from '../../i18n';
+
+interface Props { lang: string }
+const { lang } = Astro.props;
+const current = getLocaleConfig(lang);
+const groups = [...new Set(LOCALES.map((l) => l.region))];
+---
+
+<details class="locale-switch">
+  <summary class="locale-btn" aria-label={t(lang, 'locale.select')}>
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18"></path>
+    </svg>
+    <span>Global | {current.code.toUpperCase()}</span>
+  </summary>
+  <div class="locale-menu">
+    <h4>{t(lang, 'footer.location')}</h4>
+    {groups.map((region) => (
+      <div>
+        <p class="small muted" style="margin:.9rem 0 .35rem; letter-spacing:.14em; text-transform:uppercase;">{region}</p>
+        {LOCALES.filter((l) => l.region === region).map((l) => (
+          l.enabled
+            ? <a class="locale-option" href={localePath(l.code)} aria-current={l.code === lang ? 'true' : 'false'}>
+                <span>{l.nativeName}</span><span>{l.code.toUpperCase()}</span>
+              </a>
+            : <span class="locale-option" aria-disabled="true"><span>{l.nativeName}</span><span>Soon</span></span>
+        ))}
+      </div>
+    ))}
+  </div>
+</details>
+
+<style>
+  .locale-switch[open] .locale-menu { display: block; }
+  .locale-menu { display: none; }
+</style>

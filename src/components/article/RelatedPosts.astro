@@ -1,0 +1,20 @@
+---
+import { t } from '../../i18n';
+import type { ArticleCard } from '../../lib/types';
+interface Props { cards: ArticleCard[]; lang: string }
+const { cards, lang } = Astro.props;
+---
+{cards.length > 0 && (
+  <section class="related-block" aria-labelledby="related-heading">
+    <p class="eyebrow">{t(lang, 'article.relatedLabel')}</p>
+    <h2 class="h3" id="related-heading" style="margin:1rem 0 1.8rem">{t(lang, 'article.relatedLabel')}</h2>
+    <div class="related-grid">
+      {cards.map((card) => (
+        <a class="related-card" href={card.path}>
+          <span>{card.category} · {card.readingMinutes} {t(lang, 'common.minRead')}</span>
+          <h3>{card.title}</h3>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

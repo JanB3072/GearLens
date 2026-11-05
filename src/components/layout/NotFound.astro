@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localePath, t } from '../../i18n';
+interface Props { lang?: string }
+const L = Astro.props.lang ?? 'en';
+---
+<BaseLayout
+  lang={L}
+  seo={{ title: t(L, 'common.notFound'), description: t(L, 'common.notFoundBody'), path: '/404', lang: L, robots: 'noindex, follow', noCanonical: true }}
+>
+  <section class="not-found">
+    <div class="container">
+      <div class="display">404</div>
+      <h1 class="h3">{t(L, 'common.notFound')}</h1>
+      <p class="lede" style="margin:1.2rem auto 2rem">{t(L, 'common.notFoundBody')}</p>
+      <a class="btn btn--primary" href={localePath(L)}>{t(L, 'common.backHome')} →</a>
+    </div>
+  </section>
+</BaseLayout>

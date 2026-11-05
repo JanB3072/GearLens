@@ -1,0 +1,87 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ArticleCard from '../components/cards/ArticleCard.astro';
+import Pagination from '../components/ui/Pagination.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import { localePath, t } from '../i18n';
+import type { AlternateLink, Crumb } from '../lib/links';
+import { collectionPageSchema, graph, itemListSchema, organizationSchema, websiteSchema } from '../lib/schema';
+import type { ArticleCard as Card } from '../lib/types';
+
+interface Filter { label: string; href: string; active?: boolean }
+
+interface Props {
+  lang: string;
+  path: string;
+  title: string;
+  description: string;
+  eyebrow?: string;
+  cards: Card[];
+  page: number;
+  totalPages: number;
+  total: number;
+  href: (page: number) => string;
+  alternates?: AlternateLink[];
+  crumbs?: Crumb[];
+  filters?: Filter[];
+  jsonLd?: string;
+  robots?: string;
+}
+const {
+  lang, path, title, description, eyebrow, cards, page, totalPages, total,
+  href, alternates, crumbs, filters = [], jsonLd, robots,
+} = Astro.props;
+
+const breadcrumbs = crumbs ?? [
+  { label: t(lang, 'common.breadcrumbHome'), href: localePath(lang) },
+  { label: title },
+];
+const ld = jsonLd ?? graph([
+  organizationSchema(),
+  websiteSchema(lang),
+  collectionPageSchema(title, description, path, lang),
+  itemListSchema(cards, title),
+]);
+const prev = page > 1 ? href(page - 1) : undefined;
+const next = page < totalPages ? href(page + 1) : undefined;
+const pageTitle = page > 1 ? `${title} — ${t(lang, 'listing.page')} ${page}` : title;
+---
+
+<BaseLayout
+  lang={lang}
+  seo={{
+    title: pageTitle,
+    description,
+    path: page > 1 ? href(page) : path,
+    lang,
+    alternates,
+    robots: robots ?? (cards.length === 0 ? 'noindex, follow' : undefined),
+    jsonLd: ld,
+    prev,
+    next,
+  }}
+>
+  <header class="listing-head">
+    <div class="container">
+      <Breadcrumbs crumbs={breadcrumbs} />
+      {eyebrow && <p class="eyebrow" style="margin-top:2rem">{eyebrow}</p>}
+      <h1 class="h2">{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="small muted" style="margin-top:1.2rem">{total} {t(lang, 'listing.articles')}</p>
+      {filters.length > 0 && (
+        <nav class="filter-bar" aria-label="Filters">
+          {filters.map((f) => <a class="filter-chip" href={f.href} aria-current={f.active ? 'page' : undefined}>{f.label}</a>)}
+        </nav>
+      )}
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      {cards.length > 0
+        ? <div class="article-grid">{cards.map((card) => <ArticleCard card={card} lang={lang} />)}</div>
+        : <div class="empty-state"><p>{t(lang, 'listing.empty')}</p><a class="btn btn--ghost btn--sm" href={localePath(lang, 'blog')}>{t(lang, 'listing.browseAll')}</a></div>}
+      <Pagination page={page} totalPages={totalPages} lang={lang} href={href} />
+    </div>
+  </section>
+</BaseLayout>

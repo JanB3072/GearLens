@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "home-theater-101",
+    "name": "Home Theater 101",
+    "eyebrow": "Foundation path",
+    "description": "Start here. Eight guides take a bare room to a calibrated 5.1.2 system.",
+    "articleCount": 8
+  },
+  {
+    "slug": "room-acoustics",
+    "name": "Room Acoustics",
+    "eyebrow": "Deep dive",
+    "description": "Why the room changes the sound more than the speaker, and what to do about it.",
+    "articleCount": 6
+  },
+  {
+    "slug": "buyers-notebook",
+    "name": "Buyer's Notebook",
+    "eyebrow": "Field notes",
+    "description": "Price tracking, spec-sheet traps and the questions worth asking before you buy.",
+    "articleCount": 5
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "maya-chen",
+    "name": "Maya Chen",
+    "role": "Lead acoustics editor",
+    "bio": "Maya has measured more than 400 in-room speaker responses and writes the calibration protocols used across the site. Previously a transducer test engineer.",
+    "credentials": "B.S. Electrical Engineering; 11 years in transducer testing",
+    "avatar": "",
+    "sameAs": ["https://www.linkedin.com/", "https://orcid.org/"]
+  },
+  {
+    "slug": "daniel-ortiz",
+    "name": "Daniel Ortiz",
+    "role": "Buying guides editor",
+    "bio": "Daniel tracks pricing, warranty terms and spec-sheet claims across the home audio market, and maintains the site's product database.",
+    "credentials": "8 years in consumer electronics retail and product analysis",
+    "avatar": "",
+    "sameAs": ["https://www.linkedin.com/"]
+  }
+]

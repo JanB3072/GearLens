@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localePath, localeStaticParams, t } from '../../i18n';
+
+export function getStaticPaths() {
+  return localeStaticParams();
+}
+
+const L = Astro.params.lang ?? 'en';
+const path = localePath(L, 'search');
+---
+
+<BaseLayout
+  lang={L}
+  seo={{
+    title: t(L, 'search.title'),
+    description: 'Search the library of measurement-led home audio guides.',
+    path,
+    lang: L,
+    robots: 'noindex, follow',
+  }}
+>
+  <section class="section search-page">
+    <div class="container" style="max-width:860px">
+      <span class="eyebrow">{t(L, 'nav.search')}</span>
+      <h1 class="h2" style="margin:1.2rem 0">{t(L, 'search.title')}</h1>
+      <div class="search-field">
+        <label class="visually-hidden" for="q">{t(L, 'search.placeholder')}</label>
+        <input id="q" type="search" autocomplete="off" placeholder={t(L, 'search.placeholder')} data-search-input />
+        <button class="btn btn--primary" type="button" data-search-button>{t(L, 'nav.search')}</button>
+      </div>
+      <p class="small muted">{t(L, 'search.note')}</p>
+      <div class="search-results" data-search-results aria-live="polite"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  type Doc = { t: string; d: string; u: string; g: string[]; c: string };
+  const input = document.querySelector<HTMLInputElement>('[data-search-input]');
+  const button = document.querySelector<HTMLButtonElement>('[data-search-button]');
+  const results = document.querySelector<HTMLElement>('[data-search-results]');
+  let docs: Doc[] = [];
+
+  async function load() {
+    if (docs.length) return docs;
+    try {
+      const res = await fetch('/search-index.json');
+      const data = await res.json();
+      docs = Array.isArray(data.items) ? data.items : [];
+    } catch { docs = []; }
+    return docs;
+  }
+
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] ?? c);
+
+  function render(query: string) {
+    if (!results) return;
+    const q = query.trim().toLowerCase();
+    if (q.length < 2) { results.innerHTML = ''; return; }
+    const matches = docs
+      .map((doc) => {
+        const hay = `${doc.t} ${doc.d} ${doc.g.join(' ')} ${doc.c}`.toLowerCase();
+        const score = (hay.match(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+        return { doc, score };
+      })
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+    results.innerHTML = matches.length
+      ? matches.map(({ doc }) => `<a class="search-result" href="${esc(doc.u)}"><h3>${esc(doc.t)}</h3><p>${esc(doc.d)}</p></a>`).join('')
+      : '<p class="muted">No matches in the local index.</p>';
+  }
+
+  input?.addEventListener('input', () => { void load().then(() => render(input.value)); });
+  button?.addEventListener('click', () => { void load().then(() => render(input?.value ?? '')); });
+  const initial = new URLSearchParams(location.search).get('q');
+  if (initial && input) { input.value = initial; void load().then(() => render(initial)); }
+</script>

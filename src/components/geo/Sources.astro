@@ -1,0 +1,20 @@
+---
+import { t } from '../../i18n';
+import type { SourceItem } from '../../lib/types';
+interface Props { sources: SourceItem[]; lang: string }
+const { sources, lang } = Astro.props;
+---
+{sources.length > 0 && (
+  <section class="c-block c-sources" aria-labelledby="sources-heading">
+    <h2 id="sources-heading">{t(lang, 'article.sourcesLabel')}</h2>
+    <ul>
+      {sources.map((source) => (
+        <li>
+          <a href={source.url} rel="noopener noreferrer" target="_blank">{source.title}</a>
+          {source.publisher && <span> — {source.publisher}</span>}
+          {source.date && <span>, {source.date}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

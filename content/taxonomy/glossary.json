@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "dolby-atmos",
+    "term": "Dolby Atmos",
+    "definition": "An object-based surround sound format that adds a height dimension to channel-based mixes. A 5.1.2 system has five ear-level channels, one subwoofer channel and two height channels.",
+    "alsoKnownAs": ["Atmos", "Dolby Atmos height channels"],
+    "relatedTerms": ["height-channels", "bipolar-speaker"],
+    "sources": ["https://www.dolby.com/technologies/dolby-atmos/"]
+  },
+  {
+    "slug": "height-channels",
+    "term": "Height channels",
+    "definition": "Speakers or upward-firing drivers assigned to reproduce the vertical component of an object-based soundtrack. Dolby recommends a 30 to 55 degree elevation angle from the main listening position.",
+    "alsoKnownAs": ["Atmos modules", "elevation speakers"],
+    "relatedTerms": ["dolby-atmos"],
+    "sources": ["https://www.dolby.com/about/support/guide/speaker-setup-guides/"]
+  },
+  {
+    "slug": "frequency-response",
+    "term": "Frequency response",
+    "definition": "The measured output level of a speaker across the audible spectrum, normally stated in dB with a tolerance such as ±3 dB. A tighter tolerance over a stated range is more informative than the range alone.",
+    "alsoKnownAs": ["FR", "bandwidth"],
+    "relatedTerms": ["room-acoustics"],
+    "sources": []
+  },
+  {
+    "slug": "room-acoustics",
+    "term": "Room modes",
+    "definition": "Standing-wave resonances determined by a room's dimensions. Axial modes below about 300 Hz are the main cause of uneven bass between seats, and are best treated with placement and multiple subwoofers.",
+    "alsoKnownAs": ["standing waves", "axial modes"],
+    "relatedTerms": ["frequency-response"],
+    "sources": []
+  },
+  {
+    "slug": "bipolar-speaker",
+    "term": "Bipolar speaker",
+    "definition": "A loudspeaker with driver arrays on opposing baffles radiating in phase, producing a wider, more diffuse sound field than a direct-radiating design.",
+    "alsoKnownAs": ["bipole"],
+    "relatedTerms": ["dolby-atmos"],
+    "sources": []
+  }
+]

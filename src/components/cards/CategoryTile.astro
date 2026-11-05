@@ -1,0 +1,14 @@
+---
+import type { Category } from '../../lib/types';
+interface Props { category: Category; lang: string; count?: number }
+const { category, lang, count } = Astro.props;
+import { categoryPath } from '../../i18n';
+---
+<a class={`tile tile--${category.accent}`} href={categoryPath(lang, category.slug)}>
+  <span class="tile-index">{category.index} / {count !== undefined ? `${count} guides` : category.eyebrow}</span>
+  <span>
+    <span class="tile-label">{category.name}</span>
+    <span class="tile-desc" style="display:block">{category.description}</span>
+  </span>
+  <span class="tile-arrow" aria-hidden="true">↗</span>
+</a>

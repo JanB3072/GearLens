@@ -1,0 +1,136 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import AnswerBlock from '../components/geo/AnswerBlock.astro';
+import KeyTakeaways from '../components/geo/KeyTakeaways.astro';
+import FaqSection from '../components/geo/FaqSection.astro';
+import HowToSection from '../components/geo/HowToSection.astro';
+import Sources from '../components/geo/Sources.astro';
+import EntityLinks from '../components/geo/EntityLinks.astro';
+import TableOfContents from '../components/article/TableOfContents.astro';
+import AuthorBox from '../components/article/AuthorBox.astro';
+import RelatedPosts from '../components/article/RelatedPosts.astro';
+import { absoluteUrl } from '../config/site';
+import { categoryPath, formatDate, localePath, rawPath, t } from '../i18n';
+import { articleBreadcrumbs, articleSeoUrls } from '../lib/links';
+import { getRelatedCards } from '../lib/repository';
+import {
+  articleSchema, breadcrumbSchema, faqSchema, graph, howToSchema,
+  organizationSchema, personSchema, websiteSchema,
+} from '../lib/schema';
+import { authorBySlug, categoryBySlug, seriesBySlug } from '../lib/taxonomy';
+import type { Article } from '../lib/types';
+
+interface Props { article: Article; lang: string }
+const { article, lang } = Astro.props;
+
+const seoUrls = articleSeoUrls(article);
+const category = categoryBySlug.get(article.category);
+const author = authorBySlug.get(article.author);
+const reviewer = article.reviewer ? authorBySlug.get(article.reviewer) : undefined;
+const series = article.series ? seriesBySlug.get(article.series) : undefined;
+const crumbs = articleBreadcrumbs(lang, article, category?.name ?? article.category);
+const related = getRelatedCards(article);
+const mirrorPath = rawPath(lang, article.slug);
+
+const jsonLd = graph([
+  organizationSchema(),
+  websiteSchema(lang),
+  author ? personSchema(author, lang) : null,
+  reviewer ? personSchema(reviewer, lang) : null,
+  breadcrumbSchema(crumbs),
+  articleSchema(article, lang),
+  faqSchema(article.faq),
+  article.howTo ? howToSchema(article.howTo, absoluteUrl(article.path)) : null,
+]);
+---
+
+<BaseLayout
+  lang={lang}
+  seo={{
+    title: article.title,
+    description: article.description,
+    path: article.path,
+    canonicalUrl: seoUrls.canonical,
+    lang,
+    alternates: seoUrls.alternates,
+    robots: seoUrls.robots,
+    type: 'article',
+    image: article.ogImage || article.heroImage,
+    publishedAt: article.publishedAt,
+    updatedAt: article.updatedAt,
+    author: author?.name ?? article.author,
+    section: category?.name ?? article.category,
+    tags: article.tags,
+    jsonLd,
+    markdownAlternate: mirrorPath,
+  }}
+>
+  <article>
+    <header class="article-header">
+      <div class="container">
+        <Breadcrumbs crumbs={crumbs} />
+        <div style="margin-top:2rem; display:flex; flex-wrap:wrap; gap:.6rem; align-items:center">
+          {article.pillar && <span class="badge badge--pillar">Hub guide</span>}
+          <a class="badge" href={categoryPath(lang, article.category)}>{category?.name ?? article.category}</a>
+          {series && <a class="badge" href={localePath(lang, 'series', series.slug)}>{series.name}</a>}
+        </div>
+        <h1 class="article-title">{article.title}</h1>
+        <p class="article-desc">{article.description}</p>
+        <div class="byline">
+          <span class="byline-avatar" aria-hidden="true">{(author?.name ?? article.author).slice(0, 1)}</span>
+          <span>{t(lang, 'article.by')} <a href={localePath(lang, 'authors', article.author)}><strong>{author?.name ?? article.author}</strong></a></span>
+          <span>{t(lang, 'article.published')} <time datetime={article.publishedAt}>{formatDate(article.publishedAt, lang)}</time></span>
+          <span>{t(lang, 'article.updated')} <time datetime={article.updatedAt}>{formatDate(article.updatedAt, lang)}</time></span>
+          {article.reviewedAt && <span>{t(lang, 'article.reviewed')} <time datetime={article.reviewedAt}>{formatDate(article.reviewedAt, lang)}</time></span>}
+          <span>{article.readingMinutes} {t(lang, 'article.readingTime')}</span>
+        </div>
+        {article.heroImage && <img src={article.heroImage} alt={article.heroAlt ?? article.title} style="margin-top:2.5rem; width:100%; border-radius:var(--radius)" loading="eager" />}
+      </div>
+    </header>
+
+    <div class="container article-layout">
+      <div class="article-main">
+        <AnswerBlock answer={article.answer} lang={lang} />
+        <KeyTakeaways items={article.keyTakeaways} lang={lang} />
+
+        <div class="prose" set:html={article.bodyHtml} />
+
+        {article.howTo && <HowToSection howTo={article.howTo} lang={lang} />}
+        <FaqSection items={article.faq} lang={lang} />
+        <Sources sources={article.sources} lang={lang} />
+        <EntityLinks entities={article.entities} lang={lang} />
+
+        <aside class="c-notice">
+          <strong>{t(lang, 'article.lastReviewed')}:</strong> {t(lang, 'article.lastReviewedBody')}
+          {article.reviewer && <> {t(lang, 'article.reviewerLabel')}: {reviewer?.name ?? article.reviewer}.</>}
+          {' '}{t(lang, 'legal.disclaimer')}
+        </aside>
+
+        <AuthorBox slug={article.author} lang={lang} />
+        <RelatedPosts cards={related} lang={lang} />
+
+        <div class="mirror-note">
+          <span>{t(lang, 'article.machineReadable')}</span>
+          <a href={mirrorPath}>{t(lang, 'article.markdownLabel')} ↗</a>
+          <span>Canonical: {absoluteUrl(article.path)}</span>
+        </div>
+      </div>
+
+      <aside class="article-aside">
+        <TableOfContents headings={article.headings} lang={lang} />
+        <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--line)">
+          <p class="toc-title">{t(lang, 'listing.category')}</p>
+          <p class="small"><a href={categoryPath(lang, article.category)}>{category?.name ?? article.category} →</a></p>
+          {series && <>
+            <p class="toc-title" style="margin-top:1.5rem">{t(lang, 'article.inThisSeries')}</p>
+            <p class="small"><a href={localePath(lang, 'series', series.slug)}>{series.name} →</a></p>
+          </>}
+          <div class="tag-list" style="margin-top:1.5rem">
+            {article.tags.map((tag) => <a class="tag" href={localePath(lang, 'tags', tag)}>{tag}</a>)}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

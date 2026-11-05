@@ -1,0 +1,39 @@
+---
+import ListingLayout from '../../../../layouts/ListingLayout.astro';
+import { PAGINATION } from '../../../../config/site';
+import { CATEGORIES } from '../../../../config/navigation';
+import { categoryPath, localePath, t } from '../../../../i18n';
+import { pageAlternates } from '../../../../lib/links';
+import { listByDate } from '../../../../lib/repository';
+import { blogPaginationStaticPaths } from '../../../../lib/static-paths';
+
+/** Deep pagination is static too. The budget guard stops this from exploding. */
+export function getStaticPaths() {
+  return blogPaginationStaticPaths();
+}
+
+const L = Astro.params.lang ?? 'en';
+const requested = Number(Astro.params.page);
+const result = listByDate(requested, PAGINATION.articlesPerPage);
+const href = (n: number) => (n === 1 ? localePath(L, 'blog') : localePath(L, 'blog', 'page', n));
+---
+
+<ListingLayout
+  lang={L}
+  path={href(requested)}
+  title={`${t(L, 'listing.latest')} — ${t(L, 'listing.page')} ${requested}`}
+  description={`Page ${requested} of the ${t(L, 'listing.latest').toLowerCase()} archive: dated, sourced home audio guides.`}
+  eyebrow={t(L, 'listing.latest')}
+  cards={result.cards}
+  page={requested}
+  totalPages={result.totalPages}
+  total={result.total}
+  href={href}
+  alternates={pageAlternates(L, 'blog', 'page', requested)}
+  filters={CATEGORIES.map((c) => ({ label: c.shortName, href: categoryPath(L, c.slug) }))}
+  crumbs={[
+    { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+    { label: t(L, 'listing.latest'), href: localePath(L, 'blog') },
+    { label: `${t(L, 'listing.page')} ${requested}` },
+  ]}
+/>

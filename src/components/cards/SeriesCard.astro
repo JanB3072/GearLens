@@ -1,0 +1,16 @@
+---
+import { localePath, t } from '../../i18n';
+import type { Series } from '../../lib/types';
+interface Props { series: Series; lang: string; count?: number }
+const { series, lang, count } = Astro.props;
+---
+<article class="series-card">
+  <div>
+    <span class="series-eyebrow">{series.eyebrow}</span>
+    <h3 class="series-title">{series.name}</h3>
+    <p class="series-body">{series.description}</p>
+    <a class="series-link" href={localePath(lang, 'series', series.slug)}>
+      {t(lang, 'common.all')} · {count ?? series.articleCount} →
+    </a>
+  </div>
+</article>

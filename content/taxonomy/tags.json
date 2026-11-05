@@ -1,0 +1,12 @@
+[
+  { "slug": "speaker-placement", "name": "Speaker placement" },
+  { "slug": "dolby-atmos", "name": "Dolby Atmos" },
+  { "slug": "subwoofer", "name": "Subwoofer" },
+  { "slug": "room-acoustics", "name": "Room acoustics" },
+  { "slug": "center-channel", "name": "Center channel" },
+  { "slug": "calibration", "name": "Calibration" },
+  { "slug": "outdoor-audio", "name": "Outdoor audio" },
+  { "slug": "budget", "name": "Budget" },
+  { "slug": "frequency-response", "name": "Frequency response" },
+  { "slug": "soundbar", "name": "Soundbar" }
+]

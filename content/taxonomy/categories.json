@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "guides",
+    "name": "Setup Guides",
+    "shortName": "Guides",
+    "eyebrow": "Step by step",
+    "description": "Room layout, calibration and installation walkthroughs with measurable checkpoints.",
+    "index": "01",
+    "accent": "copper"
+  },
+  {
+    "slug": "comparisons",
+    "name": "Comparisons",
+    "shortName": "Comparisons",
+    "eyebrow": "Head to head",
+    "description": "Two products, one test protocol, and the exact conditions under which the winner changes.",
+    "index": "02",
+    "accent": "steel"
+  },
+  {
+    "slug": "explainers",
+    "name": "Explainers",
+    "shortName": "Explainers",
+    "eyebrow": "How it works",
+    "description": "Plain-language definitions of formats, specifications and acoustic terms.",
+    "index": "03",
+    "accent": "sand"
+  },
+  {
+    "slug": "buying-guides",
+    "name": "Buying Guides",
+    "shortName": "Buying Guides",
+    "eyebrow": "Decision support",
+    "description": "Budget bands, sizing rules and the trade-offs that actually matter at purchase time.",
+    "index": "04",
+    "accent": "moss"
+  },
+  {
+    "slug": "measurements",
+    "name": "Measurements",
+    "shortName": "Measurements",
+    "eyebrow": "Lab notes",
+    "description": "Frequency response, distortion and in-room data behind our recommendations.",
+    "index": "05",
+    "accent": "plum"
+  }
+]

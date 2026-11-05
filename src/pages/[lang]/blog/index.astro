@@ -1,0 +1,39 @@
+---
+import ListingLayout from '../../../layouts/ListingLayout.astro';
+import { PAGINATION } from '../../../config/site';
+import { CATEGORIES } from '../../../config/navigation';
+import { categoryPath, localePath, localeStaticParams, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { listByDate } from '../../../lib/repository';
+
+export function getStaticPaths() {
+  return localeStaticParams();
+}
+
+const L = Astro.params.lang ?? 'en';
+const result = listByDate(1, PAGINATION.articlesPerPage);
+const href = (n: number) => (n === 1 ? localePath(L, 'blog') : localePath(L, 'blog', 'page', n));
+const filters = [
+  { label: t(L, 'common.all'), href: localePath(L, 'blog'), active: true },
+  ...CATEGORIES.map((c) => ({ label: c.shortName, href: categoryPath(L, c.slug) })),
+];
+---
+
+<ListingLayout
+  lang={L}
+  path={localePath(L, 'blog')}
+  title={t(L, 'listing.latest')}
+  description="Every published guide, comparison and explainer, newest first. Each article includes a dated short answer, cited sources and a documented test method."
+  eyebrow={t(L, 'home.latestEyebrow')}
+  cards={result.cards}
+  page={1}
+  totalPages={result.totalPages}
+  total={result.total}
+  href={href}
+  alternates={pageAlternates(L, 'blog')}
+  filters={filters}
+  crumbs={[
+    { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+    { label: t(L, 'listing.latest') },
+  ]}
+/>

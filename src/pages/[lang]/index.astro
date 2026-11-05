@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryTile from '../../components/cards/CategoryTile.astro';
+import SeriesCard from '../../components/cards/SeriesCard.astro';
+import ArticleCard from '../../components/cards/ArticleCard.astro';
+import { SITE } from '../../config/site';
+import { CATEGORIES, SERIES } from '../../config/navigation';
+import { blogPath, localePath, localeStaticParams, t } from '../../i18n';
+import { pageAlternates } from '../../lib/links';
+import { getCard, getGroupCounts, getIndex, getStats, listByDate } from '../../lib/repository';
+import { graph, itemListSchema, organizationSchema, websiteSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return localeStaticParams();
+}
+
+const { lang } = Astro.params;
+const L = lang ?? 'en';
+const latest = listByDate(1, 6).cards;
+const priority = getIndex<string[]>('priority');
+const hub = getCard(priority[0])?.path ?? localePath(L, 'blog');
+const categoryCounts = getGroupCounts('by-category');
+const seriesCounts = getGroupCounts('by-series');
+const stats = getStats() as { published: number; words: number; categories: Record<string, number> };
+
+const jsonLd = graph([
+  organizationSchema(),
+  websiteSchema(L),
+  itemListSchema(latest, `${SITE.name} latest guides`),
+]);
+
+const proof = [
+  { num: '400+', title: 'Measured responses', text: 'In-room sweeps logged before a recommendation is published.' },
+  { num: '±3 dB', title: 'Stated tolerance', text: 'Every frequency-response claim ships with its tolerance and conditions.' },
+  { num: '90 d', title: 'Review cadence', text: 'Evergreen guides are rechecked every quarter, with real date stamps.' },
+  { num: '0', title: 'Sponsored verdicts', text: 'Affiliate relationships never change a test result or a ranking.' },
+];
+---
+
+<BaseLayout
+  lang={L}
+  seo={{
+    title: SITE.tagline,
+    description: SITE.description,
+    path: localePath(L),
+    lang: L,
+    alternates: pageAlternates(L),
+    jsonLd,
+    noappend: false,
+  }}
+>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">{t(L, 'home.heroEyebrow')}</span>
+        <h1 class="display">{t(L, 'home.heroTitle')}</h1>
+        <p class="lede">{t(L, 'home.heroBody')}</p>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href={hub}>{t(L, 'home.heroPrimary')} <span class="arrow">→</span></a>
+          <a class="btn btn--ghost" href={localePath(L, 'blog')}>{t(L, 'home.heroSecondary')}</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>{stats.published}</strong><small>Published guides</small></div>
+          <div><strong>{CATEGORIES.length}</strong><small>Research categories</small></div>
+          <div><strong>{(Number(stats.words) / 1000).toFixed(0)}k</strong><small>Words documented</small></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="hero-orbit"></span><span class="hero-orbit"></span><span class="hero-orbit"></span>
+        <span class="hero-orbit"></span><span class="hero-orbit"></span>
+        <span class="hero-art-label">Measured · Sourced · Dated</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cat-heading">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{t(L, 'home.categoriesEyebrow')}</span>
+          <h2 class="h2" id="cat-heading" style="margin-top:1rem">{t(L, 'home.categoriesTitle')}</h2>
+        </div>
+        <a class="btn btn--ghost btn--sm" href={localePath(L, 'blog')}>{t(L, 'nav.discoverAll')} →</a>
+      </div>
+      <div class="tiles">
+        {CATEGORIES.map((category) => <CategoryTile category={category} lang={L} count={categoryCounts[category.slug] ?? 0} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--border" aria-labelledby="proof-heading">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{t(L, 'home.proofEyebrow')}</span>
+          <h2 class="h2" id="proof-heading" style="margin-top:1rem">{t(L, 'home.proofTitle')}</h2>
+          <p class="lede" style="margin-top:1.2rem">{t(L, 'home.proofBody')}</p>
+        </div>
+      </div>
+    </div>
+    <div class="proof-grid">
+      {proof.map((item) => (
+        <div class="proof-item">
+          <div class="proof-num">{item.num}</div>
+          <p class="proof-title">{item.title}</p>
+          <p class="proof-text">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="container quote-block">
+    <span class="eyebrow">{t(L, 'home.quoteEyebrow')}</span>
+    <div class="quote-mark" aria-hidden="true">“</div>
+    <blockquote class="quote-text">{t(L, 'home.quote')}</blockquote>
+    <p class="quote-by">— {t(L, 'home.quoteBy')}</p>
+  </div>
+
+  <section class="section section--border" aria-labelledby="series-heading">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{t(L, 'home.seriesEyebrow')}</span>
+          <h2 class="h2" id="series-heading" style="margin-top:1rem">{t(L, 'home.seriesTitle')}</h2>
+        </div>
+      </div>
+      <div class="series-grid">
+        {SERIES.map((s) => <SeriesCard series={s} lang={L} count={seriesCounts[s.slug] ?? 0} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--border" aria-labelledby="latest-heading">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{t(L, 'home.latestEyebrow')}</span>
+          <h2 class="h2" id="latest-heading" style="margin-top:1rem">{t(L, 'home.latestTitle')}</h2>
+        </div>
+        <a class="btn btn--ghost btn--sm" href={localePath(L, 'blog')}>{t(L, 'common.all')} →</a>
+      </div>
+      <div class="article-grid">
+        {latest.map((card) => <ArticleCard card={card} lang={L} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <span class="eyebrow">{t(L, 'footer.stayCurrent')}</span>
+        <h2 class="h2" style="margin-top:1rem">{t(L, 'home.ctaTitle')}</h2>
+      </div>
+      <div>
+        <p class="lede">{t(L, 'home.ctaBody')}</p>
+        <a class="btn btn--primary" href={blogPath(L, 'home-theater-speaker-placement')} style="margin-top:1.5rem">
+          {t(L, 'home.heroPrimary')} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

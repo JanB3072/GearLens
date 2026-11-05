@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import { glossaryPath, localePath, localeStaticParams, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { glossary } from '../../../lib/taxonomy';
+import { collectionPageSchema, graph, organizationSchema, websiteSchema } from '../../../lib/schema';
+
+export function getStaticPaths() {
+  return localeStaticParams();
+}
+
+const L = Astro.params.lang ?? 'en';
+const path = localePath(L, 'glossary');
+const jsonLd = graph([
+  organizationSchema(),
+  websiteSchema(L),
+  collectionPageSchema('Glossary', 'Definitions of home audio terms with stable entity URLs.', path, L),
+  {
+    '@type': 'DefinedTermSet',
+    name: 'GearLens Glossary',
+    url: `${import.meta.env.SITE}${path}`,
+    hasDefinedTerm: glossary.map((term) => ({
+      '@type': 'DefinedTerm',
+      name: term.term,
+      url: `${import.meta.env.SITE}${glossaryPath(L, term.slug)}`,
+    })),
+  },
+]);
+---
+
+<BaseLayout
+  lang={L}
+  seo={{
+    title: 'Glossary',
+    description: 'Short, citable definitions of home audio and home theater terms. Each term has a stable URL and structured data for answer engines.',
+    path,
+    lang: L,
+    alternates: pageAlternates(L, 'glossary'),
+    jsonLd,
+  }}
+>
+  <header class="listing-head">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: t(L, 'common.breadcrumbHome'), href: localePath(L) }, { label: t(L, 'nav.glossary') }]} />
+      <span class="eyebrow" style="margin-top:2rem">{t(L, 'article.entities')}</span>
+      <h1 class="h2" style="margin-top:1.2rem">{t(L, 'nav.glossary')}</h1>
+      <p class="lede" style="margin-top:1rem">Every definition is a self-contained, quotable paragraph with a permanent URL. Articles link here to ground their entities.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      <div class="term-grid">
+        {glossary.map((term) => (
+          <article class="term-card">
+            <h2><a href={glossaryPath(L, term.slug)}>{term.term}</a></h2>
+            <p>{term.definition}</p>
+            {term.alsoKnownAs?.length ? <span class="term-aka">Also: {term.alsoKnownAs.join(', ')}</span> : null}
+            <p style="margin-top:1rem"><a class="btn btn--ghost btn--sm" href={glossaryPath(L, term.slug)}>{t(L, 'common.readMore')} →</a></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

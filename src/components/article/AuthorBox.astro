@@ -1,0 +1,19 @@
+---
+import { authorPath, t } from '../../i18n';
+import { authorBySlug } from '../../lib/taxonomy';
+interface Props { slug: string; lang: string }
+const { slug, lang } = Astro.props;
+const author = authorBySlug.get(slug);
+if (!author) throw new Error(`Unknown author: ${slug}`);
+const initials = author.name.split(' ').map((p) => p[0]).slice(0, 2).join('');
+---
+<section class="author-box" aria-label={t(lang, 'article.authorLabel')}>
+  <span class="byline-avatar" aria-hidden="true">{initials}</span>
+  <div>
+    <p class="role">{t(lang, 'article.authorLabel')}</p>
+    <h2><a href={authorPath(lang, author.slug)}>{author.name}</a></h2>
+    <p class="role" style="color:var(--muted); text-transform:none; letter-spacing:0">{author.role}</p>
+    <p>{author.bio}</p>
+    <p class="small muted">{author.credentials}</p>
+  </div>
+</section>

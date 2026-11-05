@@ -1,0 +1,78 @@
+---
+import { SITE, absoluteUrl } from '../../config/site';
+import { getLocaleConfig } from '../../i18n';
+import { DEFAULT_ROBOTS, clampDescription, fullTitle, ogImage } from '../../lib/seo';
+import type { AlternateLink } from '../../lib/links';
+
+export interface SeoProps {
+  title: string;
+  description: string;
+  /** Canonical pathname, e.g. `/en/blog/my-post` (never a full URL). */
+  path: string;
+  /** Absolute canonical override, used by untranslated fallback pages. */
+  canonicalUrl?: string;
+  lang: string;
+  alternates?: AlternateLink[];
+  robots?: string;
+  type?: 'website' | 'article';
+  image?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+  jsonLd?: string;
+  prev?: string;
+  next?: string;
+  markdownAlternate?: string;
+  noappend?: boolean;
+  /** 404 and other non-indexable utility pages should not emit a canonical. */
+  noCanonical?: boolean;
+}
+
+const p = Astro.props as SeoProps;
+const locale = getLocaleConfig(p.lang);
+const canonicalUrl = p.canonicalUrl ?? absoluteUrl(p.path);
+const title = fullTitle(p.title, { appendSiteName: !p.noappend });
+const description = clampDescription(p.description);
+const image = ogImage(p.image);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={p.robots ?? DEFAULT_ROBOTS} />
+<meta name="googlebot" content={p.robots ?? DEFAULT_ROBOTS} />
+{!p.noCanonical && <link rel="canonical" href={canonicalUrl} />}
+
+{(p.alternates ?? []).map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+{p.prev && <link rel="prev" href={absoluteUrl(p.prev)} />}
+{p.next && <link rel="next" href={absoluteUrl(p.next)} />}
+<link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href={`${SITE.url}/feed.xml`} />
+{p.markdownAlternate && <link rel="alternate" type="text/markdown" href={absoluteUrl(p.markdownAlternate)} />}
+
+<meta property="og:type" content={p.type === 'article' ? 'article' : 'website'} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={locale.ogLocale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={image} />
+{p.type === 'article' && p.publishedAt && <meta property="article:published_time" content={p.publishedAt} />}
+{p.type === 'article' && p.updatedAt && <meta property="article:modified_time" content={p.updatedAt} />}
+{p.type === 'article' && p.section && <meta property="article:section" content={p.section} />}
+{p.type === 'article' && (p.tags ?? []).map((tag) => <meta property="article:tag" content={tag} />)}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={SITE.twitter} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+{p.type === 'article' && <meta name="citation_title" content={p.title} />}
+{p.type === 'article' && p.author && <meta name="citation_author" content={p.author} />}
+{p.type === 'article' && p.publishedAt && <meta name="citation_publication_date" content={p.publishedAt.slice(0, 10)} />}
+{p.type === 'article' && <meta name="citation_journal_title" content={SITE.name} />}
+{p.updatedAt && <meta name="date" content={p.updatedAt.slice(0, 10)} />}
+<meta name="theme-color" content="#0a0c0f" />
+
+{p.jsonLd && <script type="application/ld+json" set:html={p.jsonLd} />}

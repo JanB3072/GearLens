@@ -1,0 +1,20 @@
+---
+import { glossaryPath, t } from '../../i18n';
+import { glossaryBySlug } from '../../lib/taxonomy';
+interface Props { entities: string[]; lang: string }
+const { entities, lang } = Astro.props;
+const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+{entities.length > 0 && (
+  <section class="c-block c-entities" aria-labelledby="entities-heading">
+    <h2 id="entities-heading">{t(lang, 'article.entities')}</h2>
+    <div class="tag-list">
+      {entities.map((name) => {
+        const term = glossaryBySlug.get(key(name));
+        return term
+          ? <a class="tag" href={glossaryPath(lang, term.slug)}>{term.term}</a>
+          : <span class="tag">{name}</span>;
+      })}
+    </div>
+  </section>
+)}

@@ -1,0 +1,22 @@
+---
+import { t } from '../../i18n';
+import { slugForStep } from '../../lib/schema';
+import type { HowToBlock } from '../../lib/types';
+interface Props { howTo: HowToBlock; lang: string }
+const { howTo, lang } = Astro.props;
+---
+{howTo.steps.length > 0 && (
+  <section class="c-block c-howto" aria-labelledby="howto-heading">
+    <h2 id="howto-heading">{t(lang, 'article.howToLabel')}</h2>
+    <h3 class="h3" style="margin-bottom:.5rem">{howTo.name}</h3>
+    {howTo.description && <p class="muted" style="margin-bottom:1.6rem">{howTo.description}</p>}
+    <ol>
+      {howTo.steps.map((step, i) => (
+        <li id={slugForStep(step.name, i)}>
+          <h3>{step.name}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

@@ -1,0 +1,11 @@
+---
+import { t } from '../../i18n';
+interface Props { items: string[]; lang: string }
+const { items, lang } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="c-takeaways" aria-labelledby="key-takeaways">
+    <h2 id="key-takeaways">{t(lang, 'article.takeawaysLabel')}</h2>
+    <ul>{items.map((item) => <li>{item}</li>)}</ul>
+  </section>
+)}

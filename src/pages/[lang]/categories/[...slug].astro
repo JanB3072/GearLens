@@ -1,0 +1,42 @@
+---
+import ListingLayout from '../../../layouts/ListingLayout.astro';
+import { PAGINATION } from '../../../config/site';
+import { CATEGORIES } from '../../../config/navigation';
+import { categoryPath, localePath, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { listByGroup } from '../../../lib/repository';
+import { groupHref, parseGroupPage } from '../../../lib/routes';
+import { groupStaticPaths } from '../../../lib/static-paths';
+import { categoryBySlug } from '../../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return groupStaticPaths('by-category');
+}
+
+const L = Astro.params.lang ?? 'en';
+const parsed = parseGroupPage(Astro.params.slug)!;
+const category = categoryBySlug.get(parsed.key)!;
+const result = listByGroup('by-category', parsed.key, parsed.page, PAGINATION.articlesPerPage);
+const href = groupHref(categoryPath(L, parsed.key));
+const pageSegments = parsed.page > 1 ? ['page', String(parsed.page)] : [];
+---
+
+<ListingLayout
+  lang={L}
+  path={href(parsed.page)}
+  title={parsed.page > 1 ? `${category.name} — ${t(L, 'listing.page')} ${parsed.page}` : category.name}
+  description={category.description}
+  eyebrow={category.eyebrow}
+  cards={result.cards}
+  page={parsed.page}
+  totalPages={result.totalPages}
+  total={result.total}
+  href={href}
+  alternates={pageAlternates(L, 'categories', parsed.key, ...pageSegments)}
+  crumbs={[
+    { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+    { label: t(L, 'nav.categories'), href: localePath(L, 'categories') },
+    { label: category.name },
+  ]}
+  filters={CATEGORIES.map((c) => ({ label: c.shortName, href: categoryPath(L, c.slug), active: c.slug === parsed.key }))}
+/>

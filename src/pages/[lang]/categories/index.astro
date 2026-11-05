@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CategoryTile from '../../../components/cards/CategoryTile.astro';
+import { CATEGORIES } from '../../../config/navigation';
+import { localePath, localeStaticParams, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { getGroupCounts } from '../../../lib/repository';
+import { collectionPageSchema, graph, organizationSchema, websiteSchema } from '../../../lib/schema';
+
+export function getStaticPaths() {
+  return localeStaticParams();
+}
+
+const L = Astro.params.lang ?? 'en';
+const counts = getGroupCounts('by-category');
+const path = localePath(L, 'categories');
+const jsonLd = graph([
+  organizationSchema(),
+  websiteSchema(L),
+  collectionPageSchema('Categories', 'Browse all research categories', path, L),
+]);
+---
+
+<BaseLayout
+  lang={L}
+  seo={{
+    title: 'Research categories',
+    description: 'Browse GearLens guides by research category: setup, comparisons, explainers, buying guides and measurements.',
+    path,
+    lang: L,
+    alternates: pageAlternates(L, 'categories'),
+    jsonLd,
+  }}
+>
+  <header class="listing-head">
+    <div class="container">
+      <span class="eyebrow">{t(L, 'home.categoriesEyebrow')}</span>
+      <h1 class="h2" style="margin-top:1.2rem">{t(L, 'nav.categories')}</h1>
+      <p class="lede" style="margin-top:1rem">One taxonomy, stable URLs and a countable corpus. Category hubs are the primary internal-link targets for every article.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      <div class="tiles">
+        {CATEGORIES.map((c) => <CategoryTile category={c} lang={L} count={counts[c.slug] ?? 0} />)}
+      </div>
+      <p class="small muted" style="margin-top:2rem">
+        <a href={localePath(L, 'glossary')}>{t(L, 'nav.glossary')} →</a> · <a href={localePath(L, 'blog')}>{t(L, 'listing.browseAll')} →</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

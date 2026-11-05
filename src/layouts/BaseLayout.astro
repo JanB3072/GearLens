@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import SeoHead, { type SeoProps } from '../components/seo/SeoHead.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import { getLocaleConfig, normalizeLocale, t } from '../i18n';
+
+interface Props { seo: SeoProps; lang?: string }
+const { seo } = Astro.props;
+const lang = normalizeLocale(Astro.props.lang ?? seo.lang);
+const config = getLocaleConfig(lang);
+---
+
+<!doctype html>
+<html lang={config.hreflang} dir={config.dir} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SeoHead {...seo} lang={lang} />
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('gl-theme');
+          const theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.dataset.theme = theme;
+        } catch (e) { /* storage blocked: keep the default dark theme */ }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t(lang, 'nav.skip')}</a>
+    <a class="skip-link" href="#footer">{t(lang, 'nav.skipFooter')}</a>
+
+    <SiteHeader lang={lang} currentPath={Astro.url.pathname.replace(/\.html$/i, '')} />
+    <main id="main"><slot /></main>
+    <SiteFooter lang={lang} />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+            root.dataset.theme = next;
+            try { localStorage.setItem('gl-theme', next); } catch (e) {}
+          });
+        });
+
+        const toggle = document.querySelector('[data-nav-toggle]');
+        const mobile = document.querySelector('[data-mobile-nav]');
+        if (toggle && mobile) {
+          toggle.addEventListener('click', () => {
+            const open = mobile.hasAttribute('hidden');
+            if (open) mobile.removeAttribute('hidden'); else mobile.setAttribute('hidden', '');
+            toggle.setAttribute('aria-expanded', String(open));
+          });
+        }
+
+        document.querySelectorAll('.locale-switch').forEach((el) => {
+          el.addEventListener('click', (event) => {
+            if (event.target.closest('a, summary')) return;
+          });
+        });
+        document.addEventListener('click', (event) => {
+          document.querySelectorAll('.locale-switch[open]').forEach((el) => {
+            if (!el.contains(event.target)) el.removeAttribute('open');
+          });
+        });
+
+        const form = document.querySelector('[data-newsletter]');
+        if (form) {
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const status = document.querySelector('[data-newsletter-status]');
+            if (status) {
+              status.textContent = 'Connect this form to your email provider in SiteFooter.astro before launch.';
+              status.removeAttribute('hidden');
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

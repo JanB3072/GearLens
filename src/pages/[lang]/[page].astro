@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { SITE } from '../../config/site';
+import { STATIC_PAGES, type StaticPage } from '../../config/static-pages';
+import { localePath, localeStaticParams, t } from '../../i18n';
+import { pageAlternates } from '../../lib/links';
+import { graph, organizationSchema, websiteSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return localeStaticParams().flatMap(({ params }) =>
+    Object.entries(STATIC_PAGES).map(([page, data]) => ({ params: { ...params, page }, props: { data } })),
+  );
+}
+
+const { data } = Astro.props as { data: StaticPage };
+const L = Astro.params.lang ?? 'en';
+const slug = Astro.params.page ?? 'about';
+const path = localePath(L, slug);
+const jsonLd = graph([organizationSchema(), websiteSchema(L)]);
+---
+
+<BaseLayout
+  lang={L}
+  seo={{ title: data.title, description: data.description, path, lang: L, alternates: pageAlternates(L, slug), jsonLd }}
+>
+  <header class="listing-head">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: t(L, 'common.breadcrumbHome'), href: localePath(L) }, { label: data.title }]} />
+      <span class="eyebrow" style="margin-top:2rem">{data.eyebrow}</span>
+      <h1 class="h2" style="margin-top:1.2rem">{data.title}</h1>
+      <p class="lede" style="margin-top:1rem">{data.intro}</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container legal-body">
+      {data.sections.map((section) => (
+        <>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((p) => <p>{p}</p>)}
+          {section.bullets && <ul>{section.bullets.map((b) => <li>{b}</li>)}</ul>}
+        </>
+      ))}
+      <hr class="rule" style="margin:3rem 0" />
+      <p class="small muted">Last reviewed by the {SITE.name} editorial desk. Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+    </div>
+  </section>
+</BaseLayout>

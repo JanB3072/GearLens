@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import { glossaryPath, localePath, localeStaticParams, t } from '../../../i18n';
+import { pageAlternates } from '../../../lib/links';
+import { definedTermSchema, graph, organizationSchema, websiteSchema } from '../../../lib/schema';
+import { glossary, glossaryBySlug } from '../../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return localeStaticParams().flatMap(({ params }) =>
+    glossary.map((term) => ({ params: { ...params, slug: term.slug } })),
+  );
+}
+
+const L = Astro.params.lang ?? 'en';
+const term = glossaryBySlug.get(Astro.params.slug ?? '');
+if (!term) throw new Error(`Unknown glossary term: ${Astro.params.slug}`);
+
+const path = glossaryPath(L, term.slug);
+const jsonLd = graph([
+  organizationSchema(),
+  websiteSchema(L),
+  definedTermSchema(term, L),
+]);
+const related = (term.relatedTerms ?? []).map((s) => glossaryBySlug.get(s)).filter(Boolean);
+---
+
+<BaseLayout
+  lang={L}
+  seo={{
+    title: `${term.term}: definition`,
+    description: term.definition,
+    path,
+    lang: L,
+    alternates: pageAlternates(L, 'glossary', term.slug),
+    jsonLd,
+  }}
+>
+  <header class="listing-head">
+    <div class="container">
+      <Breadcrumbs crumbs={[
+        { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
+        { label: t(L, 'nav.glossary'), href: localePath(L, 'glossary') },
+        { label: term.term },
+      ]} />
+      <span class="eyebrow" style="margin-top:2rem">Definition</span>
+      <h1 class="h2" style="margin-top:1.2rem">{term.term}</h1>
+      <p class="lede" style="margin-top:1.2rem; font-family:var(--font-serif)">{term.definition}</p>
+      {term.alsoKnownAs?.length ? <p class="small muted" style="margin-top:1.2rem">Also known as: {term.alsoKnownAs.join(', ')}</p> : null}
+    </div>
+  </header>
+  <section class="section">
+    <div class="container legal-body">
+      <h2>Why this term matters</h2>
+      <p>{term.term} appears throughout our guides because it changes the outcome of a setup decision. Linking to a single stable definition keeps our articles consistent and gives answer engines an unambiguous entity to resolve.</p>
+      {term.sources?.length ? <>
+        <h2>Primary references</h2>
+        <ul>{term.sources.map((url) => <li><a href={url} rel="noopener noreferrer" target="_blank">{url}</a></li>)}</ul>
+      </> : null}
+      {related.length ? <>
+        <h2>Related terms</h2>
+        <div class="tag-list">{related.map((r) => <a class="tag" href={glossaryPath(L, r!.slug)}>{r!.term}</a>)}</div>
+      </> : null}
+      <p style="margin-top:3rem"><a class="btn btn--ghost btn--sm" href={localePath(L, 'glossary')}>← {t(L, 'nav.glossary')}</a></p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import { t } from '../../i18n';
+import type { Heading } from '../../lib/types';
+interface Props { headings: Heading[]; lang: string }
+const { headings, lang } = Astro.props;
+---
+{headings.length > 1 && (
+  <nav class="toc" aria-labelledby="toc-heading">
+    <p class="toc-title" id="toc-heading">{t(lang, 'article.tocLabel')}</p>
+    <ul class="toc-list">
+      {headings.filter((h) => h.depth <= 3).map((h) => (
+        <li><a class="toc-link" data-depth={h.depth} href={`#${h.id}`}>{h.text}</a></li>
+      ))}
+    </ul>
+  </nav>
+)}

@@ -1,0 +1,16 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import { getArticle } from '../../../lib/repository';
+import { articleStaticPaths } from '../../../lib/static-paths';
+
+/** Every published article is a real HTML file in `dist/`. No runtime needed. */
+export function getStaticPaths() {
+  return articleStaticPaths();
+}
+
+const { id } = Astro.props as { id: string };
+const article = getArticle(id);
+if (!article) throw new Error(`[blog] missing shard for ${id}`);
+---
+
+<ArticleLayout article={article} lang={Astro.params.lang ?? 'en'} />
