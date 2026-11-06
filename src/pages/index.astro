@@ -4,15 +4,17 @@ import { SITE } from '../config/site';
 import { ENABLED_LOCALES, LOCALES } from '../i18n';
 import { graph, organizationSchema, websiteSchema } from '../lib/schema';
 
+const redirect = ENABLED_LOCALES.length === 1 ? ENABLED_LOCALES[0] : null;
+const canonicalUrl = redirect ? `${SITE.url}/${redirect.code}/` : `${SITE.url}/`;
 const jsonLd = graph([
   organizationSchema(),
-  websiteSchema('en'),
-  { '@type': 'WebPage', name: `${SITE.name} | select your region`, url: `${SITE.url}/` },
+  websiteSchema(redirect ? redirect.code : 'en'),
+  { '@type': 'WebPage', name: `${SITE.name}${redirect ? '' : ' | select your region'}`, url: canonicalUrl },
 ]);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={redirect ? redirect.code : 'en'} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,33 +22,50 @@ const jsonLd = graph([
     <title>{SITE.name} | {SITE.tagline}</title>
     <meta name="description" content={SITE.description} />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <link rel="canonical" href={`${SITE.url}/`} />
-    <link rel="alternate" hreflang="x-default" href={`${SITE.url}/`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     {ENABLED_LOCALES.map((l) => <link rel="alternate" hreflang={l.hreflang} href={`${SITE.url}/${l.code}/`} />)}
+    {redirect && <meta http-equiv="refresh" content={`0; url=/${redirect.code}/`} />}
     <meta property="og:title" content={`${SITE.name} | ${SITE.tagline}`} />
     <meta property="og:description" content={SITE.description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`${SITE.url}/`} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="theme-color" content="#0b100f" />
     <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
-    <main class="locale-splash" id="main">
-      <div class="container splash-inner">
-        <span class="eyebrow eyebrow--plain">Global | EN</span>
-        <h1 class="display">{SITE.name}</h1>
-        <p class="lede" style="margin:0 auto">{SITE.description}</p>
-        <p class="small muted" style="margin-top:2rem">Choose a language</p>
-        <div class="locale-cards">
-          {LOCALES.map((l) => l.enabled
-            ? <a class="locale-card" href={`/${l.code}/`}><div><strong>{l.nativeName}</strong><small>{l.region} · {l.hreflang}</small></div><span aria-hidden="true">→</span></a>
-            : <span class="locale-card" aria-disabled="true"><div><strong>{l.nativeName}</strong><small>{l.region} · Coming soon</small></div><span aria-hidden="true">·</span></span>)}
+    {redirect ? (
+      <main class="locale-splash" id="main">
+        <div class="container splash-inner">
+          <span class="eyebrow eyebrow--plain">{SITE.name}</span>
+          <h1 class="display">English only</h1>
+          <p class="lede" style="margin:0 auto">This site is published in English. Taking you there.</p>
+          <p style="margin-top:2rem">
+            <a class="locale-card" href={`/${redirect.code}/`}><div><strong>{redirect.nativeName}</strong><small>{redirect.region} · {redirect.hreflang}</small></div><span aria-hidden="true">→</span></a>
+          </p>
+          <p class="small muted" style="margin-top:3rem">
+            <a href="/llms.txt">llms.txt</a> · <a href="/sitemap.xml">sitemap</a> · <a href={`mailto:${SITE.email}`}>contact</a>
+          </p>
         </div>
-        <p class="small muted" style="margin-top:3rem">
-          <a href="/llms.txt">llms.txt</a> · <a href="/sitemap.xml">sitemap</a> · <a href={`mailto:${SITE.email}`}>contact</a>
-        </p>
-      </div>
-    </main>
+      </main>
+    ) : (
+      <main class="locale-splash" id="main">
+        <div class="container splash-inner">
+          <span class="eyebrow eyebrow--plain">Global | EN</span>
+          <h1 class="display">{SITE.name}</h1>
+          <p class="lede" style="margin:0 auto">{SITE.description}</p>
+          <p class="small muted" style="margin-top:2rem">Choose a language</p>
+          <div class="locale-cards">
+            {LOCALES.map((l) => l.enabled
+              ? <a class="locale-card" href={`/${l.code}/`}><div><strong>{l.nativeName}</strong><small>{l.region} · {l.hreflang}</small></div><span aria-hidden="true">→</span></a>
+              : <span class="locale-card" aria-disabled="true"><div><strong>{l.nativeName}</strong><small>{l.region} · Coming soon</small></div><span aria-hidden="true">·</span></span>)}
+          </div>
+          <p class="small muted" style="margin-top:3rem">
+            <a href="/llms.txt">llms.txt</a> · <a href="/sitemap.xml">sitemap</a> · <a href={`mailto:${SITE.email}`}>contact</a>
+          </p>
+        </div>
+      </main>
+    )}
   </body>
 </html>

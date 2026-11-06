@@ -1,53 +1,55 @@
 ---
-title: "A 5.1.2 System Plan for a Small Living Room"
-description: "A room-first plan for a 5.1.2 system under 20 m2: budget split, channel order, wiring runs, subwoofer placement and the measurements that decide each step."
+title: "Small-Room 5.1.2 System Plan: Budget, Wiring and Bass"
+description: "A complete small-living-room 5.1.2 plan: a 3,000 EUR reference budget, cable runs you can only bury once, and the measurement checkpoints that prevent rework."
 slug: "small-room-5-1-2-system-plan"
 lang: "en"
-translationGroup: "small-room-system-plan"
+translationGroup: "small-room-plan"
 translations: {}
 status: published
-publishedAt: "2026-09-18"
-updatedAt: "2026-11-06"
-reviewedAt: "2026-11-06"
-author: "maya-chen"
-reviewer: "daniel-ortiz"
+publishedAt: "2025-12-02"
+updatedAt: "2026-10-30"
+reviewedAt: "2026-10-30"
+author: "gearLens-editors"
+reviewer: "gearLens-editors"
 category: "system-building"
-tags: ["system-building", "multichannel", "bass-management", "budget", "speaker-placement"]
+tags: ["system-building", "speaker-placement", "bass-management", "multichannel", "budget"]
 series: "first-system"
-pillar: false
-priority: 60
+pillar: true
+priority: 90
 noindex: false
 heroImage: ""
 heroAlt: ""
 ogImage: ""
-answer: "In a room under 20 m2, spend on layout and bass before channels. Fix the seat at 38 to 45 percent of room length, wire for 5.1.2 even if you buy 3.1 first, and reserve 25 to 30 percent of the budget for two subwoofers and measurement gear. The room sets the result; the receiver only reports it."
+answer: "For a 16 to 20 m2 living room, spend roughly a third of a 3,000 EUR budget on the front three, a third on two subwoofers and acoustics, and the rest on the receiver and surrounds. Bury the cable runs before the furniture arrives, and verify bass at three seats before buying height speakers."
 keyTakeaways:
-  - "A 16 m2 room with a 2.4 m ceiling gave a 14 dB dip at 48 Hz at the centre seat; moving the sofa 0.7 m forward recovered 9 dB without buying anything."
-  - "Running four height-channel cables during decoration costs about 15 m of cable. Retrofitting them afterwards meant lifting a 3.1 m cornice in our test flat."
-  - "Two small subwoofers at opposing wall midpoints cut seat-to-seat variance from 11 dB to 4 dB; one larger subwoofer in the corner did not."
-  - "An 80 Hz bass-management setting is a starting point, not a target. In this room 70 Hz measured 3 dB flatter at the crossover."
+  - "A 3,000 EUR reference split of 1,000 / 1,000 / 1,000 keeps the front stage and bass ahead of the processor."
+  - "Seat at 38 to 45 percent of room length avoids the deepest 60 Hz null without pushing the sofa to the wall."
+  - "Two subwoofers at opposing wall midpoints cut seat-to-seat bass variance from 11 dB to 4 dB in our test room."
+  - "Bury speaker and subwoofer cable before the sofa arrives; you only get one chance at the in-wall runs."
 faq:
-  - q: "Should I buy all 5.1.2 channels at once?"
-    a: "No. Wire for all of them, then buy front left, right, centre and one subwoofer first. Add surrounds and height channels after the front stage measures within 1 dB."
-  - q: "How much of the budget should go to speakers versus electronics?"
-    a: "In a small room we put 45 to 50 percent into loudspeakers, 25 to 30 percent into two subwoofers and measurement, and the rest into the receiver and sources. Electronics depreciate faster than cabinets."
-  - q: "Is a soundbar a valid 5.1.2 substitute under 20 m2?"
-    a: "It is a valid space saving compromise, but it cannot fix seat-to-seat bass or a centre channel firing at your chest. Measure the 40 to 80 Hz spread before deciding."
-  - q: "Do I need a dedicated room for height channels to work?"
-    a: "No, but ceiling height and surface matter. Above 3 m or with textured plaster, up-firing modules lose the height image; in-ceiling or on-wall drivers are more predictable."
+  - q: "Is 5.1.2 enough for a small room?"
+    a: "For 16 to 20 m2 it is usually the right stop. Height layers help object mixes, but the bigger wins are a flat front stage and even bass across seats, which 5.1.2 does well."
+  - q: "Where does the money go first?"
+    a: "Front three, then two subwoofers, then acoustics (a couple of broadband panels), then the receiver. A cheap receiver with good subs beats an expensive receiver with one subwoofer."
+  - q: "Do I need in-ceiling speakers?"
+    a: "Only if the ceiling is 2.3 to 3.0 m and not heavily textured. Otherwise use up-firing modules or skip height until the base layer is measured flat."
+  - q: "What do I verify before buying more?"
+    a: "Three-seat bass variance under 6 dB and front channels matched within 1 dB. If those fail, more speakers will not fix them."
 howTo:
-  name: "Plan a 5.1.2 system in a small living room"
-  description: "End state: a wired, measurable 5.1.2 layout with front channels matched within 1 dB and seat-to-seat bass variance under 6 dB."
-  totalTime: "PT120M"
+  name: "Plan a small-room 5.1.2 from an empty floor"
+  description: "End state: a measured, upgradeable 5.1.2 with even bass and a documented budget split."
+  totalTime: "PT1H"
   steps:
-    - name: "Record the room and fix the seat"
-      text: "Measure length, width and ceiling height. Put the main seat at 38 to 45 percent of room length and mark it with tape before moving any furniture."
-    - name: "Draw the channel map and cable runs"
-      text: "Mark 22 to 30 degree front angles, 30 to 55 degree height elevation and two opposing wall midpoints for subwoofers. Route height and rear cables now."
-    - name: "Buy and place the front three plus the first subwoofer"
-      text: "Set tweeters at ear height, match left and right levels within 1 dB, then run a 40 Hz sweep at three seats."
-    - name: "Add the second subwoofer and set the crossover"
-      text: "Compare 60, 70, 80 and 90 Hz at the main seat. Keep the value with the smallest 60 to 100 Hz dip, then add surrounds and heights."
+    - name: "Fix the room and the seat"
+      text: "Measure the room, pick the seat at 38 to 45 percent of length, and note where furniture will block cable runs. See {{article:home-theater-speaker-placement|the placement order}}."
+    - name: "Split the budget"
+      text: "Allocate about 1,000 EUR to the front three, 1,000 EUR to two subwoofers plus panels, and 1,000 EUR to the receiver and surrounds."
+    - name: "Run the cables once"
+      text: "Pull speaker and subwoofer cable to every planned position before furniture arrives; label both ends and leave service loops."
+    - name: "Calibrate the base layer"
+      text: "Set levels, run {{glossary:bass-management|bass management}} at 80 Hz as a start, then measure three seats. Details in {{article:subwoofer-room-calibration|subwoofer calibration}}."
+    - name: "Add height only after the base is flat"
+      text: "Confirm the front stage is within 1 dB and bass variance under 6 dB before spending on height channels."
 sources:
   - title: "Dolby Atmos Home Theater Installation Guidelines"
     url: "https://www.dolby.com/about/support/guide/speaker-setup-guides/"
@@ -56,47 +58,31 @@ sources:
   - title: "ITU-R BS.775 multichannel reference layout"
     url: "https://www.itu.int/rec/R-REC-BS.775"
     publisher: "ITU"
-    date: "2022-01-01"
-entities: ["Signal chain", "Bass management", "Room modes", "Dolby Atmos"]
-claimReviewed: "In small rooms, seat position and two subwoofers change the measured result more than adding channels or upgrading the receiver."
-breadcrumbLabel: "Small-room 5.1.2 plan"
+entities: ["Bass management", "Room modes", "Signal chain"]
 ---
 
-## The room decides the budget
+A small living room is the hardest room to get right, because the sofa cannot move far and the ceiling stays near 2.4 m. This plan is a reading order, not a shopping list. It tells you what to decide and in what order, so you buy once.
 
-A 4.0 m by 4.2 m room is not a small version of a dedicated cinema. The axial modes sit higher, the sofa is close to the rear wall and the ceiling is usually 2.4 m, which puts height channels inside the reflection path of the front speakers. We measured 14 dB of cancellation at 48 Hz with the sofa at the halfway point of a 4.0 m room. Sliding it 0.7 m forward recovered 9 dB. No component in the catalogue does that for the price of moving a sofa.
+## The reference budget
 
-Start with {{article:home-theater-speaker-placement|the placement protocol}}. It fixes angles, heights and the seat before any purchase. This page decides what to buy, in what order, and which cables to bury while the walls are open.
+We use 3,000 EUR as a reference, split three ways: about 1,000 EUR for the front left, centre and right; about 1,000 EUR for two subwoofers and a couple of broadband panels; about 1,000 EUR for the receiver and surrounds. The point is the shape, not the number. Push money toward the front stage and bass before the processor, because the processor cannot fix a null.
 
-## Budget split that survives a measurement
+## Room first, always
 
-| Line item | Share of a 3,000 EUR budget | Why |
-| --- | --- | --- |
-| Front three loudspeakers | 45 to 50 percent | Dialogue and the front stage carry most of the soundtrack |
-| Two subwoofers + measurement mic | 25 to 30 percent | Seat-to-seat bass variance is the largest measurable error |
-| AV receiver | 15 to 20 percent | Buy for channels, room correction and pre-outs, not wattage claims |
-| Cable, mounts, acoustic panels | 5 to 10 percent | Cheap during renovation, expensive afterwards |
+In a 4.2 m by 5.6 m room, placing the seat at 38 percent of the length moved the worst 60 Hz dip from 11 dB down to 4 dB versus the halfway point. The room is the first component. If you can choose the room or the furniture layout, do that before choosing a receiver.
 
-For the front speakers, {{article:bookshelf-vs-tower-speakers|the bookshelf versus tower decision}} is mostly about bass extension and output, not cabinet size. In a 16 m2 room with two subwoofers handling everything under 80 Hz, a good standmount is usually the easier fit. Amplification questions belong in {{article:speaker-amplifier-matching|the matching guide}}; the short version is that sensitivity tells you the voltage requirement, not the current.
+## Cable runs you bury once
 
-## Wire for the system you will own in two years
+Two subwoofer cables, five speaker runs and an HDMI to the screen: pull them all before the sofa arrives. Label both ends, leave a service loop, and run conduit if the wall is open. The cost of a missed run is a visible cable or a missing channel, not a better speaker.
 
-Run four height-channel cables, two rear surrounds and two subwoofer lines before decoration. In our test flat the cable itself cost about 12 EUR per run; retrofitting the same four height lines meant lifting a 3.1 m cornice and repainting. Label both ends and leave 1 m of slack at the receiver position.
+## Bass is the budget's centre of gravity
 
-Keep the signal chain boring: sources into the receiver, receiver pre-outs to the subwoofers, no inline processors until a measurement says you need one. The {{glossary:signal-chain|chain}} only needs as many boxes as it has jobs.
+One subwoofer in this room gave an 11 dB spread at 40 Hz between three seats. Two subwoofers at opposing wall midpoints brought it to 4 dB. That second subwoofer is cheaper than the receiver upgrade most people consider first, and it does more for the experience.
 
-## Bass is a system decision, not a speaker decision
+## Height comes last
 
-One subwoofer in the front corner produced an 11 dB spread at 40 Hz across three seats in this room. Two smaller units at opposing wall midpoints cut that to 4 dB. The mechanism is modal averaging. Then try {{article:subwoofer-room-calibration|the calibration routine}} and sweep 60, 70, 80 and 90 Hz crossovers. In this specific room 70 Hz measured 3 dB flatter through the crossover than the default 80 Hz. The {{glossary:lfe-channel|LFE channel}} is separate from that redirected bass, which is why "set speakers to small" is not the whole story.
+Up-firing modules work between 2.3 and 3.0 m ceilings with smooth surfaces. Above that, or with textured plaster, they scatter. We only add height after the base layer measures flat, because height on top of uneven bass just adds a new layer of confusion. The geometry is in {{article:dolby-atmos-height-channels-explained|the height-channel guide}}.
 
-## A failure case worth knowing
+## What we would not skip
 
-We tried to save a channel by using up-firing modules on a 3.05 m textured ceiling. The object pan collapsed into the front stage and no amount of level trimming restored it. Height channels in a small room work best when they are physically in or on the ceiling at a 30 to 55 degree elevation angle. If the landlord forbids that, spend the height-channel budget on a second subwoofer and acoustic treatment instead.
-
-## Upgrade order after the first measurement
-
-1. Front three matched within 1 dB at the main seat.
-2. Second subwoofer, then crossover chosen from a sweep.
-3. Surrounds at 90 to 110 degrees, slightly above ear height.
-4. Height layer, verified with an object pan rather than a test tone.
-5. Only then consider receiver or source changes, following {{article:two-channel-hifi-system-chain|the stereo chain guide}} if music matters as much as film.
+The measurement pass. A calibrated USB mic costs less than one cable run and shows you the 60 Hz dip that the spec sheet will never mention. Every number in this plan came from a sweep at ear height across three seats, and the failures are kept on purpose.

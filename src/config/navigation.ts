@@ -121,7 +121,7 @@ export function getFooterColumns(lang: string): FooterColumn[] {
       ],
     },
     {
-      title: t(lang, 'footer.aboutUs'),
+      title: t(lang, 'footer.publication'),
       links: [
         { label: t(lang, 'nav.about'), href: localePath(lang, 'about') },
         { label: 'Editorial policy', href: localePath(lang, 'editorial-policy') },
@@ -131,7 +131,7 @@ export function getFooterColumns(lang: string): FooterColumn[] {
       ],
     },
     {
-      title: t(lang, 'footer.resources'),
+      title: t(lang, 'footer.details'),
       links: [
         { label: 'llms.txt', href: '/llms.txt' },
         { label: 'Sitemap index', href: '/sitemap.xml' },

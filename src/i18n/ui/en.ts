@@ -131,6 +131,26 @@ export const en = {
   'footer.newsletter': 'Get the note when a guide changes.',
   'cookie.note': 'No ad cookies. No tracking pixels.',
   'legal.disclaimer': 'Some links are affiliate links. A commission has never changed a test result.',
+
+  'home.everydayEdit': 'The everyday edit',
+  'home.everydayEditNote': 'Two starting points worth your first hour.',
+  'home.freshNotes': 'Fresh notes',
+  'home.freshNotesIndex': '01',
+  'home.philosophyEyebrow': 'The GearLens philosophy',
+  'home.philosophyTitle': 'A considered system. A little everyday joy in the listening room.',
+  'home.philosophyBody': 'We plan the room, the channel layout and the signal chain before touching a price tag. Every guide carries a dated short answer, the measurements that backed it, and the part that did not work.',
+  'home.philosophyLink': 'Meet GearLens',
+  'home.onRadar': 'On our radar',
+  'home.explore': 'Explore',
+  'home.allStories': 'All stories',
+  'home.clusterNote': 'Seven topic clusters, organised around the system you are building rather than around article formats.',
+  'home.buildPathsIntro': 'Four build paths, each a reading order from a plan to a working system.',
+  'footer.publication': 'The Publication',
+  'footer.details': 'The Details',
+  'footer.editorsContact': 'Questions, ideas, a little hello? Write to the editors.',
+  'footer.cookieBar': 'A little privacy note: we use no optional tracking. Essential cookies only.',
+  'nav.ourStory': 'Our story',
+  'nav.ourStandards': 'Our standards',
 } as const;
 
 export type UiKey = keyof typeof en;

@@ -1,9 +1,8 @@
 import { SITE } from '../config/site';
 import { DEFAULT_LOCALE, ENABLED_LOCALE_CODES, getLocaleConfig } from './locales';
 import { en, type UiKey } from './ui/en';
-import { de } from './ui/de';
 
-const dictionaries: Record<string, Partial<Record<UiKey, string>>> = { en, de };
+const dictionaries: Record<string, Partial<Record<UiKey, string>>> = { en };
 
 export type { UiKey } from './ui/en';
 export { DEFAULT_LOCALE, ENABLED_LOCALES, ENABLED_LOCALE_CODES, LOCALES, getLocaleConfig, localeStaticParams, isEnabledLocale } from './locales';

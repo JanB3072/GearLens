@@ -35,8 +35,8 @@ status: published
 publishedAt: "${today}"
 updatedAt: "${today}"
 reviewedAt: "${today}"
-author: "maya-chen"
-reviewer: "daniel-ortiz"
+author: "gearLens-editors"
+reviewer: "gearLens-editors"
 category: "system-building"
 tags: ["system-building", "speaker-placement"]
 series: "first-system"

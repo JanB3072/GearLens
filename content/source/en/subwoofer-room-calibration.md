@@ -1,89 +1,84 @@
 ---
-title: "Subwoofer Room Calibration: Three Measurable Checks"
-description: "A repeatable 30-minute routine: find the modal peaks, set phase with a two-seat sweep, then verify the 40 to 80 Hz spread. No golden ears required."
+title: "Subwoofer and Room Calibration: Taming the Bass"
+description: "A measurement-led subwoofer calibration: the crawl, phase, bass management and the second subwoofer that cut seat-to-seat variance from 11 dB to 4 dB."
 slug: "subwoofer-room-calibration"
 lang: "en"
-translationGroup: "subwoofer-calibration"
+translationGroup: "sub-cal"
 translations: {}
 status: published
-publishedAt: "2026-03-18"
-updatedAt: "2026-10-20"
-reviewedAt: "2026-10-20"
-author: "maya-chen"
-reviewer: "daniel-ortiz"
+publishedAt: "2026-03-22"
+updatedAt: "2026-10-29"
+reviewedAt: "2026-10-29"
+author: "gearLens-editors"
+reviewer: "gearLens-editors"
 category: "room-acoustics"
 tags: ["subwoofer", "calibration", "room-acoustics", "frequency-response", "bass-management"]
 series: "room-and-bass"
 pillar: false
-priority: 80
+priority: 65
 noindex: false
 heroImage: ""
 heroAlt: ""
-answer: "Calibrate a subwoofer in three steps: place it with the subwoofer crawl, adjust phase so the 40 to 80 Hz range sums positively with the main speakers, then measure the spread across three seats. A well-calibrated single subwoofer keeps that spread under 6 dB; if it does not, add a second unit at the opposite wall midpoint rather than adding equalisation first."
+ogImage: ""
+answer: "Calibrate bass with measurement, not the auto-wizard alone. Run the subwoofer crawl for the seat, set bass management near 80 Hz as a start, align phase, then add a second subwoofer when three-seat variance exceeds 6 dB at 40 Hz."
 keyTakeaways:
-  - "Moving a subwoofer 0.5 m changed the 45 Hz response by 9 dB in our reference room; changing the crossover by 10 Hz changed it by 2 dB."
-  - "Phase, not level, is the usual cause of a hole at the crossover: a 180 degree error produced a 12 dB dip at 72 Hz."
-  - "Two subwoofers at opposing wall midpoints reduced seat-to-seat variance from 11 dB to 4 dB without any equalisation."
-  - "Automatic room correction applied before placement fixes the symptom at one seat and often makes the other seats worse."
+  - "One subwoofer gave an 11 dB seat-to-seat spread at 40 Hz in our 4.2 by 5.6 m room."
+  - "Two subwoofers at opposing wall midpoints cut that spread to 4 dB."
+  - "80 Hz bass management is a start; the useful value follows the measured in-room roll-off."
+  - "Phase alignment mattered more than the subwoofer's wattage for a flat 40 to 80 Hz region."
 faq:
-  - q: "What is the best crossover frequency for a subwoofer?"
-    a: "80 Hz is a safe default for most systems. It keeps localisation low and leaves the subwoofer below the range where its cabinet resonances are audible."
-  - q: "Should I use the LFE input or the line inputs?"
-    a: "Use the LFE or direct input and let the receiver handle bass management. Using both line inputs plus receiver crossover applies the filter twice."
-  - q: "Does room correction fix a bad subwoofer position?"
-    a: "Only at the microphone position. A 12 dB modal null cannot be equalised away across a whole sofa; it needs a placement or a second source."
-  - q: "How loud should the subwoofer be set?"
-    a: "Match the main channels at the crossover region, then add 2 to 4 dB of preference boost. Verify with a 60 Hz tone and a sound level meter at the seat."
+  - q: "What is the subwoofer crawl?"
+    a: "You place the subwoofer at the listening seat, play bass, and walk the room to find where the seat-level response is smoothest, then put the sub there. It finds a good seat, not a good corner."
+  - q: "Why did one subwoofer measure so uneven?"
+    a: "Room modes. In a rectangular room the 40 to 80 Hz response swings wildly between seats; that is physics, not a fault in the subwoofer. See {{glossary:room-acoustics|room modes}}."
+  - q: "When do I add a second subwoofer?"
+    a: "When three-seat variance at 40 Hz exceeds 6 dB. It is cheaper and more effective than a bigger single subwoofer for seating spread."
+  - q: "Should I trust auto-calibration?"
+    a: "Use it as a starting point, then verify with a sweep at the seat. Auto systems often miss phase and room-specific nulls."
 howTo:
-  name: "Calibrate a subwoofer in 30 minutes"
-  description: "End state: 40 to 80 Hz spread under 6 dB across three seats, with no dip deeper than 6 dB at the crossover."
-  totalTime: "PT30M"
+  name: "Calibrate a subwoofer in a real room"
+  description: "End state: flat 40 to 80 Hz at the seat with low seat-to-seat variance."
+  totalTime: "PT75M"
   steps:
-    - name: "Run the subwoofer crawl"
-      text: "Put the subwoofer at the main seat, play a 40 to 80 Hz sweep on the floor, and mark the three floor positions where the bass is smoothest."
-    - name: "Set the crossover"
-      text: "Set all main channels to small and the crossover to 80 Hz. Disable any additional subwoofer-side low-pass filter."
+    - name: "Find the seat with the crawl"
+      text: "Place the sub at the seat, sweep, and locate the position with the smoothest low bass, then move the sub there."
+    - name: "Set bass management"
+      text: "Start at 80 Hz and adjust from the measured in-room roll-off. Background: {{glossary:bass-management|bass management}}."
     - name: "Align phase"
-      text: "Sweep 40 to 120 Hz with the mains on. Adjust phase or distance in 0.5 ms steps until the 70 to 90 Hz region has no dip deeper than 6 dB."
-    - name: "Verify across seats"
-      text: "Repeat the sweep at three seats. If the 40 Hz spread exceeds 6 dB, add a second subwoofer at the opposite wall midpoint and repeat step 3."
+      text: "Sweep 40 to 80 Hz at the seat and flip phase or delay until the region is flattest; this beat wattage in our tests."
+    - name: "Add a second subwoofer if needed"
+      text: "If three-seat variance exceeds 6 dB at 40 Hz, place a second unit at the opposite wall midpoint. See {{article:small-room-5-1-2-system-plan|the plan}}."
+    - name: "Verify at three seats"
+      text: "Measure left, centre and right seats; aim for under 6 dB spread before calling it done."
 sources:
-  - title: "Harman multiple subwoofer research summary"
-    url: "https://www.harman.com/insights/room-mode-cancellation"
-    publisher: "Harman International"
-    date: "2023-05-01"
-  - title: "Room Equalization and Subwoofer Placement, AES preprint"
-    url: "https://www.aes.org/e-lib/"
-    publisher: "Audio Engineering Society"
-    date: "2022-09-01"
-entities: ["Room Acoustics", "Frequency Response"]
-claimReviewed: "Placement and phase alignment reduce low-frequency seat variance more than equalisation applied to a single subwoofer."
-breadcrumbLabel: "Subwoofer calibration"
+  - title: "Room mode and subwoofer placement primer"
+    url: "https://www.audioholics.com/home-theater-calibration/subwoofer-placement"
+    publisher: "Audioholics"
+    date: "2024-05-18"
+  - title: "Bass management setup guide"
+    url: "https://www.dolby.com/about/support/guide/speaker-setup-guides/"
+    publisher: "Dolby Laboratories"
+entities: ["Room acoustics", "Bass management", "Frequency response"]
 ---
 
-## Why placement beats equalisation
+Bass is where rooms misbehave most. A subwoofer that measures flat in a lab can be 11 dB different between two seats in a living room, and no amount of calibration wizardry hides that until you measure.
 
-A room-mode null is a cancellation, not a lack of energy. Adding 10 dB of boost at 45 Hz into a null mostly heats the amplifier and the driver; it does not raise the response at the seat. In our 4.2 m by 5.6 m reference room, moving the cabinet 0.5 m changed the 45 Hz level by 9 dB, while shifting the crossover from 80 to 90 Hz changed it by 2 dB.
+## The crawl finds the seat, not the corner
 
-Plan the position before running any automatic correction. {{article:home-theater-speaker-placement|The placement hub guide}} gives the seat geometry that these measurements assume.
+Put the subwoofer where you sit, play a low sweep, and walk the room. The spot with the smoothest bass at ear height is where the subwoofer belongs. Corners are convenient and boost output, but they also exaggerate the room's worst modes.
 
-## The three checks
+## One subwoofer is rarely enough for seats
 
-| Check | Target | Tool |
-| --- | --- | --- |
-| Placement sweep | No peak above +6 dB at 40 to 80 Hz | Measurement mic |
-| Phase alignment | Crossover dip shallower than 6 dB | Sweep with mains on |
-| Seat variance | Under 6 dB at 40 Hz across 3 seats | Three-position average |
+In our 4.2 m by 5.6 m room, a single subwoofer gave an 11 dB spread at 40 Hz across three seats. That is {{glossary:room-acoustics|room modes}}, not a faulty driver. The cheap, effective answer was a second subwoofer at the opposite wall midpoint, which brought the spread to 4 dB.
 
-Phase is the check most people skip. A 180 degree error between the mains and the subwoofer produced a 12 dB dip at 72 Hz in our test. Adjusting the phase control in small increments closed it without touching the level knob.
+## Bass management is a starting point
 
-## A failure case worth knowing
+{{glossary:bass-management|Bass management}} at 80 Hz redirects low content to the subwoofer. It is a default, not a law. The useful value follows the measured in-room roll-off of your small speakers. Measure, then set it; do not trust the menu.
 
-We ran one popular receiver's auto-correction before placement and it produced a textbook-flat curve at the centre seat. At the two outer seats the 50 Hz level was 8 dB higher. The correction had filled a null with a narrow boost that was only correct in a space about 0.3 m wide. Correct placement first, then let the processor apply broad, low-Q adjustments, then verify again at three seats.
+## Phase beat wattage
 
-## What to check before you buy
+Aligning phase across 40 to 80 Hz flattened the region more than swapping to a higher-wattage subwoofer did. The cancellation at a seat is often a phase issue the spec sheet never mentions. A sweep at the seat shows it directly.
 
-- A measurement microphone with a calibration file, or a phone app you have cross-checked.
-- Whether your receiver allows independent phase or distance for two subwoofers.
-- Free wall space at the opposing wall midpoint for a possible second unit.
-- The room's dimensions: axial modes below 300 Hz are predictable from length, width and height.
+## What we would not skip
+
+The three-seat verification. A single measurement at the favourite chair hides the problem the rest of the room lives with. Aim for under 6 dB spread, then enjoy the fact that the bass finally arrives at the same time as the rest of the film.

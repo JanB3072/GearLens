@@ -10,6 +10,11 @@ const columns = getFooterColumns(lang);
 ---
 
 <footer class="site-footer" id="footer">
+  <div class="cookie-bar" data-cookie-bar>
+    <span>{t(lang, 'footer.cookieBar')}</span>
+    <button class="cookie-dismiss" type="button" data-cookie-dismiss>{t(lang, 'nav.close')}</button>
+  </div>
+
   <div class="container footer-top">
     <div class="footer-brand">
       <a class="brand" href={localePath(lang)}>
@@ -17,7 +22,7 @@ const columns = getFooterColumns(lang);
         <span class="brand-text">{SITE.name}</span>
       </a>
       <p>{SITE.description}</p>
-      <p class="small muted" style="margin-top:1.5rem">{t(lang, 'cookie.note')}</p>
+      <p class="small muted" style="margin-top:1.5rem">{t(lang, 'footer.editorsContact')} <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
     </div>
     <div class="footer-cols">
       {columns.map((col) => (

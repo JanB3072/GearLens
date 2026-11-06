@@ -4,7 +4,7 @@
     "name": "Building a System",
     "shortName": "Systems",
     "eyebrow": "Plan the whole chain",
-    "description": "Room goals, channel layouts, signal chain, power and wiring decisions made in the right order, from an empty floor to a working system.",
+    "description": "Room goals, channel layouts, signal chain, power and wiring, decided in the right order. From an empty floor to a system you can measure and upgrade.",
     "index": "01",
     "accent": "copper"
   },
@@ -13,7 +13,7 @@
     "name": "Home Theater",
     "shortName": "Theater",
     "eyebrow": "Multichannel and immersion",
-    "description": "Channel layouts, height layers, centre-channel dialogue, bass management and the trade-offs between a living room and a dedicated cinema room.",
+    "description": "Channel layouts, height layers, centre-channel dialogue, bass management and the honest trade-offs between a living room and a dedicated cinema room.",
     "index": "02",
     "accent": "steel"
   },
@@ -22,7 +22,7 @@
     "name": "Hi-Fi & Stereo",
     "shortName": "Hi-Fi",
     "eyebrow": "Two-channel listening",
-    "description": "Source, amplification and loudspeakers as one chain: stereo imaging, seat geometry, analogue sources and what actually changes the presentation.",
+    "description": "Source, amplification and loudspeakers as one chain: stereo imaging, seat geometry, analogue sources and the small moves that actually change the presentation.",
     "index": "03",
     "accent": "sand"
   },
@@ -31,7 +31,7 @@
     "name": "Room Acoustics",
     "shortName": "Rooms",
     "eyebrow": "The loudest component",
-    "description": "Modes, reflections, placement, treatment and calibration, with measurements taken in ordinary rooms rather than anechoic specifications.",
+    "description": "Modes, reflections, placement, treatment and calibration, measured in ordinary rooms rather than read off an anechoic spec sheet.",
     "index": "04",
     "accent": "moss"
   },
@@ -49,7 +49,7 @@
     "name": "Buying & Comparisons",
     "shortName": "Decisions",
     "eyebrow": "Spend where it matters",
-    "description": "Category decisions, budget tiers and spec-sheet traps, with the room and system conditions under which the answer changes.",
+    "description": "Category decisions, budget tiers and spec-sheet traps, with the room and system conditions under which the honest answer changes.",
     "index": "06",
     "accent": "steel"
   },

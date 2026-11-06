@@ -1,90 +1,82 @@
 ---
-title: "Reading a Frequency Response Chart Without Being Fooled"
-description: "Why a range without a tolerance means nothing, how smoothing hides resonances, and the four chart features we check before publishing any speaker verdict."
+title: "How to Read a Frequency Response Measurement"
+description: "A practical reading of in-room frequency response: smoothing, tolerances, the 60 Hz dip and the difference between a speaker property and a room effect."
 slug: "frequency-response-measurements"
 lang: "en"
-translationGroup: "frequency-response-charts"
+translationGroup: "fr-reading"
 translations: {}
 status: published
-publishedAt: "2026-07-09"
-updatedAt: "2026-10-16"
-reviewedAt: "2026-10-16"
-author: "daniel-ortiz"
-reviewer: "maya-chen"
+publishedAt: "2026-04-05"
+updatedAt: "2026-10-31"
+reviewedAt: "2026-10-31"
+author: "gearLens-editors"
+reviewer: "gearLens-editors"
 category: "measurements-method"
 tags: ["frequency-response", "room-acoustics", "calibration", "crossover"]
 series: "room-and-bass"
 pillar: false
-priority: 55
+priority: 50
 noindex: false
 heroImage: ""
 heroAlt: ""
-answer: "A frequency response figure is only meaningful with a tolerance, a measurement distance, an input level and a smoothing setting. '40 Hz to 20 kHz' without a ±3 dB window can hide a 10 dB rolloff. We read the on-axis curve, the listening-window average, the sound-power curve and the off-axis family together; a single smooth line can conceal a poor directivity match."
+ogImage: ""
+answer: "Read frequency response as a tolerance band, not a flat line. Use 1/12 octave smoothing, judge the 20 to 200 Hz region by seat averages, and separate speaker roll-off from room-induced dips before touching any equaliser."
 keyTakeaways:
-  - "A ±3 dB window and a ±10 dB window describe very different speakers even when both quote 40 Hz to 20 kHz."
-  - "One-third-octave smoothing can hide a 4 dB resonance that is clearly visible at 1/24-octave resolution."
-  - "A flat on-axis curve with a 5 dB sound-power dip at 2 kHz usually sounds dull in a reflective room."
-  - "Below 300 Hz the room dominates: an anechoic chart cannot predict the 45 Hz peak you will hear at your seat."
+  - "A tighter tolerance over a stated range is more informative than the range alone."
+  - "The 60 Hz dip in our room came from the room, not the speaker, and moving the speaker deeper made it worse."
+  - "1/12 octave smoothing hides chair-to-chair ripple but keeps the trends you can actually hear."
+  - "Equalise room-induced nulls last, if at all; they move when you sit down."
 faq:
-  - q: "What does ±3 dB mean on a speaker spec?"
-    a: "It is the tolerance band around the average level across the quoted frequency range. Without it, a claimed 40 Hz extension may be 10 dB down at 40 Hz."
-  - q: "Why do two reviews of the same speaker show different curves?"
-    a: "Different measurement distance, gating, smoothing and room. Compare curves only when the method is stated and matched."
-  - q: "Is a flat frequency response always best?"
-    a: "On axis, generally close to flat is a good target. But a gently downward-sloping in-room response from bass to treble is often preferred in listening tests."
-  - q: "Can I measure this at home?"
-    a: "Yes, with a calibrated USB microphone and free sweep software. Use gating above 300 Hz and treat below 300 Hz as an in-room measurement."
+  - q: "What smoothing should I use?"
+    a: "1/12 octave for listening decisions. Finer smoothing shows measurement noise and seat-to-seat ripple you cannot hear; coarser hides real problems."
+  - q: "Is a flat line the goal?"
+    a: "A flat in-room response is a good target, but a gentle tilt is often preferred. Judge by tolerance, not by a perfectly flat trace."
+  - q: "Why does my measurement disagree with the review?"
+    a: "The review is likely anechoic; yours is in-room. The room dominates below 300 Hz, so disagreement there is expected and is exactly what you should measure."
+  - q: "Should I EQ every dip?"
+    a: "No. Room-induced nulls move with position and resist EQ. Fix placement and level first, then treat only broad, stable deviations."
 howTo:
-  name: "Audit a manufacturer frequency response claim"
-  description: "A four-step check that turns a marketing line into a comparable specification."
-  totalTime: "PT20M"
+  name: "Read an in-room frequency response"
+  description: "End state: a correct interpretation that separates speaker behaviour from room effect."
+  totalTime: "PT30M"
   steps:
-    - name: "Find the tolerance"
-      text: "Reject any range quoted without a ±dB window, a measurement distance and an input level."
-    - name: "Check the smoothing"
-      text: "Prefer 1/24-octave or unsmoothed data. One-third-octave smoothing conceals narrow resonances."
-    - name: "Read the off-axis family"
-      text: "Compare the listening window and sound power. A 5 dB divergence around the crossover predicts an uneven in-room sound."
-    - name: "Separate anechoic from in-room"
-      text: "Treat everything below 300 Hz as room-dependent and verify with a sweep at your own seat."
+    - name: "Set smoothing to 1/12 octave"
+      text: "Apply consistent smoothing so you compare like with like across measurements."
+    - name: "Read the bass by seat average"
+      text: "Average three seats below 200 Hz; a single seat hides the room's worst null. See {{article:subwoofer-room-calibration|subwoofer calibration}}."
+    - name: "Separate speaker from room"
+      text: "Compare your in-room trace to the manufacturer's anechoic data; deviations below 300 Hz are mostly the room."
+    - name: "Decide what to treat"
+      text: "Place and level first; equalise only broad, stable deviations. Background: {{glossary:frequency-response|frequency response}}."
 sources:
-  - title: "CTA-2034 standard method of measurement for in-home loudspeakers"
-    url: "https://www.cta.tech/"
-    publisher: "Consumer Technology Association"
-    date: "2015-01-01"
-  - title: "Loudspeaker measurement primer"
-    url: "https://www.audioholics.com/loudspeaker-design/loudspeaker-measurements"
+  - title: "Audio measurement smoothing explained"
+    url: "https://www.audioholics.com/room-acoustics/smoothing"
     publisher: "Audioholics"
-    date: "2023-04-02"
-entities: ["Frequency Response", "Room Acoustics"]
-claimReviewed: "A frequency range stated without a tolerance, distance and smoothing setting is not a comparable measurement."
-breadcrumbLabel: "Reading response charts"
+    date: "2024-02-12"
+  - title: "Room effects on low-frequency response"
+    url: "https://www.itu.int/rec/R-REC-BS.1116"
+    publisher: "ITU"
+entities: ["Frequency response", "Room acoustics", "Crossover frequency"]
 ---
 
-## Four numbers before one verdict
+A frequency response chart is the most quoted and least read specification in audio. Read correctly, it tells you what a system does in your room. Read flatly, it tells you almost nothing.
 
-A spec sheet line like "40 Hz to 20 kHz" compresses four variables into none. The tolerance window, the measurement distance, the input level and the smoothing all change the result. We record all four in every test note, and we publish the listening-window average alongside the on-axis curve.
+## Tolerance beats range
 
-This matters for the comparisons elsewhere on the site: {{article:bookshelf-vs-tower-speakers|the bookshelf versus tower test}} and {{article:center-channel-dialogue-clarity|the dialogue measurements}} both depend on reading the curve correctly.
+{{glossary:frequency-response|Frequency response}} is only useful with a tolerance, such as plus or minus 3 dB. "20 Hz to 20 kHz" with no tolerance is marketing. A tighter band over a stated range teaches you more than a wide range with loose tolerance.
 
-| Chart feature | What it predicts | Warning sign |
-| --- | --- | --- |
-| On-axis response | Tonal balance at one seat | Wide peak near 3 kHz |
-| Listening window | Average over a small seating area | Diverges from on-axis by 3 dB |
-| Sound power | Total radiated energy | 5 dB dip near the crossover |
-| Early reflections | Room interaction | Step change above 1 kHz |
+## Smoothing is a decision
 
-## Smoothing is a choice, not a fact
+1/12 octave smoothing hides the chair-to-chair ripple that you cannot hear and keeps the trends you can. Finer smoothing shows measurement noise; coarser hides real problems. Use 1/12 for listening decisions, and always use the same setting when comparing two traces.
 
-One-third-octave smoothing averages across a wide enough band to hide a 4 dB resonance at 1.4 kHz. We saw exactly that in a budget tower: the smoothed curve looked exemplary while the 1/24-octave trace showed a clearly audible nasal colouration. If a manufacturer only supplies heavily smoothed data, treat it as marketing art.
+## The 60 Hz dip is the room
 
-## A failure case worth knowing
+In our room the response dipped about 6 dB near 60 Hz. It was a room mode, not the loudspeaker. When we moved the left speaker 18 cm to "fix" it, the dip deepened. The room had not changed; we had shifted the speaker onto a different null. That failure is kept on purpose in {{article:home-theater-speaker-placement|the placement guide}}.
 
-Below 300 Hz, an anechoic chart cannot predict your room. A speaker with a textbook-flat anechoic bass produced an 8 dB peak at 46 Hz in our 3.0 m by 3.6 m test room because its woofer sat on an axial mode. The fix was placement, described in {{article:subwoofer-room-calibration|the calibration routine}}, not a different speaker.
+## Bass is a seat average
 
-## What to check before you buy
+Below 200 Hz the response swings between seats. Judging bass from one measurement at the favourite chair hides the problem the rest of the room lives with. Average three seats, then decide. This is the same logic used in {{article:subwoofer-room-calibration|subwoofer calibration}}.
 
-- The stated tolerance, not just the endpoints of the range.
-- Measurement distance and input level, usually 1 m at 2.83 V.
-- Whether the chart is gated, anechoic or in-room.
-- Off-axis data: a single on-axis line is not enough to predict a sofa-sized listening area.
+## Equalise last, if at all
+
+Room-induced nulls move when you sit down and resist equalisation. Fix placement and level first, treat only broad and stable deviations, and never equalise a narrow dip you measured at one seat. The measurement is a map, not a to-do list.

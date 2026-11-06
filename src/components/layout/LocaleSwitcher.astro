@@ -1,15 +1,17 @@
 ---
-import { LOCALES } from '../../i18n';
+import { LOCALES, ENABLED_LOCALES } from '../../i18n';
 import { t } from '../../i18n';
 import { localePath } from '../../i18n';
 import { getLocaleConfig } from '../../i18n';
 
 interface Props { lang: string }
 const { lang } = Astro.props;
+const show = ENABLED_LOCALES.length > 1;
 const current = getLocaleConfig(lang);
 const groups = [...new Set(LOCALES.map((l) => l.region))];
 ---
 
+{show && (
 <details class="locale-switch">
   <summary class="locale-btn" aria-label={t(lang, 'locale.select')}>
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -33,6 +35,7 @@ const groups = [...new Set(LOCALES.map((l) => l.region))];
     ))}
   </div>
 </details>
+)}
 
 <style>
   .locale-switch[open] .locale-menu { display: block; }

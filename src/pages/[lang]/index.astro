@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CategoryTile from '../../components/cards/CategoryTile.astro';
 import SeriesCard from '../../components/cards/SeriesCard.astro';
 import ArticleCard from '../../components/cards/ArticleCard.astro';
 import { SITE } from '../../config/site';
@@ -8,7 +7,6 @@ import { CATEGORIES, SERIES } from '../../config/navigation';
 import { categoryPath, localePath, localeStaticParams, t } from '../../i18n';
 import { pageAlternates } from '../../lib/links';
 import { getGroupCounts, getStats, listByDate } from '../../lib/repository';
-import { authorBySlug } from '../../lib/taxonomy';
 import { graph, itemListSchema, organizationSchema, websiteSchema } from '../../lib/schema';
 
 export function getStaticPaths() {
@@ -17,7 +15,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const L = lang ?? 'en';
-const latest = listByDate(1, 6).cards;
+const all = listByDate(1, 50).cards;
 const categoryCounts = getGroupCounts('by-category');
 const seriesCounts = getGroupCounts('by-series');
 const stats = getStats() as { published: number; words: number; categories: Record<string, number> };
@@ -25,31 +23,28 @@ const stats = getStats() as { published: number; words: number; categories: Reco
 const jsonLd = graph([
   organizationSchema(),
   websiteSchema(L),
-  itemListSchema(latest, `${SITE.name} latest guides`),
+  itemListSchema(all.slice(0, 6), `${SITE.name} latest guides`),
 ]);
 
 const numberFormat = new Intl.NumberFormat(L === 'de' ? 'de-DE' : 'en-US');
 const formatNum = (n: number) => numberFormat.format(n);
-const sweepAuthor = authorBySlug.get('maya-chen')?.name ?? 'Maya Chen';
-const lastEdit = latest[0]?.updatedAt
+const lastEdit = all[0]?.updatedAt
   ? new Intl.DateTimeFormat(L === 'de' ? 'de-DE' : 'en-US', {
       month: 'short', day: 'numeric', timeZone: 'UTC',
-    }).format(new Date(latest[0].updatedAt))
+    }).format(new Date(all[0].updatedAt))
   : 'n/a';
 
-const pillars = [
-  { label: t(L, 'home.pillar1Label'), title: t(L, 'home.pillar1Title'), href: localePath(L, 'systems') },
-  { label: t(L, 'home.pillar2Label'), title: t(L, 'home.pillar2Title'), href: categoryPath(L, 'home-theater') },
-  { label: t(L, 'home.pillar3Label'), title: t(L, 'home.pillar3Title'), href: categoryPath(L, 'hi-fi-stereo') },
-  { label: t(L, 'home.pillar4Label'), title: t(L, 'home.pillar4Title'), href: categoryPath(L, 'room-acoustics') },
-];
+const pickSlugs = ['home-theater-speaker-placement', 'small-room-5-1-2-system-plan'];
+const editorPicks = pickSlugs
+  .map((s) => all.find((c) => c.slug === s))
+  .filter((c): c is (typeof all)[number] => Boolean(c));
+const fresh = all.filter((c) => !editorPicks.includes(c)).slice(0, 3);
 
-const records = [
-  { value: stats.published, suffix: '', title: t(L, 'home.recordGuides'), text: t(L, 'home.recordGuidesText') },
-  { value: stats.words, suffix: '', title: t(L, 'home.recordWords'), text: t(L, 'home.recordWordsText') },
-  { value: CATEGORIES.length, suffix: '', title: t(L, 'home.recordSections'), text: t(L, 'home.recordSectionsText') },
-  { value: 100, suffix: '%', title: t(L, 'home.recordMirrors'), text: t(L, 'home.recordMirrorsText') },
-];
+const clusters = CATEGORIES.map((cat) => {
+  const arts = all.filter((a) => a.category === cat.slug).slice(0, 3);
+  const radar = (arts.filter((a) => a.pillar).length ? arts.filter((a) => a.pillar) : arts).slice(0, 3);
+  return { cat, arts, radar };
+});
 
 // A deterministic in-room response shape: two room-mode dips, a gentle HF
 // roll-off and small ripples. Same markup on every build, no random jumps.
@@ -65,10 +60,10 @@ const bars = Array.from({ length: BAR_COUNT }, (_, i) => {
 });
 
 const tickerItems = [
-  `${t(L, 'home.tickerLatest')}: ${latest[0]?.title ?? SITE.name}`,
+  `${t(L, 'home.tickerLatest')}: ${all[0]?.title ?? SITE.name}`,
   `${formatNum(stats.published)} ${t(L, 'home.tickerGuides')}`,
-  `${sweepAuthor} / ${t(L, 'home.tickerSweeps')}`,
-  t(L, 'home.tickerMirrors'),
+  `${t(L, 'home.tickerMirrors')}`,
+  `© ${new Date().getFullYear()} ${SITE.organization}`,
 ];
 const scale = ['20', '50', '100', '200', '500', '1k', '2k', '5k', '10k', '20k'];
 ---
@@ -98,7 +93,7 @@ const scale = ['20', '50', '100', '200', '500', '1k', '2k', '5k', '10k', '20k'];
         <p class="lede">{t(L, 'home.heroBody')}</p>
         <div class="hero-actions">
           <a class="btn btn--primary" href={localePath(L, 'systems')}>{t(L, 'home.heroPrimary')} <span class="arrow">↗</span></a>
-          <a class="btn btn--ghost" href={localePath(L, 'categories')}>{t(L, 'home.heroSecondary')}</a>
+          <a class="btn btn--ghost" href={localePath(L, 'blog')}>{t(L, 'home.heroSecondary')}</a>
         </div>
         <div class="hero-meta">
           <div><strong data-count={stats.published}>{formatNum(stats.published)}</strong><small>{t(L, 'home.recordGuides')}</small></div>
@@ -132,77 +127,82 @@ const scale = ['20', '50', '100', '200', '500', '1k', '2k', '5k', '10k', '20k'];
     </div>
   </section>
 
-  <section class="section section--border" aria-labelledby="pillars-heading">
+  <section class="section section--border" aria-labelledby="edit-heading">
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="eyebrow">{t(L, 'home.pillarsEyebrow')}</span>
-          <h2 class="h2" id="pillars-heading" style="margin-top:1rem">{t(L, 'home.pillarsTitle')}</h2>
-          <p class="lede" style="margin-top:1rem">{t(L, 'home.pillarsNote')}</p>
+          <span class="eyebrow">{t(L, 'home.everydayEdit')}</span>
+          <h2 class="h2" id="edit-heading" style="margin-top:1rem">{t(L, 'home.everydayEditNote')}</h2>
         </div>
+        <a class="text-link" href={localePath(L, 'systems')}>{t(L, 'nav.systems')} <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="pillar-grid">
-        {pillars.map((pillar, i) => (
-          <a class="pillar" href={pillar.href} data-reveal style={`--delay:${i * 70}ms`}>
-            <span class="pillar-label">{pillar.label}</span>
-            <span class="pillar-title">{pillar.title}</span>
-            <span class="pillar-arrow" aria-hidden="true">↗</span>
-          </a>
-        ))}
+      <div class="everyday-grid">
+        {editorPicks.map((card) => <ArticleCard card={card} lang={L} variant="feature" />)}
       </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="cat-heading">
+  <section class="section fresh-notes" aria-labelledby="fresh-heading">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{t(L, 'home.freshNotes')} / {t(L, 'home.freshNotesIndex')}</span>
+          <h2 class="h2" id="fresh-heading" style="margin-top:1rem">{t(L, 'home.latestTitle')}</h2>
+        </div>
+        <a class="text-link" href={localePath(L, 'blog')}>{t(L, 'home.allStories')} <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="article-grid">
+        {fresh.map((card) => <ArticleCard card={card} lang={L} variant="default" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy" aria-labelledby="philosophy-heading">
+    <div class="container philosophy-inner">
+      <span class="eyebrow">{t(L, 'home.philosophyEyebrow')}</span>
+      <h2 class="h2" id="philosophy-heading">{t(L, 'home.philosophyTitle')}</h2>
+      <p class="lede">{t(L, 'home.philosophyBody')}</p>
+      <a class="btn btn--ghost" href={localePath(L, 'about')}>{t(L, 'home.philosophyLink')} <span class="arrow">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section section--border" aria-labelledby="clusters-heading">
     <div class="container">
       <div class="section-head">
         <div>
           <span class="eyebrow">{t(L, 'home.categoriesEyebrow')}</span>
-          <h2 class="h2" id="cat-heading" style="margin-top:1rem">{t(L, 'home.categoriesTitle')}</h2>
-          <p class="lede" style="margin-top:1rem">{t(L, 'home.categoriesNote')}</p>
+          <h2 class="h2" id="clusters-heading" style="margin-top:1rem">{t(L, 'nav.categories')}</h2>
+          <p class="lede" style="margin-top:1rem">{t(L, 'home.clusterNote')}</p>
         </div>
-        <a class="text-link" href={localePath(L, 'blog')}>{t(L, 'nav.discoverAll')} <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href={localePath(L, 'blog')}>{t(L, 'home.allStories')} <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="tiles">
-        {CATEGORIES.map((category) => <CategoryTile category={category} lang={L} count={categoryCounts[category.slug] ?? 0} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--border" aria-labelledby="logbook-heading">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">{t(L, 'home.proofEyebrow')}</span>
-          <h2 class="h2" id="logbook-heading" style="margin-top:1rem">{t(L, 'home.proofTitle')}</h2>
-          <p class="lede" style="margin-top:1rem">{t(L, 'home.proofBody')}</p>
-        </div>
-      </div>
-      <div class="proof-grid">
-        {records.map((item, i) => (
-          <div class="proof-item" data-reveal style={`--delay:${i * 70}ms`}>
-            <span class="proof-index">{String(i + 1).padStart(2, '0')}</span>
-            <span class="proof-num" data-count={item.value} data-suffix={item.suffix || undefined}>{formatNum(item.value)}{item.suffix}</span>
-            <div>
-              <p class="proof-title">{item.title}</p>
-              <p class="proof-text">{item.text}</p>
+      <div class="clusters">
+        {clusters.map(({ cat, arts, radar }) => (
+          <div class="cluster" data-reveal>
+            <div class="cluster-head">
+              <h3 class="cluster-title"><a href={categoryPath(L, cat.slug)}>{cat.name}</a></h3>
+              <span class="cluster-count">{categoryCounts[cat.slug] ?? 0} {t(L, 'listing.articles')}</span>
             </div>
+            <p class="cluster-desc">{cat.description}</p>
+            <ul class="cluster-links">
+              {arts.map((a) => (
+                <li><a href={a.path}>{a.title} <span class="cluster-read">{a.readingMinutes} {t(L, 'common.minRead')}</span></a></li>
+              ))}
+            </ul>
+            <div class="cluster-radar">
+              <span class="cluster-radar-label">{t(L, 'home.onRadar')}</span>
+              <ol>
+                {radar.map((a, i) => (
+                  <li><span class="radar-num">{String(i + 1).padStart(2, '0')}</span> <a href={a.path}>{a.title}</a></li>
+                ))}
+              </ol>
+            </div>
+            <a class="text-link" href={categoryPath(L, cat.slug)}>{t(L, 'home.explore')} {cat.name} <span aria-hidden="true">↗</span></a>
           </div>
         ))}
       </div>
     </div>
   </section>
-
-  <div class="container note-block">
-    <div class="note-side" data-reveal>
-      <span class="eyebrow">{t(L, 'home.quoteEyebrow')}</span>
-      <p class="note-meta"><span>{t(L, 'home.quoteMeta')}</span></p>
-    </div>
-    <div data-reveal style="--delay:120ms">
-      <blockquote class="note-quote">{t(L, 'home.quote')}</blockquote>
-      <p class="note-by"><span class="note-rule" aria-hidden="true"></span>{t(L, 'home.quoteBy')}</p>
-    </div>
-  </div>
 
   <section class="section section--border" aria-labelledby="series-heading">
     <div class="container">
@@ -210,29 +210,12 @@ const scale = ['20', '50', '100', '200', '500', '1k', '2k', '5k', '10k', '20k'];
         <div>
           <span class="eyebrow">{t(L, 'home.seriesEyebrow')}</span>
           <h2 class="h2" id="series-heading" style="margin-top:1rem">{t(L, 'home.seriesTitle')}</h2>
+          <p class="lede" style="margin-top:1rem">{t(L, 'home.buildPathsIntro')}</p>
         </div>
         <a class="text-link" href={localePath(L, 'systems')}>{t(L, 'nav.systems')} <span aria-hidden="true">↗</span></a>
       </div>
       <div class="series-grid">
         {SERIES.map((s, i) => <SeriesCard series={s} lang={L} count={seriesCounts[s.slug] ?? 0} index={i} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--border" aria-labelledby="latest-heading">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">{t(L, 'home.latestEyebrow')}</span>
-          <h2 class="h2" id="latest-heading" style="margin-top:1rem">{t(L, 'home.latestTitle')}</h2>
-        </div>
-        <a class="text-link" href={localePath(L, 'blog')}>{t(L, 'common.all')} <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="latest-layout">
-        <div class="latest-feature">{latest[0] && <ArticleCard card={latest[0]} lang={L} variant="feature" />}</div>
-        <div class="latest-list">
-          {latest.slice(1, 6).map((card, i) => <ArticleCard card={card} lang={L} variant="row" number={i + 2} />)}
-        </div>
       </div>
     </div>
   </section>

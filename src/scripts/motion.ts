@@ -89,6 +89,20 @@ function pointerGlow(): void {
   });
 }
 
+function cookieBar(): void {
+  const bar = document.querySelector<HTMLElement>('[data-cookie-bar]');
+  if (!bar) return;
+  const KEY = 'gl-cookie-dismissed';
+  try {
+    if (localStorage.getItem(KEY) === '1') { bar.hidden = true; return; }
+  } catch { /* ignore */ }
+  const btn = bar.querySelector<HTMLButtonElement>('[data-cookie-dismiss]');
+  btn?.addEventListener('click', () => {
+    bar.hidden = true;
+    try { localStorage.setItem(KEY, '1'); } catch { /* ignore */ }
+  });
+}
+
 function scrollChrome(): void {
   const bar = document.querySelector<HTMLElement>('.scroll-progress-bar');
   const header = document.querySelector<HTMLElement>('.site-header');
@@ -126,6 +140,7 @@ function disable(): void {
 }
 
 scrollChrome();
+cookieBar();
 if (reduceMotion.matches) disable();
 else enable();
 
