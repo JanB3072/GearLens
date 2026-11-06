@@ -1,16 +1,16 @@
 ---
 import { localePath, t } from '../../i18n';
 import type { Series } from '../../lib/types';
-interface Props { series: Series; lang: string; count?: number }
-const { series, lang, count } = Astro.props;
+interface Props { series: Series; lang: string; count?: number; index?: number }
+const { series, lang, count, index = 0 } = Astro.props;
 ---
-<article class="series-card">
-  <div>
+<a class="series-card" href={localePath(lang, 'series', series.slug)} data-reveal style={`--delay:${index * 80}ms`}>
+  <span class="series-index">{String(index + 1).padStart(2, '0')}</span>
+  <span>
     <span class="series-eyebrow">{series.eyebrow}</span>
-    <h3 class="series-title">{series.name}</h3>
-    <p class="series-body">{series.description}</p>
-    <a class="series-link" href={localePath(lang, 'series', series.slug)}>
-      {t(lang, 'common.all')} · {count ?? series.articleCount} →
-    </a>
-  </div>
-</article>
+    <span class="series-title">{series.name}</span>
+    <span class="series-body">{series.description}</span>
+  </span>
+  <span class="series-count">{count ?? series.articleCount}<small>{t(lang, 'listing.articles')}</small></span>
+  <span class="series-arrow" aria-hidden="true">↗</span>
+</a>

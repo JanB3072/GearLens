@@ -1,7 +1,7 @@
 import { LIMITS, SITE, absoluteUrl } from '../config/site';
 import { DEFAULT_LOCALE, formatDate, localePath, rawPath } from '../i18n';
 import { getArticle, getCards, getIndex, getManifest } from './repository';
-import { categoryBySlug } from './taxonomy';
+import { categoryBySlug, seriesBySlug } from './taxonomy';
 import type { Article } from './types';
 
 /**
@@ -28,7 +28,7 @@ export function buildLlmsTxt(): string {
     '',
     `> ${SITE.description}`,
     '',
-    `${SITE.name} publishes measurement-led, dated and sourced guides. Each article states a direct answer first, lists extractable key takeaways, cites primary sources, and records its last fact-check date. Numbers are given with units and measurement conditions. Recommendations are revised when the underlying measurement changes.`,
+    `${SITE.name} is a vertical editorial library, not a brand blog or product catalogue. Coverage spans high-end home audio, home theater, two-channel Hi-Fi, room acoustics and complete AV system building, organised by system goal and topic cluster. Articles state a direct answer first, list extractable takeaways, cite primary sources, record a real fact-check date and give numbers with units and measurement conditions. Comparisons contrast technical approaches and measured behaviour rather than model names.`,
     '',
     'Content conventions for citation: use the article URL as the source, quote the "Short answer" block for a summary, and prefer dated figures from the body over undated claims. Affiliate relationships never affect test results.',
     '',
@@ -42,6 +42,12 @@ export function buildLlmsTxt(): string {
   lines.push('', '## Core guides', '');
   for (const card of featured.slice(0, 40)) {
     lines.push(`- [${card.title}](${absoluteUrl(card.path)}): ${card.description}`);
+  }
+
+  lines.push('', '## System blueprints and build paths', '');
+  lines.push(`- [System blueprints](${absoluteUrl(localePath(DEFAULT_LOCALE, 'systems'))}): complete plans for a small living room, a two-channel chain and a dedicated cinema room.`);
+  for (const [slug, series] of seriesBySlug) {
+    lines.push(`- [${series.name}](${absoluteUrl(localePath(DEFAULT_LOCALE, 'series', slug))}): ${series.description}`);
   }
 
   lines.push('', '## Browse by topic', '');

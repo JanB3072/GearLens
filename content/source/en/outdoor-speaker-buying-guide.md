@@ -11,9 +11,9 @@ updatedAt: "2026-09-30"
 reviewedAt: "2026-09-30"
 author: "daniel-ortiz"
 reviewer: "maya-chen"
-category: "buying-guides"
+category: "buying-comparisons"
 tags: ["outdoor-audio", "budget", "frequency-response"]
-series: "buyers-notebook"
+series: "first-system"
 pillar: false
 priority: 60
 noindex: false

@@ -11,9 +11,9 @@ updatedAt: "2026-10-02"
 reviewedAt: "2026-10-02"
 author: "maya-chen"
 reviewer: "daniel-ortiz"
-category: "guides"
-tags: ["center-channel", "speaker-placement", "frequency-response", "calibration"]
-series: "room-acoustics"
+category: "home-theater"
+tags: ["center-channel", "speaker-placement", "frequency-response", "calibration", "multichannel"]
+series: "theater-build"
 pillar: false
 priority: 65
 noindex: false

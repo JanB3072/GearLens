@@ -3,12 +3,20 @@ import type { Category } from '../../lib/types';
 interface Props { category: Category; lang: string; count?: number }
 const { category, lang, count } = Astro.props;
 import { categoryPath } from '../../i18n';
+const delay = (Number(category.index) - 1) * 70;
 ---
-<a class={`tile tile--${category.accent}`} href={categoryPath(lang, category.slug)}>
-  <span class="tile-index">{category.index} / {count !== undefined ? `${count} guides` : category.eyebrow}</span>
-  <span>
-    <span class="tile-label">{category.name}</span>
-    <span class="tile-desc" style="display:block">{category.description}</span>
+<a class={`tile tile--${category.accent}`} href={categoryPath(lang, category.slug)} data-reveal style={`--delay:${delay}ms`}>
+  <span class="tile-top">
+    <span class="tile-index">{category.index}</span>
+    <span class="tile-count">{count !== undefined ? `${count} guides` : category.eyebrow}</span>
   </span>
-  <span class="tile-arrow" aria-hidden="true">↗</span>
+  <span class="tile-main">
+    <span class="tile-label">{category.name}</span>
+    <span class="tile-desc">{category.description}</span>
+  </span>
+  <span class="tile-bottom">
+    <span class="tile-eyebrow">{category.eyebrow}</span>
+    <span class="tile-arrow" aria-hidden="true">↗</span>
+  </span>
+  <span class="tile-wipe" aria-hidden="true"></span>
 </a>

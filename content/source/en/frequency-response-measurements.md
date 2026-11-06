@@ -11,9 +11,9 @@ updatedAt: "2026-10-16"
 reviewedAt: "2026-10-16"
 author: "daniel-ortiz"
 reviewer: "maya-chen"
-category: "measurements"
-tags: ["frequency-response", "room-acoustics", "calibration"]
-series: "room-acoustics"
+category: "measurements-method"
+tags: ["frequency-response", "room-acoustics", "calibration", "crossover"]
+series: "room-and-bass"
 pillar: false
 priority: 55
 noindex: false

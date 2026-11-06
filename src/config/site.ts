@@ -9,9 +9,9 @@ export const SITE = {
   url: RAW_SITE_URL.replace(/\/$/, ''),
   name: 'GearLens',
   shortName: 'GearLens',
-  tagline: 'Evidence-led guides for home audio and home theater',
+  tagline: 'High-end audio, home theater and Hi-Fi, planned as a system',
   description:
-    'Independent, measurement-driven buying guides, comparisons and explainers for speakers, subwoofers and home theater setups.',
+    'Independent, measurement-led guides to high-end home audio, home theater, Hi-Fi loudspeakers and complete AV system building.',
   // Replace with the real legal entity before launch.
   organization: 'GearLens Media',
   foundedYear: 2026,

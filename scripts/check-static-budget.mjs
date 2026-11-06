@@ -54,7 +54,7 @@ const staticPerLocale =
   1 +                                   // categories index
   1 +                                   // glossary index
   1 +                                   // search
-  5 +                                   // about/editorial-policy/privacy/terms/accessibility
+  6 +                                   // systems/about/editorial-policy/privacy/terms/accessibility
   tax('glossary').length;               // DefinedTerm entity pages
 
 const breakdown = [

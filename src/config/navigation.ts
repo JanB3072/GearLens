@@ -32,20 +32,25 @@ export interface NavItem {
   feature?: { eyebrow: string; title: string; body: string; href: string };
 }
 
-/** Reference-site pattern: fat two-column mega menu (Categories + Series). */
+/**
+ * Vertical-site information architecture. The menu is organised around system
+ * goals and topic clusters, not around product lines or a single manufacturer.
+ * "Series" are build paths: an ordered route from a plan to a working system.
+ */
 export function getNavigation(lang: string): NavItem[] {
   return [
     {
-      label: t(lang, 'nav.guides'),
-      href: categoryPath(lang, 'guides'),
+      label: t(lang, 'nav.systems'),
+      href: localePath(lang, 'systems'),
       columns: [
         {
-          title: t(lang, 'nav.categories'),
-          links: CATEGORIES.map((c) => ({
-            label: c.shortName,
-            href: categoryPath(lang, c.slug),
-            hint: c.eyebrow,
-          })),
+          title: 'Start with a plan',
+          links: [
+            { label: 'Living room 5.1.2', href: blogPath(lang, 'small-room-5-1-2-system-plan'), hint: '16 to 20 m2' },
+            { label: 'Two-channel Hi-Fi', href: blogPath(lang, 'two-channel-hifi-system-chain'), hint: 'Signal chain' },
+            { label: 'Dedicated cinema room', href: blogPath(lang, 'dolby-atmos-height-channels-explained'), hint: 'Height channels' },
+            { label: 'All system plans', href: localePath(lang, 'systems') },
+          ],
         },
         {
           title: t(lang, 'nav.series'),
@@ -58,31 +63,36 @@ export function getNavigation(lang: string): NavItem[] {
       ],
       feature: {
         eyebrow: 'Start here',
-        title: 'The complete setup path',
-        body: 'One hub guide that links every step, measurement and buying decision.',
+        title: 'Where the 60 Hz dip came from',
+        body: 'One guide on moving a speaker 18 cm, remeasuring, and getting a worse result.',
         href: blogPath(lang, 'home-theater-speaker-placement'),
       },
     },
     {
-      label: t(lang, 'nav.comparisons'),
-      href: categoryPath(lang, 'comparisons'),
+      label: t(lang, 'nav.topics'),
+      href: localePath(lang, 'categories'),
       columns: [
         {
           title: t(lang, 'nav.categories'),
-          links: CATEGORIES.slice(0, 3).map((c) => ({ label: c.name, href: categoryPath(lang, c.slug) })),
+          links: CATEGORIES.map((c) => ({
+            label: c.shortName,
+            href: categoryPath(lang, c.slug),
+            hint: c.eyebrow,
+          })),
         },
         {
-          title: 'Popular head-to-heads',
+          title: 'Decisions and method',
           links: [
-            { label: 'Bookshelf vs tower', href: blogPath(lang, 'bookshelf-vs-tower-speakers') },
-            { label: 'Soundbar vs separates', href: blogPath(lang, 'center-channel-dialogue-clarity') },
-            { label: 'All comparisons', href: categoryPath(lang, 'comparisons') },
+            { label: 'Buying & comparisons', href: categoryPath(lang, 'buying-comparisons') },
+            { label: 'Measurements & method', href: categoryPath(lang, 'measurements-method') },
+            { label: t(lang, 'nav.glossary'), href: localePath(lang, 'glossary') },
+            { label: t(lang, 'listing.latest'), href: localePath(lang, 'blog') },
           ],
         },
       ],
     },
-    { label: t(lang, 'nav.explainers'), href: categoryPath(lang, 'explainers') },
-    { label: t(lang, 'nav.buyingGuides'), href: categoryPath(lang, 'buying-guides') },
+    { label: t(lang, 'nav.homeTheater'), href: categoryPath(lang, 'home-theater') },
+    { label: t(lang, 'nav.hiFi'), href: categoryPath(lang, 'hi-fi-stereo') },
     { label: t(lang, 'nav.glossary'), href: localePath(lang, 'glossary') },
   ];
 }
@@ -95,8 +105,9 @@ export interface FooterColumn {
 export function getFooterColumns(lang: string): FooterColumn[] {
   return [
     {
-      title: t(lang, 'footer.productHelp'),
+      title: t(lang, 'footer.explore'),
       links: [
+        { label: t(lang, 'nav.systems'), href: localePath(lang, 'systems') },
         ...CATEGORIES.map((c) => ({ label: c.shortName, href: categoryPath(lang, c.slug) })),
         { label: t(lang, 'listing.latest'), href: localePath(lang, 'blog') },
       ],
@@ -105,6 +116,7 @@ export function getFooterColumns(lang: string): FooterColumn[] {
       title: t(lang, 'nav.series'),
       links: [
         ...SERIES.map((s) => ({ label: s.name, href: localePath(lang, 'series', s.slug) })),
+        { label: t(lang, 'nav.topics'), href: localePath(lang, 'categories') },
         { label: t(lang, 'nav.glossary'), href: glossaryPath(lang, 'dolby-atmos') },
       ],
     },

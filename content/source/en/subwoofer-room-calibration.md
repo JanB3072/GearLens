@@ -11,9 +11,9 @@ updatedAt: "2026-10-20"
 reviewedAt: "2026-10-20"
 author: "maya-chen"
 reviewer: "daniel-ortiz"
-category: "guides"
-tags: ["subwoofer", "calibration", "room-acoustics", "frequency-response"]
-series: "room-acoustics"
+category: "room-acoustics"
+tags: ["subwoofer", "calibration", "room-acoustics", "frequency-response", "bass-management"]
+series: "room-and-bass"
 pillar: false
 priority: 80
 noindex: false

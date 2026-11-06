@@ -4,7 +4,7 @@
     "term": "Dolby Atmos",
     "definition": "An object-based surround sound format that adds a height dimension to channel-based mixes. A 5.1.2 system has five ear-level channels, one subwoofer channel and two height channels.",
     "alsoKnownAs": ["Atmos", "Dolby Atmos height channels"],
-    "relatedTerms": ["height-channels", "bipolar-speaker"],
+    "relatedTerms": ["height-channels", "lfe-channel"],
     "sources": ["https://www.dolby.com/technologies/dolby-atmos/"]
   },
   {
@@ -20,7 +20,7 @@
     "term": "Frequency response",
     "definition": "The measured output level of a speaker across the audible spectrum, normally stated in dB with a tolerance such as ±3 dB. A tighter tolerance over a stated range is more informative than the range alone.",
     "alsoKnownAs": ["FR", "bandwidth"],
-    "relatedTerms": ["room-acoustics"],
+    "relatedTerms": ["room-acoustics", "speaker-sensitivity"],
     "sources": []
   },
   {
@@ -28,15 +28,63 @@
     "term": "Room modes",
     "definition": "Standing-wave resonances determined by a room's dimensions. Axial modes below about 300 Hz are the main cause of uneven bass between seats, and are best treated with placement and multiple subwoofers.",
     "alsoKnownAs": ["standing waves", "axial modes"],
-    "relatedTerms": ["frequency-response"],
+    "relatedTerms": ["frequency-response", "bass-management"],
     "sources": []
   },
   {
     "slug": "bipolar-speaker",
     "term": "Bipolar speaker",
-    "definition": "A loudspeaker with driver arrays on opposing baffles radiating in phase, producing a wider, more diffuse sound field than a direct-radiating design.",
+    "definition": "A loudspeaker with driver arrays on opposing baffles radiating in phase, producing a wider, more diffuse sound field than a direct-radiating design. One of several available dispersion strategies, not a mark of quality.",
     "alsoKnownAs": ["bipole"],
-    "relatedTerms": ["dolby-atmos"],
+    "relatedTerms": ["stereo-imaging", "dolby-atmos"],
+    "sources": []
+  },
+  {
+    "slug": "bass-management",
+    "term": "Bass management",
+    "definition": "The processor rules that redirect low-frequency content from small channels to the subwoofer. An 80 Hz crossover is a starting point; the useful value depends on measured in-room response and subwoofer placement.",
+    "alsoKnownAs": ["crossover setting", "small/large speaker setting"],
+    "relatedTerms": ["crossover-frequency", "lfe-channel", "room-acoustics"],
+    "sources": ["https://www.dolby.com/about/support/guide/speaker-setup-guides/"]
+  },
+  {
+    "slug": "crossover-frequency",
+    "term": "Crossover frequency",
+    "definition": "The boundary where a signal is split between drivers or between a speaker and a subwoofer. In a passive loudspeaker it is fixed by the crossover network; in an AV processor it is a configurable setting verified by measurement.",
+    "alsoKnownAs": ["crossover point", "XO"],
+    "relatedTerms": ["bass-management", "speaker-sensitivity"],
+    "sources": []
+  },
+  {
+    "slug": "speaker-sensitivity",
+    "term": "Speaker sensitivity",
+    "definition": "Sound pressure level produced at one metre from a 2.83 V input, stated in dB. It predicts how much amplifier voltage a speaker needs, but says nothing about impedance dips or how much current the amplifier must deliver.",
+    "alsoKnownAs": ["efficiency", "dB/2.83V/1m"],
+    "relatedTerms": ["crossover-frequency", "signal-chain"],
+    "sources": []
+  },
+  {
+    "slug": "signal-chain",
+    "term": "Signal chain",
+    "definition": "The complete path from source to room: source, DAC or phono stage, preamplifier, power amplifier, loudspeakers and cables. A system is limited by its weakest stage and by the room, never by the most expensive box in the chain.",
+    "alsoKnownAs": ["system chain", "reproduction chain"],
+    "relatedTerms": ["speaker-sensitivity", "crossover-frequency"],
+    "sources": []
+  },
+  {
+    "slug": "lfe-channel",
+    "term": "LFE channel",
+    "definition": "The low-frequency effects channel, the '.1' in 5.1 or 7.1. It carries a dedicated effects track and is not the same as bass redirected from other channels by bass management.",
+    "alsoKnownAs": [".1 channel", "subwoofer channel"],
+    "relatedTerms": ["bass-management", "dolby-atmos"],
+    "sources": ["https://www.dolby.com/about/support/guide/speaker-setup-guides/"]
+  },
+  {
+    "slug": "stereo-imaging",
+    "term": "Stereo imaging",
+    "definition": "The perceived position and size of sounds between two loudspeakers. It depends on level and time differences at the listening seat, so symmetry and first reflections usually matter more than cable or amplifier branding.",
+    "alsoKnownAs": ["soundstage", "phantom centre"],
+    "relatedTerms": ["bipolar-speaker", "signal-chain"],
     "sources": []
   }
 ]

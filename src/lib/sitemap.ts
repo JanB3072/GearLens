@@ -3,6 +3,7 @@ import { ENABLED_LOCALES, LOCALES, localePath } from '../i18n';
 import { pageAlternates } from './links';
 import { getAllPublishedEntries, getSitemapEntries, getStats } from './repository';
 import { authors, categories, glossary, series } from './taxonomy';
+import { STATIC_PAGES } from '../config/static-pages';
 import type { SitemapEntry } from './types';
 
 export function escapeXml(value: string): string {
@@ -46,7 +47,7 @@ export function sitemapUrls(): SitemapEntry[] {
     for (const s of series) add('series', s.slug);
     for (const a of authors) add('authors', a.slug);
     for (const g of glossary) add('glossary', g.slug);
-    for (const page of ['about', 'editorial-policy', 'privacy', 'terms', 'accessibility']) add(page);
+    for (const page of Object.keys(STATIC_PAGES)) add(page);
   }
 
   // `sitemap.json` holds domain-agnostic relative paths so one content snapshot

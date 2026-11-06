@@ -11,9 +11,9 @@ updatedAt: "2026-10-12"
 reviewedAt: "2026-10-12"
 author: "daniel-ortiz"
 reviewer: "maya-chen"
-category: "comparisons"
-tags: ["frequency-response", "budget", "speaker-placement", "room-acoustics"]
-series: "buyers-notebook"
+category: "buying-comparisons"
+tags: ["frequency-response", "budget", "speaker-placement", "room-acoustics", "system-building"]
+series: "first-system"
 pillar: false
 priority: 70
 noindex: false

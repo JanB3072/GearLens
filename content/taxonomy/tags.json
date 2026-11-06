@@ -8,5 +8,13 @@
   { "slug": "outdoor-audio", "name": "Outdoor audio" },
   { "slug": "budget", "name": "Budget" },
   { "slug": "frequency-response", "name": "Frequency response" },
-  { "slug": "soundbar", "name": "Soundbar" }
+  { "slug": "soundbar", "name": "Soundbar" },
+  { "slug": "system-building", "name": "System building" },
+  { "slug": "signal-chain", "name": "Signal chain" },
+  { "slug": "amplification", "name": "Amplification" },
+  { "slug": "bass-management", "name": "Bass management" },
+  { "slug": "stereo-imaging", "name": "Stereo imaging" },
+  { "slug": "multichannel", "name": "Multichannel" },
+  { "slug": "crossover", "name": "Crossover" },
+  { "slug": "dedicated-room", "name": "Dedicated room" }
 ]

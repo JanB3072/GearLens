@@ -1,5 +1,5 @@
 import { SITE, absoluteUrl } from '../config/site';
-import { DEFAULT_LOCALE, ENABLED_LOCALES, blogPath, getLocaleConfig, localePath } from '../i18n';
+import { DEFAULT_LOCALE, ENABLED_LOCALES, blogPath, getLocaleConfig, localePath, t } from '../i18n';
 import type { Article, ArticleCard } from './types';
 
 export interface AlternateLink {
@@ -74,7 +74,7 @@ export function articleSeoUrls(article: Article) {
 export function articleBreadcrumbs(lang: string, article: Article, categoryName: string): Crumb[] {
   return [
     { label: 'Home', href: localePath(lang) },
-    { label: 'Blog', href: localePath(lang, 'blog') },
+    { label: t(lang, 'common.breadcrumbBlog'), href: localePath(lang, 'blog') },
     { label: categoryName, href: localePath(lang, 'categories', article.category) },
     { label: article.breadcrumbLabel ?? article.title },
   ];

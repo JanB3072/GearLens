@@ -1,6 +1,22 @@
-# GearLens — 面向 Cloudflare Pages 的 Astro SEO / GEO 博客框架
+# GearLens — 高端家庭音响 / 家庭影院垂直内容站
 
-英文优先、多语言就绪的内容站框架，部署链路是 **git push → Cloudflare Pages 自动构建 → 纯静态托管**。视觉与信息架构参考 [Definitive Technology](https://www.definitivetechnology.com)：双列 Mega Menu（Categories + Series）、超大全大写标题、分类瓦片、价值点矩阵、编辑引言、系列卡片、多列页脚、`Global | EN` 区域选择器。产品语言被翻译成博客语言：分类替换品类，系列替换产品线，文章替换产品。
+英文优先、多语言就绪的 Astro 静态内容站，部署链路是 **git push → Cloudflare Pages 自动构建 → 纯静态托管**。定位是围绕**高端家庭音响、家庭影院、Hi-Fi 音箱与影音系统搭建**的垂直编辑库，不是任何品牌的产品博客或型号目录。
+
+## 内容定位与信息架构
+
+信息架构围绕「系统」而不是「产品」组织：
+
+| 层 | 文件 / 入口 | 内容 |
+| --- | --- | --- |
+| 四条主线 | 首页 + `/<lang>/systems/` | 系统搭建、家庭影院、Hi-Fi 立体声、房间声学与校准 |
+| 七个主题簇 | `content/taxonomy/categories.json` | 系统搭建、家庭影院、Hi-Fi 与立体声、房间声学、音箱与器材、选购与对比、测量与方法 |
+| 四条搭建路径 | `content/taxonomy/series.json` | 首个系统、影院按房间搭建、双声道 Hi-Fi、房间与低频调校 |
+| 系统方案总览 | `src/config/static-pages.ts` 的 `systems` | 小客厅 5.1.2、双声道链路、独立影音室 7.1.4 三套完整方案 |
+| 术语实体 | `content/taxonomy/glossary.json` | 低音管理、分频点、灵敏度、信号链、LFE、立体声像等 |
+
+**品牌中立**：导航、URL、栏目标题和分类都不使用品牌名或型号；比较对象是技术路径、布局与实测行为；具体型号只作为测试样本出现，并写明测量条件与失败案例。规则写在 `/<lang>/editorial-policy/` 与 `/<lang>/about/`，`llms.txt` 也向答案引擎声明了这一点。
+
+分类是「内容主题」而不是「文章格式」，系列是「搭建顺序」而不是「产品线」。新增主题簇只需改 `categories.json` 并让至少一篇文章使用它；`sitemap.ts`、`llms.txt`、Mega Menu、页脚、归档页与文件数预算会自动跟随。
 
 ## 快速开始
 
@@ -60,13 +76,13 @@ npm run preview           # 预览纯静态产物
 
 CF Pages **免费版 20,000 文件/部署**，付费版 100,000（2026-01 起，需在项目设置加 `PAGES_WRANGLER_MAJOR_VERSION=4`），单文件 25 MiB。全静态下每篇文章要 **2 个文件**（HTML + Markdown 镜像），再加分页页、分类/标签/作者/系列归档页、`llms-full` 分片，`npm run budget` 会按 `static-paths.ts` 的同一套公式精确计算并在超限前中止构建。
 
-以当前 5 分类 / 10 标签 / 2 作者 / 3 系列配置、每页 12 篇、`llms` 每片 100 篇估算：
+以当前 7 主题簇 / 18 标签 / 2 作者 / 4 搭建路径配置、每页 12 篇、`llms` 每片 100 篇估算：
 
 ```
-[budget] 7 published articles · estimated capacity ~6787 articles
+[budget] 10 published articles · estimated capacity ~6529 articles
 ```
 
-也就是说免费版大约 **6,800 篇**就会触顶，而不是「1.5 万篇」。想延长静态模式的寿命，按成本从低到高：
+也就是说免费版大约 **6,500 篇**就会触顶，而不是「1.5 万篇」。想延长静态模式的寿命，按成本从低到高：
 
 1. 提高 `src/config/site.ts` 的 `PAGINATION.articlesPerPage`（例如 24），减少分页页；
 2. 提高 `PUBLIC_LLMS_CHUNK_SIZE`（例如 500），减少 `llms-full` 分片；
@@ -108,7 +124,7 @@ src/
   components/               layout / seo / geo / cards / article / ui
   layouts/                  BaseLayout / ArticleLayout / ListingLayout
   pages/                    页面与端点（全部静态）
-  styles/                   tokens / global / prose（含明暗主题）
+  styles/                   tokens / global / prose / motion（含明暗主题与渐进增强动效）
 public/
   _headers                  CF 响应头（缓存、安全、Markdown MIME）
 ```
@@ -148,8 +164,8 @@ GEO：`llms.txt` + 分片全文、每篇独立 `.md` 镜像（`<link rel="altern
 ## 上线前必改
 
 1. `PUBLIC_SITE_URL` 改成真实域名；`src/config/site.ts` 里的组织名、邮箱、社交账号。
-2. `content/taxonomy/*.json` 换成真实分类、系列、作者、术语。
-3. 删除 `content/source/en/` 的示例文章。
+2. `content/taxonomy/*.json` 换成真实的主题簇、搭建路径、作者与术语。新增主题簇后确保至少有一篇文章使用它，否则 sitemap 会列出没有归档页的空 URL。
+3. `content/source/en/` 的 10 篇示例文章是垂直站的结构示范（系统方案、影院、Hi-Fi、声学、选购、测量），上线前替换为自己的实测内容；`src/config/static-pages.ts` 里三张系统方案卡的链接也要同步。
 4. 把 `SiteFooter.astro` 订阅表单接到邮件服务商；接入 Cookie 同意（若启用分析/广告）。
 5. OG 图目前是 SVG 占位，社交平台多数只认 PNG/JPEG，生产环境用 satori/sharp 生成 1200×630 PNG。
 6. 文章超过约 5,000 篇时把 `search-index.json` 换成 Algolia / Typesense / Orama Cloud / Pagefind 分片。

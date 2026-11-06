@@ -17,15 +17,15 @@ const path = localePath(L, 'categories');
 const jsonLd = graph([
   organizationSchema(),
   websiteSchema(L),
-  collectionPageSchema('Categories', 'Browse all research categories', path, L),
+  collectionPageSchema('Topic clusters', `${CATEGORIES.length} topic clusters organised around complete AV systems, rooms, hardware decisions and measurement method.`, path, L),
 ]);
 ---
 
 <BaseLayout
   lang={L}
   seo={{
-    title: 'Research categories',
-    description: 'Browse GearLens guides by research category: setup, comparisons, explainers, buying guides and measurements.',
+    title: 'Topic clusters',
+    description: 'Browse the library by system goal: system building, home theater, Hi-Fi and stereo, room acoustics, components, buying decisions and measurement method.',
     path,
     lang: L,
     alternates: pageAlternates(L, 'categories'),
@@ -36,7 +36,7 @@ const jsonLd = graph([
     <div class="container">
       <span class="eyebrow">{t(L, 'home.categoriesEyebrow')}</span>
       <h1 class="h2" style="margin-top:1.2rem">{t(L, 'nav.categories')}</h1>
-      <p class="lede" style="margin-top:1rem">One taxonomy, stable URLs and a countable corpus. Category hubs are the primary internal-link targets for every article.</p>
+      <p class="lede" style="margin-top:1rem">{CATEGORIES.length} topic clusters, organised around the system you are building rather than around article formats. Each one links to the guides, measurements and decisions behind it.</p>
     </div>
   </header>
   <section class="section">

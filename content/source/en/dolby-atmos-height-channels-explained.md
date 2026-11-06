@@ -11,9 +11,9 @@ updatedAt: "2026-10-05"
 reviewedAt: "2026-10-05"
 author: "maya-chen"
 reviewer: "daniel-ortiz"
-category: "explainers"
-tags: ["dolby-atmos", "speaker-placement", "soundbar"]
-series: "home-theater-101"
+category: "home-theater"
+tags: ["dolby-atmos", "speaker-placement", "soundbar", "multichannel", "dedicated-room"]
+series: "theater-build"
 pillar: false
 priority: 75
 noindex: false

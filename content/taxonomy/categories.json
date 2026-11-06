@@ -1,47 +1,65 @@
 [
   {
-    "slug": "guides",
-    "name": "Setup Guides",
-    "shortName": "Guides",
-    "eyebrow": "Step by step",
-    "description": "Room layout, calibration and installation walkthroughs with measurable checkpoints.",
+    "slug": "system-building",
+    "name": "Building a System",
+    "shortName": "Systems",
+    "eyebrow": "Plan the whole chain",
+    "description": "Room goals, channel layouts, signal chain, power and wiring decisions made in the right order, from an empty floor to a working system.",
     "index": "01",
     "accent": "copper"
   },
   {
-    "slug": "comparisons",
-    "name": "Comparisons",
-    "shortName": "Comparisons",
-    "eyebrow": "Head to head",
-    "description": "Two products, one test protocol, and the exact conditions under which the winner changes.",
+    "slug": "home-theater",
+    "name": "Home Theater",
+    "shortName": "Theater",
+    "eyebrow": "Multichannel and immersion",
+    "description": "Channel layouts, height layers, centre-channel dialogue, bass management and the trade-offs between a living room and a dedicated cinema room.",
     "index": "02",
     "accent": "steel"
   },
   {
-    "slug": "explainers",
-    "name": "Explainers",
-    "shortName": "Explainers",
-    "eyebrow": "How it works",
-    "description": "Plain-language definitions of formats, specifications and acoustic terms.",
+    "slug": "hi-fi-stereo",
+    "name": "Hi-Fi & Stereo",
+    "shortName": "Hi-Fi",
+    "eyebrow": "Two-channel listening",
+    "description": "Source, amplification and loudspeakers as one chain: stereo imaging, seat geometry, analogue sources and what actually changes the presentation.",
     "index": "03",
     "accent": "sand"
   },
   {
-    "slug": "buying-guides",
-    "name": "Buying Guides",
-    "shortName": "Buying Guides",
-    "eyebrow": "Decision support",
-    "description": "Budget bands, sizing rules and the trade-offs that actually matter at purchase time.",
+    "slug": "room-acoustics",
+    "name": "Room Acoustics",
+    "shortName": "Rooms",
+    "eyebrow": "The loudest component",
+    "description": "Modes, reflections, placement, treatment and calibration, with measurements taken in ordinary rooms rather than anechoic specifications.",
     "index": "04",
     "accent": "moss"
   },
   {
-    "slug": "measurements",
-    "name": "Measurements",
-    "shortName": "Measurements",
-    "eyebrow": "Lab notes",
-    "description": "Frequency response, distortion and in-room data behind our recommendations.",
+    "slug": "speakers-components",
+    "name": "Speakers & Components",
+    "shortName": "Components",
+    "eyebrow": "Hardware fundamentals",
+    "description": "How drivers, crossovers, cabinets, amplifiers and sources behave together, explained by mechanism and measurement instead of model numbers.",
     "index": "05",
     "accent": "plum"
+  },
+  {
+    "slug": "buying-comparisons",
+    "name": "Buying & Comparisons",
+    "shortName": "Decisions",
+    "eyebrow": "Spend where it matters",
+    "description": "Category decisions, budget tiers and spec-sheet traps, with the room and system conditions under which the answer changes.",
+    "index": "06",
+    "accent": "steel"
+  },
+  {
+    "slug": "measurements-method",
+    "name": "Measurements & Method",
+    "shortName": "Method",
+    "eyebrow": "How we know",
+    "description": "Test protocols, tolerances, frequency-response reading, failed experiments and the editorial standard behind every published number.",
+    "index": "07",
+    "accent": "copper"
   }
 ]

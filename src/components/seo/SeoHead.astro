@@ -73,6 +73,6 @@ const image = ogImage(p.image);
 {p.type === 'article' && p.publishedAt && <meta name="citation_publication_date" content={p.publishedAt.slice(0, 10)} />}
 {p.type === 'article' && <meta name="citation_journal_title" content={SITE.name} />}
 {p.updatedAt && <meta name="date" content={p.updatedAt.slice(0, 10)} />}
-<meta name="theme-color" content="#0a0c0f" />
+<meta name="theme-color" content="#0b100f" />
 
 {p.jsonLd && <script type="application/ld+json" set:html={p.jsonLd} />}

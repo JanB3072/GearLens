@@ -18,6 +18,7 @@ const L = Astro.params.lang ?? 'en';
 const slug = Astro.params.page ?? 'about';
 const path = localePath(L, slug);
 const jsonLd = graph([organizationSchema(), websiteSchema(L)]);
+const segments = (href: string) => href.split('/').filter(Boolean);
 ---
 
 <BaseLayout
@@ -33,7 +34,28 @@ const jsonLd = graph([organizationSchema(), websiteSchema(L)]);
     </div>
   </header>
   <section class="section">
-    <div class="container legal-body">
+    <div class:list={['container', !data.cards?.length && 'legal-body']}>
+      {data.cards && (
+        <div class="system-grid">
+          {data.cards.map((card, i) => (
+            <a class="system-card" href={localePath(L, ...segments(card.href))} data-reveal style={`--delay:${i * 90}ms`}>
+              <span class="system-card-top">
+                <span class="system-card-index">{card.index}</span>
+                <span class="system-card-label">{card.label}</span>
+              </span>
+              <span class="system-card-title">{card.title}</span>
+              <span class="system-card-body">{card.body}</span>
+              <span class="system-points">{card.points.map((point) => <span>{point}</span>)}</span>
+              <span class="system-card-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      )}
+      {data.links && (
+        <nav class="topic-links" aria-label={t(L, 'nav.topics')}>
+          {data.links.map((link) => <a class="tag" href={localePath(L, ...segments(link.href))}>{link.label} →</a>)}
+        </nav>
+      )}
       {data.sections.map((section) => (
         <>
           <h2>{section.heading}</h2>

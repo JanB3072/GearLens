@@ -34,7 +34,7 @@ const pageSegments = parsed.page > 1 ? ['page', String(parsed.page)] : [];
   alternates={pageAlternates(L, 'series', parsed.key, ...pageSegments)}
   crumbs={[
     { label: t(L, 'common.breadcrumbHome'), href: localePath(L) },
-    { label: t(L, 'nav.series'), href: localePath(L, 'categories') },
+    { label: t(L, 'nav.series'), href: localePath(L, 'systems') },
     { label: series.name },
   ]}
 />

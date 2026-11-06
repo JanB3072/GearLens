@@ -3,30 +3,41 @@ import { formatDate, t } from '../../i18n';
 import { categoryBySlug, authorBySlug } from '../../lib/taxonomy';
 import type { ArticleCard as Card } from '../../lib/types';
 
-interface Props { card: Card; lang: string }
-const { card, lang } = Astro.props;
+interface Props {
+  card: Card;
+  lang: string;
+  variant?: 'default' | 'feature' | 'row';
+  number?: number;
+}
+const { card, lang, variant = 'default', number } = Astro.props;
 const category = categoryBySlug.get(card.category);
 const author = authorBySlug.get(card.author);
+const delay = variant === 'row' ? (number ?? 2) * 70 : 0;
 ---
 
-<article class="article-card">
-  <a class="article-card-media" href={card.path} tabindex="-1" aria-hidden="true">
-    {card.heroImage
-      ? <img src={card.heroImage} alt="" loading="lazy" decoding="async" width="640" height="360" />
-      : <span class="visually-hidden">Article illustration</span>}
-  </a>
+<article class={`article-card article-card--${variant}`} data-reveal style={`--delay:${delay}ms`}>
+  {variant !== 'row' && (
+    <a class="article-card-media" href={card.path} tabindex="-1" aria-hidden="true">
+      {card.heroImage
+        ? <img src={card.heroImage} alt="" loading="lazy" decoding="async" width="640" height="360" />
+        : <span class="visually-hidden">Article illustration</span>}
+    </a>
+  )}
+  {variant === 'row' && <span class="card-number">{String(number ?? 2).padStart(2, '0')}</span>}
   <div class="article-card-body">
     <div class="article-card-meta">
-      {card.pillar && <span class="badge badge--pillar">Hub guide</span>}
+      {variant === 'feature' && <span class="badge badge--pillar">{t(lang, 'home.latestFeature')}</span>}
+      {card.pillar && variant === 'default' && <span class="badge badge--pillar">Hub guide</span>}
       <span>{category?.shortName ?? card.category}</span>
-      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">/</span>
       <time datetime={card.updatedAt}>{formatDate(card.updatedAt, lang)}</time>
     </div>
     <h3 class="article-card-title"><a href={card.path}>{card.title}</a></h3>
-    <p class="article-card-desc">{card.description}</p>
+    {variant !== 'row' && <p class="article-card-desc">{card.description}</p>}
     <div class="article-card-foot">
       <span>{author?.name ?? card.author}</span>
       <span>{card.readingMinutes} {t(lang, 'common.minRead')}</span>
     </div>
   </div>
+  {variant === 'row' && <span class="card-arrow" aria-hidden="true">↗</span>}
 </article>

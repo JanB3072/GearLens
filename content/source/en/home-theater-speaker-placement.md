@@ -11,9 +11,9 @@ updatedAt: "2026-10-28"
 reviewedAt: "2026-10-28"
 author: "maya-chen"
 reviewer: "daniel-ortiz"
-category: "guides"
-tags: ["speaker-placement", "dolby-atmos", "calibration", "room-acoustics"]
-series: "home-theater-101"
+category: "system-building"
+tags: ["speaker-placement", "dolby-atmos", "calibration", "room-acoustics", "system-building", "multichannel"]
+series: "theater-build"
 pillar: true
 priority: 100
 noindex: false
@@ -68,7 +68,7 @@ breadcrumbLabel: "Speaker placement guide"
 
 Most placement problems are actually listening-position problems. In a rectangular room the strongest axial null sits near the midpoint of the room length, so a sofa placed at exactly 50 percent of the length often sits in a 15 dB dip around 50 Hz. Moving the seat to 38 to 45 percent of the room length costs nothing and usually recovers more bass than any equipment change.
 
-This is the hub guide in the {{glossary:room-acoustics|room acoustics}} series. It links out to each measurement in detail: {{article:bookshelf-vs-tower-speakers|choosing the front speakers}}, {{article:subwoofer-room-calibration|calibrating the subwoofer}} and {{article:dolby-atmos-height-channels-explained|setting up height channels}}.
+This is the hub of the home theater build path. Before choosing channels, {{article:small-room-5-1-2-system-plan|plan the room, the budget split and the cable runs}}. It links out to each measurement in detail: {{article:bookshelf-vs-tower-speakers|choosing the front speakers}}, {{article:subwoofer-room-calibration|calibrating the subwoofer}} and {{article:dolby-atmos-height-channels-explained|setting up height channels}}. If music matters as much as film, {{article:two-channel-hifi-system-chain|build the stereo chain in order}} and check {{article:speaker-amplifier-matching|how the amplifier matches the load}}.
 
 ## Build the front stage from angles
 

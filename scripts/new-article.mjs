@@ -37,9 +37,9 @@ updatedAt: "${today}"
 reviewedAt: "${today}"
 author: "maya-chen"
 reviewer: "daniel-ortiz"
-category: "guides"
-tags: ["speaker-placement", "calibration"]
-series: "home-theater-101"
+category: "system-building"
+tags: ["system-building", "speaker-placement"]
+series: "first-system"
 pillar: false
 priority: 10
 noindex: false
@@ -74,7 +74,7 @@ sources:
     url: "https://example.com/source"
     publisher: "Publisher name"
     date: "2025-06-01"
-entities: ["Dolby Atmos", "Room modes"]
+entities: ["Signal chain", "Room modes"]
 claimReviewed: "The one-sentence claim this article verifies."
 ---
 

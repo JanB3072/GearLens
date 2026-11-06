@@ -7,7 +7,7 @@ import { graph, organizationSchema, websiteSchema } from '../lib/schema';
 const jsonLd = graph([
   organizationSchema(),
   websiteSchema('en'),
-  { '@type': 'WebPage', name: `${SITE.name} — select your region`, url: `${SITE.url}/` },
+  { '@type': 'WebPage', name: `${SITE.name} | select your region`, url: `${SITE.url}/` },
 ]);
 ---
 
@@ -17,17 +17,17 @@ const jsonLd = graph([
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{SITE.name} — {SITE.tagline}</title>
+    <title>{SITE.name} | {SITE.tagline}</title>
     <meta name="description" content={SITE.description} />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <link rel="canonical" href={`${SITE.url}/`} />
     <link rel="alternate" hreflang="x-default" href={`${SITE.url}/`} />
     {ENABLED_LOCALES.map((l) => <link rel="alternate" hreflang={l.hreflang} href={`${SITE.url}/${l.code}/`} />)}
-    <meta property="og:title" content={`${SITE.name} — ${SITE.tagline}`} />
+    <meta property="og:title" content={`${SITE.name} | ${SITE.tagline}`} />
     <meta property="og:description" content={SITE.description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`${SITE.url}/`} />
-    <meta name="theme-color" content="#0a0c0f" />
+    <meta name="theme-color" content="#0b100f" />
     <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body>
@@ -37,7 +37,7 @@ const jsonLd = graph([
         <span class="eyebrow eyebrow--plain">Global | EN</span>
         <h1 class="display">{SITE.name}</h1>
         <p class="lede" style="margin:0 auto">{SITE.description}</p>
-        <p class="small muted" style="margin-top:2rem; letter-spacing:.18em; text-transform:uppercase">Select your location</p>
+        <p class="small muted" style="margin-top:2rem">Choose a language</p>
         <div class="locale-cards">
           {LOCALES.map((l) => l.enabled
             ? <a class="locale-card" href={`/${l.code}/`}><div><strong>{l.nativeName}</strong><small>{l.region} · {l.hreflang}</small></div><span aria-hidden="true">→</span></a>

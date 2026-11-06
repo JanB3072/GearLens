@@ -1,23 +1,30 @@
 [
   {
-    "slug": "home-theater-101",
-    "name": "Home Theater 101",
-    "eyebrow": "Foundation path",
-    "description": "Start here. Eight guides take a bare room to a calibrated 5.1.2 system.",
-    "articleCount": 8
+    "slug": "first-system",
+    "name": "Build the First System",
+    "eyebrow": "Entry path",
+    "description": "Decide the room, the channel count and the budget split before buying any box. Ends with a system you can measure and upgrade.",
+    "articleCount": 4
   },
   {
-    "slug": "room-acoustics",
-    "name": "Room Acoustics",
-    "eyebrow": "Deep dive",
-    "description": "Why the room changes the sound more than the speaker, and what to do about it.",
-    "articleCount": 6
+    "slug": "theater-build",
+    "name": "Home Theater, Room by Room",
+    "eyebrow": "Multichannel path",
+    "description": "From a 5.1.2 living-room layout to height channels, dialogue and bass that holds up across more than one seat.",
+    "articleCount": 3
   },
   {
-    "slug": "buyers-notebook",
-    "name": "Buyer's Notebook",
-    "eyebrow": "Field notes",
-    "description": "Price tracking, spec-sheet traps and the questions worth asking before you buy.",
-    "articleCount": 5
+    "slug": "two-channel",
+    "name": "Two-Channel Hi-Fi",
+    "eyebrow": "Stereo path",
+    "description": "Source, amplification, loudspeakers and seat geometry treated as a single chain, with the failure case recorded.",
+    "articleCount": 1
+  },
+  {
+    "slug": "room-and-bass",
+    "name": "Room and Bass Tuning",
+    "eyebrow": "Measurement path",
+    "description": "Learn to read an in-room sweep, move the seat and the subwoofer, then calibrate in an order that can be repeated.",
+    "articleCount": 2
   }
 ]
