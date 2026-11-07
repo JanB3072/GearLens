@@ -3,7 +3,7 @@
  * `import.meta.env.SITE` is injected by Astro from `site` in astro.config.mjs,
  * so canonical / sitemap / JSON-LD can never drift apart.
  */
-const RAW_SITE_URL = (import.meta.env.SITE as string | undefined) ?? 'https://soundandroom.example.com';
+const RAW_SITE_URL = (import.meta.env.SITE as string | undefined) ?? 'https://soundandroom.com';
 
 export const SITE = {
   url: RAW_SITE_URL.replace(/\/$/, ''),
@@ -15,7 +15,7 @@ export const SITE = {
   // Replace with the real legal entity before launch.
   organization: 'SoundAndRoom Media',
   foundedYear: 2026,
-  email: 'editorial@soundandroom.example.com',
+  email: 'editorial@soundandroom.com',
   logo: '/logo.png',
   defaultOgImage: '/assets/og-default.svg',
   twitter: '@soundandroom',
