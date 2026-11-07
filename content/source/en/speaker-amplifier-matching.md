@@ -11,7 +11,7 @@ updatedAt: "2026-10-31"
 reviewedAt: "2026-10-31"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "speakers-components"
+category: "components"
 tags: ["amplification", "signal-chain", "speaker-placement", "stereo-imaging"]
 series: "first-system"
 pillar: false

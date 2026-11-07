@@ -1,46 +1,57 @@
-/* Light, editorial "journal" palette is the single source of truth.
+/* Theme mirrors dewybeautynotes.com: a warm sage-green editorial "journal"
+   palette (paper background, ink text, sage accent, rose secondary).
    The site ships bright-only; there is no dark theme to override. */
 :root {
   color-scheme: light;
 
-  --bg: #f6f3ea;
-  --bg-soft: #efe8da;
-  --surface: #fffdf8;
-  --surface-2: #f1ebdf;
-  --surface-3: #e7dfce;
-  --line: rgba(28, 24, 18, 0.14);
-  --line-strong: rgba(28, 24, 18, 0.30);
+  --bg: #f8f7f2;
+  --bg-soft: #eaece4;
+  --surface: #f5f5ef;
+  --surface-2: #e8ecdf;
+  --surface-3: #dce0d3;
 
-  --text: #1a1610;
-  --text-soft: #3a332a;
-  --muted: #5f5648;
-  --dim: #8a8071;
+  --line: #d9ddd3;
+  --line-strong: #cbd2c4;
 
-  --accent: #b23c1b;
-  --accent-bright: #cf4d1c;
-  --accent-ink: #fff7ef;
-  --signal: #5f7a1c;
-  --steel: #2f6b84;
-  --sand: #9a7a2e;
+  --text: #303c34;
+  --text-soft: #49654f;
+  --muted: #6a7069;
+  --dim: #98a08f;
+
+  --accent: #677e6c;
+  --accent-bright: #7d927f;
+  --accent-ink: #f5f5ef;
+  --signal: #a87572;
+  --steel: #6a7069;
+  --sand: #7d8a5e;
   --moss: #4d7043;
-  --plum: #6f4f86;
+  --plum: #5f6f4a;
 
-  --danger: #b23c1b;
+  /* Aliases that mirror the dewybeautynotes.com reference design tokens,
+     so the cloned stylesheet can be ported verbatim. */
+  --sage: var(--accent);
+  --rose: var(--signal);
+  --paper: var(--bg);
+  --ink: var(--text);
+  --serif: var(--font-display);
+  --sans: var(--font-ui);
+
+  --danger: #a87572;
   --success: #4d7043;
 
   --radius: 2px;
   --radius-lg: 4px;
-  --shadow: 0 22px 55px rgba(28, 24, 18, 0.12);
+  --shadow: 0 22px 55px rgba(48, 60, 52, 0.12);
 
   --max: 1380px;
   --gutter: clamp(1.25rem, 4.5vw, 5rem);
   --header-h: 78px;
   --measure: 66ch;
 
-  --font-ui: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-  --font-serif: Georgia, "Times New Roman", serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-ui: 'DM Sans', Arial, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'DM Sans', Arial, sans-serif;
 
   --step--1: clamp(0.76rem, 0.74rem + 0.1vw, 0.84rem);
   --step-0: 1rem;
@@ -51,7 +62,7 @@
   --step-5: clamp(3rem, 1.4rem + 6.2vw, 7.4rem);
 
   --grid-bg:
-    repeating-linear-gradient(90deg, transparent 0 63px, rgba(28, 24, 18, 0.035) 63px 64px),
-    repeating-linear-gradient(0deg, transparent 0 63px, rgba(28, 24, 18, 0.035) 63px 64px);
+    repeating-linear-gradient(90deg, transparent 0 63px, rgba(48, 60, 52, 0.04) 63px 64px),
+    repeating-linear-gradient(0deg, transparent 0 63px, rgba(48, 60, 52, 0.04) 63px 64px);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -62,13 +62,13 @@ export const STATIC_PAGES: Record<string, StaticPage> = {
       },
     ],
     links: [
-      { label: 'Building a System', href: 'categories/system-building/' },
+      { label: 'Speakers', href: 'categories/speakers/' },
       { label: 'Home Theater', href: 'categories/home-theater/' },
-      { label: 'Hi-Fi & Stereo', href: 'categories/hi-fi-stereo/' },
-      { label: 'Room Acoustics', href: 'categories/room-acoustics/' },
-      { label: 'Speakers & Components', href: 'categories/speakers-components/' },
-      { label: 'Buying & Comparisons', href: 'categories/buying-comparisons/' },
-      { label: 'Measurements & Method', href: 'categories/measurements-method/' },
+      { label: 'Amplifiers & DACs', href: 'categories/amplifiers-dacs/' },
+      { label: 'Room Treatment', href: 'categories/room-treatment/' },
+      { label: 'Components', href: 'categories/components/' },
+      { label: 'Buying & Comparisons', href: 'categories/buying/' },
+      { label: 'Measurements & Method', href: 'categories/method/' },
     ],
     sections: [
       {

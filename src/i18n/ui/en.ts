@@ -151,6 +151,14 @@ export const en = {
   'footer.cookieBar': 'A little privacy note: we use no optional tracking. Essential cookies only.',
   'nav.ourStory': 'Our story',
   'nav.ourStandards': 'Our standards',
+
+  'nav.contact': 'Contact',
+  'nav.standards': 'Our Standards',
+  'nav.privacy': 'Privacy Policy',
+  'footer.tagline': 'Thoughtful audio. Everyday rooms. Notes for building a system you can measure.',
+  'footer.writeEditors': 'Questions, ideas, a little hello?',
+  'footer.writeLink': 'Write to the editors',
+  'footer.independent': 'Independent audio & system editorial',
 } as const;
 
 export type UiKey = keyof typeof en;

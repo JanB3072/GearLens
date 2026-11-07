@@ -11,7 +11,7 @@ updatedAt: "2026-10-29"
 reviewedAt: "2026-10-29"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "room-acoustics"
+category: "room-treatment"
 tags: ["subwoofer", "calibration", "room-acoustics", "frequency-response", "bass-management"]
 series: "room-and-bass"
 pillar: false

@@ -11,7 +11,7 @@ updatedAt: "2026-10-28"
 reviewedAt: "2026-10-28"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "system-building"
+category: "speakers"
 tags: ["speaker-placement", "dolby-atmos", "calibration", "room-acoustics", "system-building", "multichannel"]
 series: "theater-build"
 pillar: true

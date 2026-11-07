@@ -84,8 +84,8 @@ export function getNavigation(lang: string): NavItem[] {
         {
           title: 'Decisions and method',
           links: [
-            { label: 'Buying & comparisons', href: categoryPath(lang, 'buying-comparisons') },
-            { label: 'Measurements & method', href: categoryPath(lang, 'measurements-method') },
+            { label: 'Buying & Comparisons', href: categoryPath(lang, 'buying') },
+            { label: 'Measurements & Method', href: categoryPath(lang, 'method') },
             { label: t(lang, 'nav.glossary'), href: localePath(lang, 'glossary') },
             { label: t(lang, 'listing.latest'), href: localePath(lang, 'blog') },
           ],
@@ -93,7 +93,7 @@ export function getNavigation(lang: string): NavItem[] {
       ],
     },
     { label: t(lang, 'nav.homeTheater'), href: categoryPath(lang, 'home-theater') },
-    { label: t(lang, 'nav.hiFi'), href: categoryPath(lang, 'hi-fi-stereo') },
+    { label: 'Amplifiers & DACs', href: categoryPath(lang, 'amplifiers-dacs') },
     { label: t(lang, 'nav.glossary'), href: localePath(lang, 'glossary') },
     { label: 'The Latest', href: localePath(lang, 'blog') },
     { label: 'Our Story', href: localePath(lang, 'about') },

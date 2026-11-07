@@ -11,7 +11,7 @@ updatedAt: "2026-10-30"
 reviewedAt: "2026-10-30"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "buying-comparisons"
+category: "buying"
 tags: ["outdoor-audio", "budget", "frequency-response"]
 series: "first-system"
 pillar: false

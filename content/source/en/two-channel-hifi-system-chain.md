@@ -11,7 +11,7 @@ updatedAt: "2026-10-29"
 reviewedAt: "2026-10-29"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "hi-fi-stereo"
+category: "amplifiers-dacs"
 tags: ["signal-chain", "stereo-imaging", "speaker-placement", "system-building", "amplification"]
 series: "two-channel"
 pillar: true

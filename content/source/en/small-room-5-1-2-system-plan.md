@@ -11,7 +11,7 @@ updatedAt: "2026-10-30"
 reviewedAt: "2026-10-30"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "system-building"
+category: "speakers"
 tags: ["system-building", "speaker-placement", "bass-management", "multichannel", "budget"]
 series: "first-system"
 pillar: true

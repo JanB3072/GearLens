@@ -65,30 +65,6 @@ function counters(): void {
   targets.forEach((el) => observer.observe(el));
 }
 
-function ticker(): void {
-  document.querySelectorAll<HTMLElement>('[data-ticker]').forEach((zone) => {
-    const track = zone.querySelector<HTMLElement>('[data-ticker-track]');
-    const first = track?.querySelector<HTMLElement>('.ticker-copy');
-    if (!track || !first || track.querySelector('.ticker-copy[aria-hidden="true"]')) return;
-    const clone = first.cloneNode(true) as HTMLElement;
-    clone.setAttribute('aria-hidden', 'true');
-    track.appendChild(clone);
-  });
-}
-
-function pointerGlow(): void {
-  document.querySelectorAll<HTMLElement>('[data-glow]').forEach((zone) => {
-    zone.addEventListener('pointermove', (event) => {
-      if (event.pointerType === 'touch') return;
-      const rect = zone.getBoundingClientRect();
-      zone.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
-      zone.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-      zone.classList.add('has-pointer');
-    }, { passive: true });
-    zone.addEventListener('pointerleave', () => zone.classList.remove('has-pointer'));
-  });
-}
-
 function cookieBar(): void {
   const bar = document.querySelector<HTMLElement>('[data-cookie-bar]');
   if (!bar) return;
@@ -130,8 +106,6 @@ function enable(): void {
   initialized = true;
   reveal();
   counters();
-  ticker();
-  pointerGlow();
 }
 
 function disable(): void {

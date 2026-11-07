@@ -11,7 +11,7 @@ updatedAt: "2026-10-31"
 reviewedAt: "2026-10-31"
 author: "soundandroom-editors"
 reviewer: "soundandroom-editors"
-category: "measurements-method"
+category: "method"
 tags: ["frequency-response", "room-acoustics", "calibration", "crossover"]
 series: "room-and-bass"
 pillar: false

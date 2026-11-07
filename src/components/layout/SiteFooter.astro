@@ -1,66 +1,84 @@
 ---
 import { SITE } from '../../config/site';
-import { getFooterColumns } from '../../config/navigation';
-import { localePath, t } from '../../i18n';
+import { CATEGORIES } from '../../config/navigation';
+import { categoryPath, localePath, t } from '../../i18n';
 
 interface Props { lang: string }
 const { lang } = Astro.props;
-const columns = getFooterColumns(lang);
+const topCategories = CATEGORIES.slice(0, 4);
 ---
 
-<footer class="site-footer" id="footer">
-  <div class="cookie-bar" data-cookie-bar>
-    <span>{t(lang, 'footer.cookieBar')}</span>
-    <button class="cookie-dismiss" type="button" data-cookie-dismiss>{t(lang, 'nav.close')}</button>
-  </div>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <a class="brand" href={localePath(lang)} aria-label={SITE.name}>
+          <img class="brand-logo" src="/logo.png" alt={SITE.name} />
+        </a>
+        <p>{t(lang, 'footer.tagline')}</p>
+      </div>
 
-  <div class="container footer-top">
-    <div class="footer-brand">
-      <a class="brand" href={localePath(lang)}>
-        <img class="brand-logo" src="/logo.png" alt={SITE.name} />
-      </a>
-      <p>{SITE.description}</p>
-      <p class="small muted" style="margin-top:1.5rem">{t(lang, 'footer.editorsContact')} <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-    </div>
-    <div class="footer-cols">
-      {columns.map((col) => (
-        <div class="footer-col">
-          <p class="footer-title">{col.title}</p>
-          <ul class="footer-links">
-            {col.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-          </ul>
+      <div>
+        <h3>{t(lang, 'footer.explore')}</h3>
+        <div class="links">
+          {topCategories.map((cat) => (
+            <a href={categoryPath(lang, cat.slug)}>{cat.name}</a>
+          ))}
+          <a href={localePath(lang, 'blog')}>{t(lang, 'listing.latest')}</a>
         </div>
-      ))}
-    </div>
-  </div>
-
-  <div class="container" style="padding-block:2rem; border-top:1px solid var(--line);">
-    <div class="cta-inner" style="padding:0">
-      <div>
-        <p class="eyebrow">{t(lang, 'footer.stayCurrent')}</p>
-        <h2 class="h3" style="margin-top:1rem">{t(lang, 'home.ctaTitle')}</h2>
-        <p class="muted small" style="margin:.7rem 0 0">{t(lang, 'home.ctaBody')}</p>
       </div>
+
       <div>
-        <form class="newsletter" data-newsletter aria-label="Newsletter">
-          <label class="visually-hidden" for="footer-email">Email</label>
-          <input class="newsletter-input" id="footer-email" type="email" name="email" required placeholder={t(lang, 'home.ctaPlaceholder')} />
-          <button class="btn btn--primary" type="submit">{t(lang, 'home.ctaButton')}</button>
-        </form>
-        <p class="form-note">{t(lang, 'home.ctaNote')} {t(lang, 'legal.disclaimer')}</p>
-        <p class="form-note" data-newsletter-status hidden></p>
+        <h3>{t(lang, 'footer.publication')}</h3>
+        <div class="links">
+          <a href={localePath(lang, 'about')}>{t(lang, 'nav.about')}</a>
+          <a href={`mailto:${SITE.email}`}>{t(lang, 'nav.contact')}</a>
+          <a href={localePath(lang, 'editorial-policy')}>{t(lang, 'nav.standards')}</a>
+          <a href={localePath(lang, 'privacy')}>{t(lang, 'nav.privacy')}</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>{t(lang, 'footer.details')}</h3>
+        <div class="links">
+          <a href="/llms.txt">llms.txt</a>
+          <a href="/sitemap.xml">Sitemap</a>
+          <a href="/feed.xml">RSS feed</a>
+          <a href={localePath(lang, 'search')}>{t(lang, 'nav.search')}</a>
+        </div>
+        <p>{t(lang, 'footer.writeEditors')} <a href={`mailto:${SITE.email}`}>{t(lang, 'footer.writeLink')} ↗</a></p>
       </div>
     </div>
-  </div>
 
-  <div class="container footer-bottom">
-    <span>© {new Date().getFullYear()} {SITE.organization}. {t(lang, 'footer.rights')}</span>
-    <div class="footer-legal">
-      <a href={localePath(lang, 'privacy')}>Privacy Policy</a>
-      <a href={localePath(lang, 'terms')}>Terms of Use</a>
-      <a href={localePath(lang, 'accessibility')}>Accessibility</a>
-      <a href="/llms.txt">llms.txt</a>
-      <a href={`mailto:${SITE.email}`}>Contact</a>
+    <div class="copyright">
+      <span>© {new Date().getFullYear()} {SITE.organization}. {t(lang, 'footer.rights')}</span>
+      <span>{t(lang, 'footer.independent')}</span>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); padding: 45px 0 25px; background: #eaece4; }
+  .footgrid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 45px; }
+  .footer .brand { display: flex; align-items: center; gap: 9px; text-decoration: none !important; }
+  .footer .brand-logo { height: 34px; width: auto; }
+  .footer h3 { font: 500 21px var(--serif); margin: 0 0 18px; }
+  .footer p { font-size: 12px; line-height: 1.8; color: var(--muted); }
+  .footer .links { display: grid; gap: 13px; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .footer .links a { color: var(--ink); }
+  .copyright {
+    margin-top: 40px; border-top: 1px solid #cbd2c4; padding-top: 20px;
+    display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  @media (max-width: 1100px) { .footgrid { gap: 25px; } }
+  @media (max-width: 760px) {
+    .footgrid { grid-template-columns: 1fr 1fr; gap: 35px 22px; }
+    .footgrid > div:first-child { grid-column: 1 / -1; }
+    .footer .brand-logo { height: 34px; }
+    .footer h3 { font-size: 21px; }
+    .copyright { display: block; line-height: 2.2; }
+    .copyright span { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>

@@ -1,87 +1,77 @@
 ---
 import { SITE } from '../../config/site';
-import { getNavigation } from '../../config/navigation';
-import { localePath, t } from '../../i18n';
-import LocaleSwitcher from './LocaleSwitcher.astro';
+import { CATEGORIES } from '../../config/navigation';
+import { categoryPath, localePath, t } from '../../i18n';
 
 interface Props { lang: string; currentPath?: string }
 const { lang, currentPath = '' } = Astro.props;
-const nav = getNavigation(lang);
+
+// Four primary categories shown in the top nav, matching the reference layout.
+const topCategories = CATEGORIES.slice(0, 4);
+const isActive = (href: string) => currentPath === href;
 ---
 
-<header class="site-header" id="header">
-  <div class="container header-inner">
+<header class="header wrap">
+  <div class="headtop">
     <a class="brand" href={localePath(lang)} aria-label={`${SITE.name} — ${t(lang, 'nav.home')}`}>
-      <img class="brand-logo" src="/logo.png" alt="" />
+      <img class="brand-logo" src="/logo.png" alt={SITE.name} />
     </a>
-
-    <nav class="nav" aria-label="Primary">
-      {nav.map((item) => (
-        <div class="nav-item">
-          <a class="nav-link" href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
-            {item.label}{item.columns && <span class="caret" aria-hidden="true">▾</span>}
-          </a>
-          {item.columns && (
-            <div class="mega">
-              <div class="mega-inner">
-                {item.columns.map((col) => (
-                  <div>
-                    <p class="mega-title">{col.title}</p>
-                    <ul class="mega-links">
-                      {col.links.map((link) => (
-                        <li><a class="mega-link" href={link.href}>{link.label}{link.hint && <span class="mega-hint">{link.hint}</span>}</a></li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-                {item.feature && (
-                  <div class="mega-feature">
-                    <span class="eyebrow">{item.feature.eyebrow}</span>
-                    <h4>{item.feature.title}</h4>
-                    <p>{item.feature.body}</p>
-                    <a href={item.feature.href}>{t(lang, 'nav.discoverAll')} →</a>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+    <button class="menu" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-nav">Menu ☰</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      {topCategories.map((cat) => (
+        <a href={categoryPath(lang, cat.slug)} aria-current={isActive(categoryPath(lang, cat.slug)) ? 'page' : undefined}>{cat.shortName}</a>
       ))}
+      <a href={localePath(lang, 'blog')} aria-current={isActive(localePath(lang, 'blog')) ? 'page' : undefined}>{t(lang, 'listing.latest')}</a>
+      <a href={localePath(lang, 'about')} aria-current={isActive(localePath(lang, 'about')) ? 'page' : undefined}>{t(lang, 'nav.about')}</a>
     </nav>
-
-    <div class="header-actions">
-      <a class="icon-btn" href={localePath(lang, 'search')} aria-label={t(lang, 'nav.search')}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path>
-        </svg>
-      </a>
-      <LocaleSwitcher lang={lang} />
-      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label={t(lang, 'nav.menu')}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <path d="M3 7h18M3 12h18M3 17h18"></path>
-        </svg>
-      </button>
-    </div>
   </div>
-
-  <div class="mobile-nav" data-mobile-nav hidden>
-    <nav class="container" aria-label="Mobile">
-      {nav.map((item) => (
-        <details>
-          <summary>{item.label}</summary>
-          <ul>
-            <li><a href={item.href}>{t(lang, 'common.all')}</a></li>
-            {(item.columns ?? []).flatMap((c) => c.links).map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-          </ul>
-        </details>
-      ))}
-      <details>
-        <summary>{t(lang, 'nav.about')}</summary>
-        <ul>
-          <li><a href={localePath(lang, 'about')}>{t(lang, 'nav.about')}</a></li>
-          <li><a href={localePath(lang, 'glossary')}>{t(lang, 'nav.glossary')}</a></li>
-        </ul>
-      </details>
-    </nav>
+  <div class="headbottom">
+    <div class="utility">
+      <a href={`mailto:${SITE.email}`}>{t(lang, 'nav.contact')}</a>
+      <a href={localePath(lang, 'editorial-policy')}>{t(lang, 'nav.standards')}</a>
+    </div>
+    <a class="search-link" href={localePath(lang, 'search')}>{t(lang, 'nav.search')} <span aria-hidden="true">⌕</span></a>
   </div>
 </header>
+
+<script is:inline>
+  const mb = document.querySelector('[data-menu-toggle]');
+  const mn = document.querySelector('[data-primary-nav]');
+  if (mb && mn) {
+    mb.addEventListener('click', () => {
+      const open = mn.classList.toggle('open');
+      mb.setAttribute('aria-expanded', String(open));
+    });
+  }
+</script>
+
+<style>
+  .header { padding-top: 27px; padding-bottom: 32px; }
+  .headtop, .headbottom { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 9px; text-decoration: none !important; }
+  .brand-logo { width: auto; height: 40px; flex: none; }
+  .nav { display: flex; align-items: center; gap: 29px; }
+  .nav a, .utility a, .search-link {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink);
+  }
+  .nav a[aria-current='page'] { color: var(--sage); font-weight: 700; }
+  .headbottom { margin-top: 25px; }
+  .utility { display: flex; gap: 25px; }
+  .search-link { display: flex; align-items: center; gap: 8px; }
+  .menu { display: none; border: 0; background: none; color: var(--ink); padding: 8px; font-size: 12px; letter-spacing: 1px; }
+  .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+  @media (max-width: 760px) {
+    .header { padding-top: 22px; padding-bottom: 20px; }
+    .brand-logo { height: 32px; }
+    .menu { display: block; }
+    .headtop { flex-wrap: wrap; gap: 15px; }
+    .nav { display: none; width: 100%; padding: 18px 0 0; flex-wrap: wrap; gap: 22px; }
+    .nav.open { display: flex; }
+    .headbottom { margin-top: 20px; }
+    .utility { gap: 18px; }
+    .utility a, .search-link { font-size: 9px; }
+    .search-link { gap: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>

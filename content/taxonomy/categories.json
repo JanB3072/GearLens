@@ -1,10 +1,10 @@
 [
   {
-    "slug": "system-building",
-    "name": "Building a System",
-    "shortName": "Systems",
-    "eyebrow": "Plan the whole chain",
-    "description": "Room goals, channel layouts, signal chain, power and wiring, decided in the right order. From an empty floor to a system you can measure and upgrade.",
+    "slug": "speakers",
+    "name": "Speakers",
+    "shortName": "Speakers",
+    "eyebrow": "Drivers, cabinets, placement",
+    "description": "Loudspeakers and subwoofers treated as hardware: drivers, crossovers, cabinets and the placement that decides whether the spec sheet shows up in the room.",
     "index": "01",
     "accent": "copper"
   },
@@ -18,17 +18,17 @@
     "accent": "steel"
   },
   {
-    "slug": "hi-fi-stereo",
-    "name": "Hi-Fi & Stereo",
-    "shortName": "Hi-Fi",
-    "eyebrow": "Two-channel listening",
-    "description": "Source, amplification and loudspeakers as one chain: stereo imaging, seat geometry, analogue sources and the small moves that actually change the presentation.",
+    "slug": "amplifiers-dacs",
+    "name": "Amplifiers & DACs",
+    "shortName": "Amps",
+    "eyebrow": "Source, gain and control",
+    "description": "Source components, DACs, preamplifiers and power amplifiers as one chain: gain, impedance, stereo imaging and the small moves that actually change the presentation.",
     "index": "03",
     "accent": "sand"
   },
   {
-    "slug": "room-acoustics",
-    "name": "Room Acoustics",
+    "slug": "room-treatment",
+    "name": "Room Treatment",
     "shortName": "Rooms",
     "eyebrow": "The loudest component",
     "description": "Modes, reflections, placement, treatment and calibration, measured in ordinary rooms rather than read off an anechoic spec sheet.",
@@ -36,8 +36,8 @@
     "accent": "moss"
   },
   {
-    "slug": "speakers-components",
-    "name": "Speakers & Components",
+    "slug": "components",
+    "name": "Components",
     "shortName": "Components",
     "eyebrow": "Hardware fundamentals",
     "description": "How drivers, crossovers, cabinets, amplifiers and sources behave together, explained by mechanism and measurement instead of model numbers.",
@@ -45,7 +45,7 @@
     "accent": "plum"
   },
   {
-    "slug": "buying-comparisons",
+    "slug": "buying",
     "name": "Buying & Comparisons",
     "shortName": "Decisions",
     "eyebrow": "Spend where it matters",
@@ -54,7 +54,7 @@
     "accent": "steel"
   },
   {
-    "slug": "measurements-method",
+    "slug": "method",
     "name": "Measurements & Method",
     "shortName": "Method",
     "eyebrow": "How we know",
