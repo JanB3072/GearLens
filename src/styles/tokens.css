@@ -1,34 +1,36 @@
+/* Light, editorial "journal" palette is the single source of truth.
+   The site ships bright-only; there is no dark theme to override. */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #0b100f;
-  --bg-soft: #101716;
-  --surface: #17201e;
-  --surface-2: #1e2926;
-  --surface-3: #29332f;
-  --line: rgba(233, 238, 226, 0.13);
-  --line-strong: rgba(233, 238, 226, 0.3);
+  --bg: #f6f3ea;
+  --bg-soft: #efe8da;
+  --surface: #fffdf8;
+  --surface-2: #f1ebdf;
+  --surface-3: #e7dfce;
+  --line: rgba(28, 24, 18, 0.14);
+  --line-strong: rgba(28, 24, 18, 0.30);
 
-  --text: #f3efe4;
-  --text-soft: #cbd2c7;
-  --muted: #98a49a;
-  --dim: #6e7a72;
+  --text: #1a1610;
+  --text-soft: #3a332a;
+  --muted: #5f5648;
+  --dim: #8a8071;
 
-  --accent: #f2683c;
-  --accent-bright: #ff8c5e;
-  --accent-ink: #170b06;
-  --signal: #c6df6b;
-  --steel: #7fb2c6;
-  --sand: #d9b878;
-  --moss: #9cbb88;
-  --plum: #b79bc9;
+  --accent: #b23c1b;
+  --accent-bright: #cf4d1c;
+  --accent-ink: #fff7ef;
+  --signal: #5f7a1c;
+  --steel: #2f6b84;
+  --sand: #9a7a2e;
+  --moss: #4d7043;
+  --plum: #6f4f86;
 
-  --danger: #e8796c;
-  --success: #9cc78d;
+  --danger: #b23c1b;
+  --success: #4d7043;
 
   --radius: 2px;
   --radius-lg: 4px;
-  --shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
+  --shadow: 0 22px 55px rgba(28, 24, 18, 0.12);
 
   --max: 1380px;
   --gutter: clamp(1.25rem, 4.5vw, 5rem);
@@ -49,38 +51,7 @@
   --step-5: clamp(3rem, 1.4rem + 6.2vw, 7.4rem);
 
   --grid-bg:
-    repeating-linear-gradient(90deg, transparent 0 63px, rgba(233, 238, 226, 0.028) 63px 64px),
-    repeating-linear-gradient(0deg, transparent 0 63px, rgba(233, 238, 226, 0.028) 63px 64px);
+    repeating-linear-gradient(90deg, transparent 0 63px, rgba(28, 24, 18, 0.035) 63px 64px),
+    repeating-linear-gradient(0deg, transparent 0 63px, rgba(28, 24, 18, 0.035) 63px 64px);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="light"] {
-  color-scheme: light;
-
-  --bg: #f4f1e8;
-  --bg-soft: #fbf9f2;
-  --surface: #fffdf7;
-  --surface-2: #eeeade;
-  --surface-3: #e2ddcd;
-  --line: rgba(24, 32, 28, 0.16);
-  --line-strong: rgba(24, 32, 28, 0.32);
-
-  --text: #151b18;
-  --text-soft: #333d36;
-  --muted: #5b675e;
-  --dim: #7b867c;
-
-  --accent: #b8401c;
-  --accent-bright: #96330f;
-  --accent-ink: #fff8f0;
-  --signal: #6f7f1e;
-  --steel: #2c6a83;
-  --sand: #8a6d2c;
-  --moss: #4d7043;
-  --plum: #75518a;
-
-  --shadow: 0 22px 60px rgba(24, 32, 28, 0.12);
-  --grid-bg:
-    repeating-linear-gradient(90deg, transparent 0 63px, rgba(24, 32, 28, 0.04) 63px 64px),
-    repeating-linear-gradient(0deg, transparent 0 63px, rgba(24, 32, 28, 0.04) 63px 64px);
 }

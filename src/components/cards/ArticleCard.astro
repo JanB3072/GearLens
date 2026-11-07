@@ -36,6 +36,7 @@ const delay = variant === 'row' ? (number ?? 2) * 70 : 0;
     {variant !== 'row' && <p class="article-card-desc">{card.description}</p>}
     <div class="article-card-foot">
       <span>{author?.name ?? card.author}</span>
+      <span class="dot" aria-hidden="true">·</span>
       <span>{card.readingMinutes} {t(lang, 'common.minRead')}</span>
     </div>
   </div>

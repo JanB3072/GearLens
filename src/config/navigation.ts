@@ -1,6 +1,7 @@
 import categoriesData from '../../content/taxonomy/categories.json';
 import seriesData from '../../content/taxonomy/series.json';
 import type { Category, Series } from '../lib/types';
+import { SITE } from './site';
 import { blogPath, categoryPath, glossaryPath, localePath, t } from '../i18n';
 
 export const CATEGORIES = categoriesData as Category[];
@@ -94,6 +95,10 @@ export function getNavigation(lang: string): NavItem[] {
     { label: t(lang, 'nav.homeTheater'), href: categoryPath(lang, 'home-theater') },
     { label: t(lang, 'nav.hiFi'), href: categoryPath(lang, 'hi-fi-stereo') },
     { label: t(lang, 'nav.glossary'), href: localePath(lang, 'glossary') },
+    { label: 'The Latest', href: localePath(lang, 'blog') },
+    { label: 'Our Story', href: localePath(lang, 'about') },
+    { label: 'Contact', href: `mailto:${SITE.email}` },
+    { label: 'Our Standards', href: localePath(lang, 'editorial-policy') },
   ];
 }
 
