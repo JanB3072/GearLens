@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-02-26"
 updatedAt: "2026-10-28"
 reviewedAt: "2026-10-28"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "home-theater"
 tags: ["center-channel", "speaker-placement", "frequency-response", "calibration", "multichannel"]
 series: "theater-build"

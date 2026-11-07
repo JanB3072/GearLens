@@ -124,6 +124,8 @@ button { cursor: pointer; }
 .brand-mark i:nth-child(4) { height: 22px; background: var(--signal); }
 .brand-mark i:nth-child(5) { height: 10px; }
 .brand-text { font-family: var(--font-display); font-weight: 600; font-size: 1.42rem; letter-spacing: -.035em; }
+.brand-logo { height: 44px; width: auto; flex: none; }
+.site-footer .brand-logo { height: 56px; }
 
 .nav { display: flex; align-items: center; gap: .15rem; flex: 1; }
 .nav-item { position: relative; }

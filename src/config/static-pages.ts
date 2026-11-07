@@ -83,12 +83,12 @@ export const STATIC_PAGES: Record<string, StaticPage> = {
     ],
   },
   about: {
-    title: 'About GearLens',
-    description: 'Who writes GearLens, how we measure, and how we correct mistakes. Authorship, methodology and update cadence in one place.',
+    title: 'About SoundAndRoom',
+    description: 'Who writes SoundAndRoom, how we measure, and how we correct mistakes. Authorship, methodology and update cadence in one place.',
     eyebrow: 'About us',
     intro: `${SITE.name} is an independent editorial library about high-end home audio, home theater, Hi-Fi loudspeakers and building complete AV systems. We are not a brand blog, a product catalogue or a dealer. Recommendations are derived from in-room measurements, with the method attached.`,
     sections: [
-      { heading: 'Who is behind it', paragraphs: ['Every guide carries the GearLens Editors byline. Where a claim needs verification, a second editor checks the measurement and the method. The editorial desk, not a single personality, stands behind each published number.'] },
+      { heading: 'Who is behind it', paragraphs: ['Every guide carries the SoundAndRoom Editors byline. Where a claim needs verification, a second editor checks the measurement and the method. The editorial desk, not a single personality, stands behind each published number.'] },
       { heading: 'How we test', paragraphs: ['Measurements are taken in-room at a stated microphone position, with a stated sweep level and smoothing. A frequency-range claim always ships with its tolerance. When a result depends on the room, we say so instead of presenting it as a product property.', 'We keep the failure cases. A guide that only reports success is a brochure, not a test.'] },
       { heading: 'What this site is not', paragraphs: ['It is not a single-brand product blog and there is no model database to maintain. Comparisons are between technical approaches, layouts and system decisions. A brand name may appear as a test sample, never as the organising principle of the library.'], bullets: ['No sponsored verdicts or paid placements in a ranking.', 'No "best speaker" list built from specification sheets alone.', 'No product line as a navigation category.'] },
       { heading: 'Correction policy', paragraphs: ['If a measurement or a sourced claim is wrong, we correct the article, change the last-updated date and add a note describing what changed. Corrections are never silent.'] },
@@ -96,7 +96,7 @@ export const STATIC_PAGES: Record<string, StaticPage> = {
   },
   'editorial-policy': {
     title: 'Editorial policy',
-    description: 'Sourcing standards, brand-neutrality rules, affiliate disclosure, update cadence and the method behind every recommendation published on GearLens.',
+    description: 'Sourcing standards, brand-neutrality rules, affiliate disclosure, update cadence and the method behind every recommendation published on SoundAndRoom.',
     eyebrow: 'Editorial standards',
     intro: 'This page exists so readers and answer engines can check how the content is produced before they cite it.',
     sections: [
@@ -121,7 +121,7 @@ export const STATIC_PAGES: Record<string, StaticPage> = {
   },
   terms: {
     title: 'Terms of use',
-    description: 'Terms governing the use of GearLens content, including citation and reuse.',
+    description: 'Terms governing the use of SoundAndRoom content, including citation and reuse.',
     eyebrow: 'Legal',
     intro: 'Template terms. Have them reviewed for your jurisdiction before launch.',
     sections: [

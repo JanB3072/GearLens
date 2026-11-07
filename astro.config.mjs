@@ -4,7 +4,7 @@ import { loadEnv } from 'vite';
 // astro.config.mjs is evaluated BEFORE Vite loads .env files, so read them
 // explicitly. Canonical / sitemap / JSON-LD then follow .env in every mode.
 const env = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
-const SITE_URL = env.PUBLIC_SITE_URL || 'https://gearlens.example.com';
+const SITE_URL = env.PUBLIC_SITE_URL || 'https://soundandroom.example.com';
 
 /**
  * Deploy mode: `static` (default) targets git -> Cloudflare Pages.

@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-03-10"
 updatedAt: "2026-10-28"
 reviewedAt: "2026-10-28"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "home-theater"
 tags: ["dolby-atmos", "speaker-placement", "soundbar", "multichannel", "dedicated-room"]
 series: "theater-build"

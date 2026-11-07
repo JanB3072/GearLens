@@ -9,8 +9,8 @@ status: published
 publishedAt: "2025-11-04"
 updatedAt: "2026-10-28"
 reviewedAt: "2026-10-28"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "system-building"
 tags: ["speaker-placement", "dolby-atmos", "calibration", "room-acoustics", "system-building", "multichannel"]
 series: "theater-build"

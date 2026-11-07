@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-04-18"
 updatedAt: "2026-10-30"
 reviewedAt: "2026-10-30"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "buying-comparisons"
 tags: ["frequency-response", "budget", "speaker-placement", "room-acoustics", "system-building"]
 series: "first-system"

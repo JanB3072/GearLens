@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-03-22"
 updatedAt: "2026-10-29"
 reviewedAt: "2026-10-29"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "room-acoustics"
 tags: ["subwoofer", "calibration", "room-acoustics", "frequency-response", "bass-management"]
 series: "room-and-bass"

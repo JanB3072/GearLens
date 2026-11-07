@@ -9,8 +9,8 @@ status: published
 publishedAt: "2025-12-02"
 updatedAt: "2026-10-30"
 reviewedAt: "2026-10-30"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "system-building"
 tags: ["system-building", "speaker-placement", "bass-management", "multichannel", "budget"]
 series: "first-system"

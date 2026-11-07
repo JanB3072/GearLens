@@ -3,22 +3,22 @@
  * `import.meta.env.SITE` is injected by Astro from `site` in astro.config.mjs,
  * so canonical / sitemap / JSON-LD can never drift apart.
  */
-const RAW_SITE_URL = (import.meta.env.SITE as string | undefined) ?? 'https://gearlens.example.com';
+const RAW_SITE_URL = (import.meta.env.SITE as string | undefined) ?? 'https://soundandroom.example.com';
 
 export const SITE = {
   url: RAW_SITE_URL.replace(/\/$/, ''),
-  name: 'GearLens',
-  shortName: 'GearLens',
+  name: 'SoundAndRoom',
+  shortName: 'SoundAndRoom',
   tagline: 'High-end audio, home theater and Hi-Fi, planned as a system',
   description:
     'Independent, measurement-led guides to high-end home audio, home theater, Hi-Fi loudspeakers and complete AV system building.',
   // Replace with the real legal entity before launch.
-  organization: 'GearLens Media',
+  organization: 'SoundAndRoom Media',
   foundedYear: 2026,
-  email: 'editorial@gearlens.example.com',
-  logo: '/favicon.svg',
+  email: 'editorial@soundandroom.example.com',
+  logo: '/logo.png',
   defaultOgImage: '/assets/og-default.svg',
-  twitter: '@gearlens',
+  twitter: '@soundandroom',
   language: 'en',
 } as const;
 

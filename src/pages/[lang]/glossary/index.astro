@@ -18,7 +18,7 @@ const jsonLd = graph([
   collectionPageSchema('Glossary', 'Definitions of home audio terms with stable entity URLs.', path, L),
   {
     '@type': 'DefinedTermSet',
-    name: 'GearLens Glossary',
+    name: 'SoundAndRoom Glossary',
     url: `${import.meta.env.SITE}${path}`,
     hasDefinedTerm: glossary.map((term) => ({
       '@type': 'DefinedTerm',

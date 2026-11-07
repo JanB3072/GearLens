@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-01-20"
 updatedAt: "2026-10-29"
 reviewedAt: "2026-10-29"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "hi-fi-stereo"
 tags: ["signal-chain", "stereo-imaging", "speaker-placement", "system-building", "amplification"]
 series: "two-channel"

@@ -1,4 +1,4 @@
-# GearLens — 高端家庭音响 / 家庭影院垂直内容站
+# SoundAndRoom — 高端家庭音响 / 家庭影院垂直内容站
 
 英文单语（English-only）的 Astro 静态内容站，部署链路是 **git push → Cloudflare Pages 自动构建 → 纯静态托管**。定位是围绕**高端家庭音响、家庭影院、Hi-Fi 音箱与影音系统搭建**的垂直编辑库，不是任何品牌的产品博客或型号目录。
 

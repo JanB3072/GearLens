@@ -35,8 +35,8 @@ status: published
 publishedAt: "${today}"
 updatedAt: "${today}"
 reviewedAt: "${today}"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "system-building"
 tags: ["system-building", "speaker-placement"]
 series: "first-system"

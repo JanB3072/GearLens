@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-02-14"
 updatedAt: "2026-10-31"
 reviewedAt: "2026-10-31"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "speakers-components"
 tags: ["amplification", "signal-chain", "speaker-placement", "stereo-imaging"]
 series: "first-system"

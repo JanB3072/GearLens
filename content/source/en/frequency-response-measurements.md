@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-04-05"
 updatedAt: "2026-10-31"
 reviewedAt: "2026-10-31"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "measurements-method"
 tags: ["frequency-response", "room-acoustics", "calibration", "crossover"]
 series: "room-and-bass"

@@ -2,7 +2,6 @@
 import { SITE } from '../../config/site';
 import { getFooterColumns } from '../../config/navigation';
 import { localePath, t } from '../../i18n';
-import LocaleSwitcher from './LocaleSwitcher.astro';
 
 interface Props { lang: string }
 const { lang } = Astro.props;
@@ -18,8 +17,7 @@ const columns = getFooterColumns(lang);
   <div class="container footer-top">
     <div class="footer-brand">
       <a class="brand" href={localePath(lang)}>
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="brand-text">{SITE.name}</span>
+        <img class="brand-logo" src="/logo.png" alt={SITE.name} />
       </a>
       <p>{SITE.description}</p>
       <p class="small muted" style="margin-top:1.5rem">{t(lang, 'footer.editorsContact')} <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
@@ -34,11 +32,6 @@ const columns = getFooterColumns(lang);
         </div>
       ))}
     </div>
-  </div>
-
-  <div class="container locale-bar">
-    <strong>{t(lang, 'footer.location')}</strong>
-    <LocaleSwitcher lang={lang} />
   </div>
 
   <div class="container" style="padding-block:2rem; border-top:1px solid var(--line);">

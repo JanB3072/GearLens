@@ -9,8 +9,8 @@ status: published
 publishedAt: "2026-05-02"
 updatedAt: "2026-10-30"
 reviewedAt: "2026-10-30"
-author: "gearLens-editors"
-reviewer: "gearLens-editors"
+author: "soundandroom-editors"
+reviewer: "soundandroom-editors"
 category: "buying-comparisons"
 tags: ["outdoor-audio", "budget", "frequency-response"]
 series: "first-system"
